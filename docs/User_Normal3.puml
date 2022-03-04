@@ -1,0 +1,31 @@
+@startuml
+
+title <b> 회원 - 일반 </b>
+
+actor normal
+actor admin
+actor streamer
+
+'normal 에서 시작
+usecase/ 스트리머_등록
+normal --> 스트리머_등록
+admin --> 스트리머_등록: 스트리밍 승인
+스트리머_등록 --> streamer
+
+usecase/ 팔로우
+normal --> 팔로우
+팔로우 --> streamer
+
+usecase/ 구독
+normal --> 구독
+구독 --> streamer
+
+usecase/ 정보수정
+normal --> 정보수정
+정보수정 --> normal
+
+usecase/ 정보조회
+normal --> 정보조회
+정보조회 --> normal
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+
+title <b> 회원 - 스트리머 </b>
+
+actor streamer
+
+'streamer 에서 시작
+usecase/ 스트리밍_시작
+streamer --> 스트리밍_시작
+
+usecase/ 구독비용_등록_수정
+streamer --> 구독비용_등록_수정
+구독비용_등록_수정 --> streamer
+
+usecase/ 고유정보_등록_수정
+streamer --> 고유정보_등록_수정
+고유정보_등록_수정 --> streamer
+
+usecase/ 고유정보_조회
+streamer --> 고유정보_조회
+고유정보_조회 --> streamer
+
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+
+title <b> 회원 - 가입 </b>
+
+actor user
+participant front
+participant controller
+participant domain
+database repository
+participant external
+
+== 가입 요청 ==
+user -> front
+front -> domain
+note left: email, name ...
+domain -> domain: uuid 채번
+domain -> repository: '가입 요청' 저장, status=PENDING
+domain -> external: email 로 '가입 확인' API 를 호출하는 url+uuid 전송
+domain -> user
+
+== 가입 여부 확인 ==
+user -> front: email 링크를 통해 접속
+front -> domain
+note left: uuid
+domain <-> repository: uuid 로 '가입 요청' 조회
+alt 가입 요청이 존재하지 않음 || PENDING 상태가 아니면
+    domain -> user: redirect 공통 에러 페이지
+    note left #Coral: 409
+else
+  domain -> user: redirect 로그인 성공
+  note left #LimeGreen: accessToken, refreshToken
+end
+note right: 이메일을 통해 접근했음으로\n백엔드에서 redirect 해줘야함
+
+@enduml
