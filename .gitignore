@@ -1,20 +1,37 @@
-# System-dependent autogen file
-.DS_Store
-desktop.ini
-
-# Build outputs
+HELP.md
 .gradle
-build
-out
-bin
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-# IDE specific files
-.idea
+### STS ###
+.apt_generated
+.classpath
+.factorypath
 .project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
-# Automatic build number generation
-build_number.properties
-api-main/src/main/resources/build_api-main.json
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
-# Application config
-/application.yml
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
