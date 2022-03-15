@@ -1,0 +1,24 @@
+@startuml
+
+title <b> 회원 - 관리자 </b>
+
+actor normal
+actor admin
+actor streamer
+
+'admin 에서 시작
+usecase/ 회원_정지
+admin --> 회원_정지
+회원_정지 --> normal
+
+usecase/ 스트리밍_정지
+admin --> 스트리밍_정지
+스트리밍_정지 --> streamer
+
+usecase/ 비밀번호_초기화
+admin --> 비밀번호_초기화
+비밀번호_초기화 --> normal
+비밀번호_초기화 --> (이메일로 임시 비밀번호 전달)
+
+
+@enduml

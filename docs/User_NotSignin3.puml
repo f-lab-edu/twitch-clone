@@ -1,0 +1,29 @@
+@startuml
+
+title <b> 회원 - 미인증 </b>
+
+actor not_signin
+actor normal
+
+'not_signin 에서 시작
+usecase/ 회원가입
+not_signin --> 회원가입
+회원가입 --> (이메일 수신): 이메일로 redirecUrl 전달
+(이메일 수신) --> (회원가입 성공): redirecUrl 로 전달
+(회원가입 성공) --> normal
+
+usecase/ 회원조회
+not_signin --> 회원조회
+회원조회 --> normal
+
+usecase/ 비밀번호_초기화
+not_signin --> 비밀번호_초기화
+비밀번호_초기화 --> normal
+비밀번호_초기화 --> (이메일로 임시 비밀번호 전달): nickName 추가 확인
+
+usecase/ 인증
+not_signin --> 인증
+인증 --> (accessToken\nrefreshToken):인증 성공
+
+
+@enduml
