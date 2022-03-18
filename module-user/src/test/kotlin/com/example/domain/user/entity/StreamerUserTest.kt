@@ -1,7 +1,7 @@
 package com.example.domain.user.entity
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -15,7 +15,7 @@ internal class StreamerUserTest {
         @JvmStatic
         fun `create streamerUser by userAndStreamerName`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(User("test@gmail.com", "mario"), "koopa")
+                Arguments.of(User(email = "test@gmail.com", password = "passsword01", nickName = "mario"), "koopa")
             )
         }
     }
@@ -30,7 +30,7 @@ internal class StreamerUserTest {
         val streamer = StreamerUser(user, streamerName)
 
         // then
-        Assertions.assertAll(
+        assertAll(
             { assertThat(streamer.user.status).isEqualTo(UserStatus.REGISTERED) },
             { assertThat(streamer.status).isEqualTo(StreamerUserStatus.PENDING) }
         )

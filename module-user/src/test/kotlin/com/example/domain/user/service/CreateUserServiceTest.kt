@@ -4,8 +4,10 @@ import com.example.domain.user.entity.StreamerUser
 import com.example.domain.user.entity.StreamerUserStatus
 import com.example.domain.user.entity.User
 import com.example.domain.user.entity.UserStatus
+import com.example.domain.user.repository.MockUserRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -16,27 +18,38 @@ import java.util.stream.Stream
 @DisplayName("[회원] 생성")
 internal class CreateUserServiceTest {
 
-    private val createUserService: CreateUserService = CreateUserService()
+    private lateinit var mockUserRepository: MockUserRepository
+    private lateinit var createUserService: CreateUserService
 
-    @DisplayName("email, nickName으로 일반회원을 생성합니다")
+    @BeforeEach
+    fun beforeEach() {
+        mockUserRepository = MockUserRepository()
+        createUserService = CreateUserService(mockUserRepository)
+    }
+
+    @DisplayName("email, password, nickName로 일반회원을 생성 합니다")
     @ParameterizedTest
     @CsvSource(
-        value = ["test@gmail.com,mario"]
+        value = ["test@gmail.com,password01,mario"]
     )
-    fun `create user by emailAndNickname`(email: String, nickName: String) {
+    fun `create user by emailAndNicknameAndPassword`(email: String, password: String, nickName: String) {
         // given
 
         // when
-        val user = createUserService.createUser(email, nickName)
+        val user = createUserService.createUser(email, password, nickName)
 
         // then
+        val findUser = mockUserRepository.findById(user.id)
+
         assertAll(
-            { assertThat(user.email).isNotBlank },
-            { assertThat(user.status).isEqualTo(UserStatus.REGISTERED) }
+            { assertThat(findUser.id).isEqualTo(user.id) },
+            { assertThat(findUser.email).isEqualTo(user.email) },
+            { assertThat(findUser.status).isEqualTo(UserStatus.REGISTERED) },
+            { assertThat(findUser.status).isEqualTo(user.status) }
         )
     }
 
-    @DisplayName("user, streamerName으로 스트리머회원을 생성합니다")
+    @DisplayName("user, streamerName으로 스트리머회원을 생성 합니다")
     @ParameterizedTest
     @MethodSource
     fun `create streamerUser by userAndStreamerName`(user: User, streamerName: String) {
@@ -56,9 +69,8 @@ internal class CreateUserServiceTest {
         @JvmStatic
         fun `create streamerUser by userAndStreamerName`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(User("test@gmail.com", "mario"), "koopa")
+                Arguments.of(User(email = "test@gmail.com", password = "password01", nickName = "mario"), "koopa")
             )
         }
     }
 }
-

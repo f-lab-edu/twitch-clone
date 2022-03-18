@@ -5,7 +5,7 @@ package com.example.domain.user.entity
  * Streamer는 User의 하위 개념이기 때문에 탈퇴가 존재하지 않습니다.
  */
 enum class StreamerUserStatus(val description: String) {
-    PENDING("가입대기"),
+    PENDING("등록대기"),
     REGISTERED("등록"),
     SUSPENSE("정지")
 }
