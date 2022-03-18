@@ -2,28 +2,47 @@
 
 title <b> 회원 - 미인증 </b>
 
-actor not_signin
-actor normal
+actor actor
+participant front
+participant module_api
+participant module_user
+participant module_smtp
 
-'not_signin 에서 시작
-usecase/ 회원가입
-not_signin --> 회원가입
-회원가입 --> (이메일 수신): 이메일로 redirecUrl 전달
-(이메일 수신) --> (회원가입 성공): redirecUrl 로 전달
-(회원가입 성공) --> normal
+== 일반 회원 등록 ==
+actor -> front
+front -> module_api
+note left:email, nickname, password
+module_api <-> module_user: 회원 조회 - email 존재 여부
+module_api -> module_api: uuid 생성 & 입력 받은 정보 인메모리에 저장
+module_api -> module_smtp: 등록 redirecUrl을 email로 전송 (+uuid)
 
-usecase/ 회원조회
-not_signin --> 회원조회
-회원조회 --> normal
+actor -> module_api: redirecUrl로 접근
+module_api <-> module_user: 일반 회원 등록
+note left:email, nickname
 
-usecase/ 비밀번호_초기화
-not_signin --> 비밀번호_초기화
-비밀번호_초기화 --> normal
-비밀번호_초기화 --> (이메일로 임시 비밀번호 전달): nickName 추가 확인
+== 회원 조회 ==
+actor -> front
+front -> module_api
+note left:조회 조건 (복합 조회 가능)\nemail, nickname
+module_api <-> module_user: 회원 조회
 
-usecase/ 인증
-not_signin --> 인증
-인증 --> (accessToken\nrefreshToken):인증 성공
+== 비밀번호 변경 ==
+actor -> front
+front -> module_api
+note left:email, nickname
+module_api <-> module_user: 회원 조회 - email & nickname 일치 확인
+module_api -> module_api: uuid 생성 후 인메모리에 저장
+module_api -> module_smtp: 비밀번호 초기화 redirecUrl을 email로 전송 (+uuid)
 
+actor -> module_api: redirecUrl로 접근
+front <- module_api: 비밀번호 변경 페이지로 redirect
+front -> module_api
+note left:newPassword, uuid
+module_api -> module_api: uuid 검증
+module_api <-> module_user: 비밀번호 변경
+
+
+== 인증 (로그인) ==
 
 @enduml
+
