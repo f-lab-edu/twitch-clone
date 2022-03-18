@@ -1,10 +1,12 @@
 package com.example.domain.user.service
 
 import com.example.domain.user.repository.MockUserRepository
+import com.example.domain.user.util.randomUser
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertAll
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
@@ -15,13 +17,11 @@ import java.util.*
 internal class UpdateUserServiceTest {
 
     private lateinit var mockUserRepository: MockUserRepository
-    private lateinit var createUserService: CreateUserService
     private lateinit var updateUserService: UpdateUserService
 
     @BeforeEach
     fun beforeEach() {
         mockUserRepository = MockUserRepository()
-        createUserService = CreateUserService(mockUserRepository)
         updateUserService = UpdateUserService(mockUserRepository)
     }
 
@@ -32,14 +32,16 @@ internal class UpdateUserServiceTest {
     )
     fun `update user by nickname`(email: String, password: String, nickName: String, newNickName: String) {
         // given
-        val user = createUserService.createUser(email, password, nickName)
+        val user = randomUser()
+        mockUserRepository.save(user)
+
         val beforeId = user.id
 
         // when
         updateUserService.updateUser(beforeId, newNickName)
 
         // then
-        val findUser = mockUserRepository.findById(beforeId) ?: fail(ErrorCode.ENTITY_NOT_FOUND.reason)
+        val findUser = mockUserRepository.findById(beforeId)
 
         assertAll(
             { assertThat(findUser).isNotNull },
@@ -62,5 +64,31 @@ internal class UpdateUserServiceTest {
 
         // then
         assertThat(exception.errorCode).isEqualTo(ErrorCode.ENTITY_NOT_FOUND)
+    }
+
+    @DisplayName("회원의 password를 변경합니다")
+    @ParameterizedTest
+    @CsvSource(
+        value = ["test@gmail.com,password01,mario,password50"]
+    )
+    fun `update user by password`(email: String, password: String, nickName: String, newPassword: String) {
+        // given
+        val user = randomUser()
+        mockUserRepository.save(user)
+
+        val beforeId = user.id
+
+        // when
+        updateUserService.updateUserPassword(beforeId, newPassword)
+
+        // then
+        val findUser = mockUserRepository.findById(beforeId)
+
+        assertAll(
+            { assertThat(findUser).isNotNull },
+
+            { assertThat(findUser.id).isEqualTo(beforeId) },
+            { assertThat(findUser.password).isEqualTo(newPassword) },
+        )
     }
 }

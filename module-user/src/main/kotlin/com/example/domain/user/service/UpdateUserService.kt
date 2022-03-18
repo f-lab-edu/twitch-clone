@@ -23,4 +23,17 @@ class UpdateUserService(private val userRepository: UserRepository) {
         }
             ?: throw CustomException(ErrorCode.ENTITY_NOT_FOUND)
     }
+
+    fun updateUserPassword(id: UUID, password: String): User {
+        return userRepository.findById(id)?.let {
+            userRepository.save(
+                User(
+                    id = it.id, email = it.email,
+                    password = password,
+                    nickName = it.nickName
+                )
+            )
+        }
+            ?: throw CustomException(ErrorCode.ENTITY_NOT_FOUND)
+    }
 }
