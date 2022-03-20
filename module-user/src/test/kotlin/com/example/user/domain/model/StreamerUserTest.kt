@@ -1,4 +1,4 @@
-package com.example.user.domain.entity
+package com.example.user.domain.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll

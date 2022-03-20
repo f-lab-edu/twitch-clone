@@ -1,10 +1,10 @@
 package com.example.user.application.service
 
 import com.example.user.application.port.`in`.CreateUserCommand
-import com.example.user.domain.entity.StreamerUser
-import com.example.user.domain.entity.StreamerUserStatus
-import com.example.user.domain.entity.User
-import com.example.user.domain.entity.UserStatus
+import com.example.user.domain.model.StreamerUser
+import com.example.user.domain.model.StreamerUserStatus
+import com.example.user.domain.model.User
+import com.example.user.domain.model.UserStatus
 import com.example.user.util.MockUserRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll

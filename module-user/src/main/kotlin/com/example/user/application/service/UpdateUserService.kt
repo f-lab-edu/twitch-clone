@@ -3,9 +3,9 @@ package com.example.user.application.service
 import com.example.user.application.port.`in`.UpdateUserCommand
 import com.example.user.application.port.`in`.UpdateUserUseCase
 import com.example.user.application.port.out.UserRepository
-import com.example.user.domain.entity.User
+import com.example.user.domain.model.User
 
-class UpdateUserService(private val userRepository: UserRepository) : UpdateUserUseCase {
+internal class UpdateUserService(private val userRepository: UserRepository) : UpdateUserUseCase {
 
     /**
      * - 현재 변경 가능한 필드는 nickname만 입니다.

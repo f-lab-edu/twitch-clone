@@ -1,4 +1,4 @@
-package com.example.user.domain.entity
+package com.example.user.domain.model
 
 /**
  * 스트리머 회원

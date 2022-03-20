@@ -3,9 +3,9 @@ package com.example.user.application.service
 import com.example.user.application.port.`in`.CreateUserCommand
 import com.example.user.application.port.`in`.CreateUserUseCase
 import com.example.user.application.port.out.UserRepository
-import com.example.user.domain.entity.User
+import com.example.user.domain.model.User
 
-class CreateUserService(private val userRepository: UserRepository) : CreateUserUseCase {
+internal class CreateUserService(private val userRepository: UserRepository) : CreateUserUseCase {
 
     override fun createUser(createUserCommand: CreateUserCommand): User {
         return with(createUserCommand) {

@@ -3,7 +3,7 @@ package com.example.user.util
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
 import com.example.user.application.port.out.UserRepository
-import com.example.user.domain.entity.User
+import com.example.user.domain.model.User
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 

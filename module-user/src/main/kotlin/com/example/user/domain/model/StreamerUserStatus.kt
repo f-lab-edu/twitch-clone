@@ -1,4 +1,4 @@
-package com.example.user.domain.entity
+package com.example.user.domain.model
 
 /**
  * 스트리머는 등록과 정지만 존재합니다.
