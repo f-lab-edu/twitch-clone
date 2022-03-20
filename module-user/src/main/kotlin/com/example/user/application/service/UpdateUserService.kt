@@ -1,9 +1,7 @@
-package com.example.domain.user.service
+package com.example.user.application.service
 
-import com.example.domain.user.entity.User
-import com.example.domain.user.repository.UserRepository
-import com.example.exception.CustomException
-import com.example.exception.ErrorCode
+import com.example.user.application.port.out.UserRepository
+import com.example.user.domain.entity.User
 import java.util.*
 
 class UpdateUserService(private val userRepository: UserRepository) {

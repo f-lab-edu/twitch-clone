@@ -1,6 +1,6 @@
-package com.example.domain.user.repository
+package com.example.user.application.port.out
 
-import com.example.domain.user.entity.User
+import com.example.user.domain.entity.User
 import java.util.*
 
 interface UserRepository {

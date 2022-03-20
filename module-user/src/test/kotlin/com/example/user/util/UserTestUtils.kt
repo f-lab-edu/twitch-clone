@@ -1,7 +1,7 @@
-package com.example.domain.user.util
+package com.example.user.util
 
-import com.example.domain.user.entity.User
-import com.example.domain.user.entity.UserStatus
+import com.example.user.domain.entity.User
+import com.example.user.domain.entity.UserStatus
 import com.github.javafaker.Faker
 import java.util.*
 

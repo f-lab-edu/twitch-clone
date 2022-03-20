@@ -1,4 +1,4 @@
-package com.example.domain.user.entity
+package com.example.user.domain.entity
 
 import java.util.*
 

@@ -1,10 +1,10 @@
-package com.example.domain.user.service
+package com.example.user.application.service
 
-import com.example.domain.user.entity.StreamerUser
-import com.example.domain.user.entity.StreamerUserStatus
-import com.example.domain.user.entity.User
-import com.example.domain.user.entity.UserStatus
-import com.example.domain.user.repository.MockUserRepository
+import com.example.user.domain.entity.StreamerUser
+import com.example.user.domain.entity.StreamerUserStatus
+import com.example.user.domain.entity.User
+import com.example.user.domain.entity.UserStatus
+import com.example.user.util.MockUserRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach

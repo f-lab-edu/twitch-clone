@@ -1,4 +1,4 @@
-package com.example.domain.user.entity
+package com.example.user.domain.entity
 
 enum class UserStatus(val description: String) {
     REGISTERED("등록"),

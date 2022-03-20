@@ -1,9 +1,9 @@
-package com.example.domain.user.service
+package com.example.user.application.service
 
-import com.example.domain.user.repository.MockUserRepository
-import com.example.domain.user.util.randomUser
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
+import com.example.user.util.MockUserRepository
+import com.example.user.util.randomUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertThrows

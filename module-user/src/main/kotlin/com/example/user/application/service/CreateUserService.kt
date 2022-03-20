@@ -1,8 +1,8 @@
-package com.example.domain.user.service
+package com.example.user.application.service
 
-import com.example.domain.user.entity.StreamerUser
-import com.example.domain.user.entity.User
-import com.example.domain.user.repository.UserRepository
+import com.example.user.application.port.out.UserRepository
+import com.example.user.domain.entity.StreamerUser
+import com.example.user.domain.entity.User
 
 class CreateUserService(private val userRepository: UserRepository) {
 
