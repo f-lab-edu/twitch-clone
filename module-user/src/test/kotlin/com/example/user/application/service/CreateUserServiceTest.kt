@@ -1,5 +1,7 @@
 package com.example.user.application.service
 
+import com.example.exception.CustomException
+import com.example.exception.ErrorCode
 import com.example.user.application.port.`in`.CreateUserCommand
 import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
@@ -8,6 +10,7 @@ import com.example.user.domain.model.UserStatus
 import com.example.user.util.MockUserRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
@@ -43,6 +46,20 @@ internal class CreateUserServiceTest {
             { assertThat(findUser.status).isEqualTo(UserStatus.REGISTERED) },
             { assertThat(findUser.status).isEqualTo(user.status) }
         )
+    }
+
+    @DisplayName("이미 존재하는 email의 일반회원을 생성하려고 하면 CustomException이 발생합니다")
+    @ParameterizedTest
+    @MethodSource("create user by createUserCommand")
+    fun `create user by exsitsNickname cuased customException`(createUserCommand: CreateUserCommand) {
+        // given
+        val user = createUserService.createUser(createUserCommand)
+
+        // when
+        val exception = assertThrows(CustomException::class.java) { createUserService.createUser(createUserCommand) }
+
+        // then
+        assertThat(exception.errorCode).isEqualTo(ErrorCode.EXISTS_ENTITY)
     }
 
     @DisplayName("user, streamerNickname으로 스트리머회원을 생성 합니다")
