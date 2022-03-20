@@ -2,6 +2,7 @@ package com.example.user.application.service
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
+import com.example.user.application.port.`in`.UpdateUserCommand
 import com.example.user.util.MockUserRepository
 import com.example.user.util.randomUser
 import org.assertj.core.api.Assertions.assertThat
@@ -28,25 +29,25 @@ internal class UpdateUserServiceTest {
     @DisplayName("회원의 nickname을 luigi로 변경합니다")
     @ParameterizedTest
     @CsvSource(
-        value = ["test@gmail.com,password01,mario,luigi"]
+        value = ["luigi"]
     )
-    fun `update user by nickname`(email: String, password: String, nickname: String, newNickname: String) {
+    fun `update user by nickname`(newNickname: String) {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
 
-        val beforeId = user.id
+        val updateUserCommand = UpdateUserCommand(user.id, newNickname)
 
         // when
-        updateUserService.updateUser(beforeId, newNickname)
+        updateUserService.updateUser(updateUserCommand)
 
         // then
-        val findUser = mockUserRepository.findById(beforeId)
+        val findUser = mockUserRepository.findById(updateUserCommand.id)
 
         assertAll(
             { assertThat(findUser).isNotNull },
 
-            { assertThat(findUser.id).isEqualTo(beforeId) },
+            { assertThat(findUser.id).isEqualTo(updateUserCommand.id) },
             { assertThat(findUser.nickname).isEqualTo(newNickname) },
         )
     }
@@ -57,36 +58,13 @@ internal class UpdateUserServiceTest {
         value = ["luigi"]
     )
     fun `update notExistUser caused CustomException`(newNickname: String) {
+        // given
+        val updateUserCommand = UpdateUserCommand(UUID.randomUUID(), newNickname)
+
         // when
-        val exception = assertThrows(CustomException::class.java) { updateUserService.updateUser(UUID.randomUUID(), newNickname) }
+        val exception = assertThrows(CustomException::class.java) { updateUserService.updateUser(updateUserCommand) }
 
         // then
         assertThat(exception.errorCode).isEqualTo(ErrorCode.ENTITY_NOT_FOUND)
-    }
-
-    @DisplayName("회원의 password를 변경합니다")
-    @ParameterizedTest
-    @CsvSource(
-        value = ["test@gmail.com,password01,mario,password50"]
-    )
-    fun `update user by password`(email: String, password: String, nickname: String, newPassword: String) {
-        // given
-        val user = randomUser()
-        mockUserRepository.save(user)
-
-        val beforeId = user.id
-
-        // when
-        updateUserService.updateUserPassword(beforeId, newPassword)
-
-        // then
-        val findUser = mockUserRepository.findById(beforeId)
-
-        assertAll(
-            { assertThat(findUser).isNotNull },
-
-            { assertThat(findUser.id).isEqualTo(beforeId) },
-            { assertThat(findUser.password).isEqualTo(newPassword) },
-        )
     }
 }
