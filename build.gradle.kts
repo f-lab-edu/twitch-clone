@@ -13,3 +13,6 @@ repositories {
 dependencies {
 
 }
+allprojects {
+    tasks.withType<Test> { useJUnitPlatform() }
+}
