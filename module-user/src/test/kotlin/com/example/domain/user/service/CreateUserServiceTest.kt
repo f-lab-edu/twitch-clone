@@ -27,16 +27,14 @@ internal class CreateUserServiceTest {
         createUserService = CreateUserService(mockUserRepository)
     }
 
-    @DisplayName("email, password, nickName로 일반회원을 생성 합니다")
+    @DisplayName("email, password, nickname로 일반회원을 생성 합니다")
     @ParameterizedTest
     @CsvSource(
         value = ["test@gmail.com,password01,mario"]
     )
-    fun `create user by emailAndNicknameAndPassword`(email: String, password: String, nickName: String) {
-        // given
-
+    fun `create user by emailAndNicknameAndPassword`(email: String, password: String, nickname: String) {
         // when
-        val user = createUserService.createUser(email, password, nickName)
+        val user = createUserService.createUser(email, password, nickname)
 
         // then
         val findUser = mockUserRepository.findById(user.id)
@@ -49,14 +47,12 @@ internal class CreateUserServiceTest {
         )
     }
 
-    @DisplayName("user, streamerName으로 스트리머회원을 생성 합니다")
+    @DisplayName("user, streamerNickname으로 스트리머회원을 생성 합니다")
     @ParameterizedTest
     @MethodSource
-    fun `create streamerUser by userAndStreamerName`(user: User, streamerName: String) {
-        // given
-
+    fun `create streamerUser by userAndStreamerNickname`(user: User, streamerNickname: String) {
         // when
-        val streamer = StreamerUser(user, streamerName)
+        val streamer = StreamerUser(user, streamerNickname)
 
         // then
         assertAll(
@@ -67,9 +63,9 @@ internal class CreateUserServiceTest {
 
     companion object {
         @JvmStatic
-        fun `create streamerUser by userAndStreamerName`(): Stream<Arguments> {
+        fun `create streamerUser by userAndStreamerNickname`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(User(email = "test@gmail.com", password = "password01", nickName = "mario"), "koopa")
+                Arguments.of(User(email = "test@gmail.com", password = "password01", nickname = "mario"), "koopa")
             )
         }
     }

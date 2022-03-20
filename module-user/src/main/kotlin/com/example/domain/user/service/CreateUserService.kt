@@ -6,13 +6,13 @@ import com.example.domain.user.repository.UserRepository
 
 class CreateUserService(private val userRepository: UserRepository) {
 
-    fun createUser(email: String, password: String, nickName: String): User {
+    fun createUser(email: String, password: String, nickname: String): User {
         return userRepository.save(
-            User(email = email, password = password, nickName = nickName)
+            User(email = email, password = password, nickname = nickname)
         )
     }
 
-    fun createStreamerUser(user: User, streamerName: String): StreamerUser {
-        return StreamerUser(user, streamerName)
+    fun createStreamerUser(user: User, streamerNickname: String): StreamerUser {
+        return StreamerUser(user, streamerNickname)
     }
 }

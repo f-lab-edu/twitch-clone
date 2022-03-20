@@ -25,12 +25,12 @@ internal class UpdateUserServiceTest {
         updateUserService = UpdateUserService(mockUserRepository)
     }
 
-    @DisplayName("회원의 nickName을 luigi로 변경합니다")
+    @DisplayName("회원의 nickname을 luigi로 변경합니다")
     @ParameterizedTest
     @CsvSource(
         value = ["test@gmail.com,password01,mario,luigi"]
     )
-    fun `update user by nickname`(email: String, password: String, nickName: String, newNickName: String) {
+    fun `update user by nickname`(email: String, password: String, nickname: String, newNickname: String) {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
@@ -38,7 +38,7 @@ internal class UpdateUserServiceTest {
         val beforeId = user.id
 
         // when
-        updateUserService.updateUser(beforeId, newNickName)
+        updateUserService.updateUser(beforeId, newNickname)
 
         // then
         val findUser = mockUserRepository.findById(beforeId)
@@ -47,7 +47,7 @@ internal class UpdateUserServiceTest {
             { assertThat(findUser).isNotNull },
 
             { assertThat(findUser.id).isEqualTo(beforeId) },
-            { assertThat(findUser.nickName).isEqualTo(newNickName) },
+            { assertThat(findUser.nickname).isEqualTo(newNickname) },
         )
     }
 
@@ -56,11 +56,9 @@ internal class UpdateUserServiceTest {
     @CsvSource(
         value = ["luigi"]
     )
-    fun `update notExistUser caused CustomException`(newNickName: String) {
-        // given
-
+    fun `update notExistUser caused CustomException`(newNickname: String) {
         // when
-        val exception = assertThrows(CustomException::class.java) { updateUserService.updateUser(UUID.randomUUID(), newNickName) }
+        val exception = assertThrows(CustomException::class.java) { updateUserService.updateUser(UUID.randomUUID(), newNickname) }
 
         // then
         assertThat(exception.errorCode).isEqualTo(ErrorCode.ENTITY_NOT_FOUND)
@@ -71,7 +69,7 @@ internal class UpdateUserServiceTest {
     @CsvSource(
         value = ["test@gmail.com,password01,mario,password50"]
     )
-    fun `update user by password`(email: String, password: String, nickName: String, newPassword: String) {
+    fun `update user by password`(email: String, password: String, nickname: String, newPassword: String) {
         // given
         val user = randomUser()
         mockUserRepository.save(user)

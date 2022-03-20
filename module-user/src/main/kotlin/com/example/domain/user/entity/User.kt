@@ -9,6 +9,6 @@ class User(
     val id: UUID = UUID.randomUUID(),
     val email: String,
     val password: String,
-    val nickName: String,
+    val nickname: String,
     val status: UserStatus = UserStatus.REGISTERED
 )

@@ -13,21 +13,19 @@ internal class StreamerUserTest {
 
     companion object {
         @JvmStatic
-        fun `create streamerUser by userAndStreamerName`(): Stream<Arguments> {
+        fun `create streamerUser by userAndStreamerNickname`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(User(email = "test@gmail.com", password = "passsword01", nickName = "mario"), "koopa")
+                Arguments.of(User(email = "test@gmail.com", password = "passsword01", nickname = "mario"), "koopa")
             )
         }
     }
 
-    @DisplayName("user, streamerName으로 스트리머회원을 생성합니다")
+    @DisplayName("user, streamerNickname으로 스트리머회원을 생성합니다")
     @ParameterizedTest
     @MethodSource
-    fun `create streamerUser by userAndStreamerName`(user: User, streamerName: String) {
-        // given
-
+    fun `create streamerUser by userAndStreamerNickname`(user: User, streamerNickname: String) {
         // when
-        val streamer = StreamerUser(user, streamerName)
+        val streamer = StreamerUser(user, streamerNickname)
 
         // then
         assertAll(

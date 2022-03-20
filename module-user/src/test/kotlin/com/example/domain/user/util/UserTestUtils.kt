@@ -9,14 +9,14 @@ fun randomUser(
     id: UUID? = null,
     email: String? = null,
     password: String? = null,
-    nickName: String? = null,
+    nickname: String? = null,
     status: UserStatus? = null
 ): User = with(Faker()) {
     User(
         id = id ?: UUID.randomUUID(),
         email = email ?: internet().emailAddress(),
         password = password ?: lorem().characters(10),
-        nickName = nickName ?: name().name(),
+        nickname = nickname ?: name().name(),
         status = status ?: UserStatus.REGISTERED
     )
 }
