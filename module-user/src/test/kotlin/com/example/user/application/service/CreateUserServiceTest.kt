@@ -1,5 +1,6 @@
 package com.example.user.application.service
 
+import com.example.user.application.port.`in`.CreateUserCommand
 import com.example.user.domain.entity.StreamerUser
 import com.example.user.domain.entity.StreamerUserStatus
 import com.example.user.domain.entity.User
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
@@ -27,14 +27,12 @@ internal class CreateUserServiceTest {
         createUserService = CreateUserService(mockUserRepository)
     }
 
-    @DisplayName("email, password, nickname로 일반회원을 생성 합니다")
+    @DisplayName("CreateUserCommand로 일반회원을 생성 합니다")
     @ParameterizedTest
-    @CsvSource(
-        value = ["test@gmail.com,password01,mario"]
-    )
-    fun `create user by emailAndNicknameAndPassword`(email: String, password: String, nickname: String) {
+    @MethodSource
+    fun `create user by createUserCommand`(createUserCommand: CreateUserCommand) {
         // when
-        val user = createUserService.createUser(email, password, nickname)
+        val user = createUserService.createUser(createUserCommand)
 
         // then
         val findUser = mockUserRepository.findById(user.id)
@@ -62,6 +60,13 @@ internal class CreateUserServiceTest {
     }
 
     companion object {
+        @JvmStatic
+        fun `create user by createUserCommand`(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of(CreateUserCommand(email = "test@gmail.com", password = "password01", nickname = "mario"))
+            )
+        }
+
         @JvmStatic
         fun `create streamerUser by userAndStreamerNickname`(): Stream<Arguments> {
             return Stream.of(

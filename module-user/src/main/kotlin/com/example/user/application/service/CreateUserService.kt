@@ -1,18 +1,17 @@
 package com.example.user.application.service
 
+import com.example.user.application.port.`in`.CreateUserCommand
+import com.example.user.application.port.`in`.CreateUserUseCase
 import com.example.user.application.port.out.UserRepository
-import com.example.user.domain.entity.StreamerUser
 import com.example.user.domain.entity.User
 
-class CreateUserService(private val userRepository: UserRepository) {
+class CreateUserService(private val userRepository: UserRepository) : CreateUserUseCase {
 
-    fun createUser(email: String, password: String, nickname: String): User {
-        return userRepository.save(
-            User(email = email, password = password, nickname = nickname)
-        )
-    }
-
-    fun createStreamerUser(user: User, streamerNickname: String): StreamerUser {
-        return StreamerUser(user, streamerNickname)
+    override fun createUser(createUserCommand: CreateUserCommand): User {
+        return with(createUserCommand) {
+            userRepository.save(
+                User(email = email, password = password, nickname = nickname)
+            )
+        }
     }
 }
