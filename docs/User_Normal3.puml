@@ -2,30 +2,27 @@
 
 title <b> 회원 - 일반 </b>
 
-actor normal
-actor admin
-actor streamer
+actor actor
+participant front
+participant module_api
+participant module_user
 
-'normal 에서 시작
-usecase/ 스트리머_등록
-normal --> 스트리머_등록
-admin --> 스트리머_등록: 스트리밍 승인
-스트리머_등록 --> streamer
+== 회원 조회 ==
+actor -> front
+front -> module_api
+note left:조회 조건 (복합 조회 가능)\nemail, nickname
+module_api <-> module_user: 회원 조회
 
-usecase/ 팔로우
-normal --> 팔로우
-팔로우 --> streamer
+== 회원 정보 수정 ==
+actor -> front
+front -> module_api
+note left: nickname
+module_api <-> module_user: 회원 정보 수정
 
-usecase/ 구독
-normal --> 구독
-구독 --> streamer
-
-usecase/ 정보수정
-normal --> 정보수정
-정보수정 --> normal
-
-usecase/ 정보조회
-normal --> 정보조회
-정보조회 --> normal
+== 비밀번호 수정 ==
+actor -> front
+front -> module_api
+note left: newPassword
+module_api <-> module_user: 비밀번호 수정
 
 @enduml

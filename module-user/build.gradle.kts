@@ -16,4 +16,5 @@ dependencies {
     // TODO 추후 버전 및 공통 dependencies 분리
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("org.assertj:assertj-core:3.21.0")
+    testImplementation("com.github.javafaker:javafaker:1.0.2")
 }
