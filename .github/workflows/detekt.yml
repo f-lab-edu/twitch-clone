@@ -44,4 +44,6 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: ${{ always() }}
         with:
-          files: module-user/build/test-results/**/*.xml
+          files: |
+            module-user/build/test-results/**/*.xml
+            module-core/build/test-results/**/*.xml
