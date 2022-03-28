@@ -7,7 +7,6 @@ import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.collections.ArrayList
 
 class MockStreamerUserRepository : StreamerUserRepository {
 
@@ -20,11 +19,25 @@ class MockStreamerUserRepository : StreamerUserRepository {
         return ArrayList(streamerUserMap.values)
     }
 
+    override fun saveAll(streamerUsers: List<StreamerUser>) {
+        for (streamerUser in streamerUsers) {
+            this.streamerUsers[streamerUser.id()] = streamerUser
+        }
+    }
+
     override fun save(streamerUser: StreamerUser) {
         mockCreateStreamer(streamerUser.id(), streamerUser)
     }
 
+    override fun findById(id: UUID): StreamerUser {
+        return mockSelectStreamer(id)
+    }
+
     private fun mockCreateStreamer(uuid: UUID, streamerUser: StreamerUser) {
         this.streamerUsers[uuid] = streamerUser
+    }
+
+    private fun mockSelectStreamer(uuid: UUID): StreamerUser {
+        return this.streamerUsers[uuid] ?: throw CustomException(ErrorCode.ENTITY_NOT_FOUND)
     }
 }

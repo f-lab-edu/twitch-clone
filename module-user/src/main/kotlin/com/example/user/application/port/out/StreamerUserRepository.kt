@@ -6,9 +6,13 @@ import java.util.*
 
 interface StreamerUserRepository {
 
+    fun findById(id: UUID): StreamerUser
+
     fun findAllByStatus(streamerUserStatus: StreamerUserStatus): List<StreamerUser>
 
     fun save(streamerUser: StreamerUser)
+
+    fun saveAll(streamerUsers: List<StreamerUser>)
 
 }
 
