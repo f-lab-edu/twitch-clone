@@ -60,6 +60,27 @@ class UpdateStreamerUserServiceTest {
         )
     }
 
+    @Test
+    @DisplayName("스트리머의 상태를 정지 상태로 변경한다.")
+    fun `update streamer status suspense`() {
+        // given
+        createPendingStreamer()
+        val streamerUsers = selectPendingStreamer()
+        updateStreamerService.approveStreamerUser(streamerUsers)
+        val id = streamerUsers[0].id()
+
+        // when
+        updateStreamerService.suspendStreamer(id)
+
+        // then
+        val findUser = mockStreamerUserRepository.findById(id)
+
+        Assertions.assertAll(
+            { assertThat(findUser).isNotNull },
+            { assertThat(findUser.status).isEqualTo(StreamerUserStatus.SUSPENSE) },
+        )
+    }
+
     private fun createUser() = User(email = "test@Test.com", nickname = "test", password = "password01")
 
     private fun createStreamerUser(user: User) = StreamerUser(user = user, streamerNickname = "streamer")

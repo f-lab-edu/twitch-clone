@@ -4,6 +4,7 @@ import com.example.user.application.port.`in`.UpdateStreamerUserUseCase
 import com.example.user.application.port.out.StreamerUserRepository
 import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
+import java.util.*
 
 class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepository) : UpdateStreamerUserUseCase {
 
@@ -28,4 +29,14 @@ class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepo
         }
         streamerRepository.saveAll(updateStreamerUsers)
     }
+
+    override fun suspendStreamer(id: UUID) {
+        val streamerUser = streamerRepository.findById(id)
+        streamerRepository.save(StreamerUser(
+            user = streamerUser.user,
+            streamerNickname = streamerUser.streamerNickname,
+            status = StreamerUserStatus.SUSPENSE
+        ))
+    }
+
 }
