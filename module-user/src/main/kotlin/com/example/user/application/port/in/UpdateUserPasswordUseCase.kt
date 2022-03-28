@@ -6,6 +6,9 @@ import java.util.*
 interface UpdateUserPasswordUseCase {
 
     fun updateUserPassword(updateUserPasswordCommand: UpdateUserPasswordCommand): User
+
+    fun initUserPassword(id: UUID)
+
 }
 
 data class UpdateUserPasswordCommand(val id: UUID, val password: String)
