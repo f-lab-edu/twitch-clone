@@ -6,6 +6,9 @@ import java.util.*
 interface UpdateUserUseCase {
 
     fun updateUser(updateUserCommand: UpdateUserCommand): User
+
+    fun suspendUser(userId: UUID)
+
 }
 
 data class UpdateUserCommand(val id: UUID, val nickname: String?)

@@ -4,6 +4,8 @@ import com.example.user.application.port.`in`.UpdateUserCommand
 import com.example.user.application.port.`in`.UpdateUserUseCase
 import com.example.user.application.port.out.UserRepository
 import com.example.user.domain.model.User
+import com.example.user.domain.model.UserStatus
+import java.util.*
 
 internal class UpdateUserService(private val userRepository: UserRepository) : UpdateUserUseCase {
 
@@ -22,5 +24,13 @@ internal class UpdateUserService(private val userRepository: UserRepository) : U
                 )
             }
         }
+    }
+
+    override fun suspendUser(userId: UUID) {
+        val (id, email, password, nickname) = userRepository.findById(userId)
+        userRepository.save(User(
+            id = id, email = email, password = password,
+            nickname = nickname, status = UserStatus.SUSPENSE
+        ))
     }
 }
