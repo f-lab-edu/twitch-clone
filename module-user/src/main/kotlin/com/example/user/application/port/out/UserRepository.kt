@@ -1,6 +1,7 @@
 package com.example.user.application.port.out
 
 import com.example.user.domain.model.User
+import com.example.user.domain.model.UserStatus
 import java.util.*
 
 interface UserRepository {
@@ -12,4 +13,4 @@ interface UserRepository {
     fun search(searchUserQuery: SearchUserQuery): List<User>
 }
 
-class SearchUserQuery(val email: String? = null, val nickname: String? = null)
+class SearchUserQuery(val email: String? = null, val nickname: String? = null, val status: UserStatus? = null)
