@@ -5,7 +5,7 @@ import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.domain.model.User
 import com.example.user.util.MockStreamerUserRepository
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -32,7 +32,7 @@ class FindStreamerUserServiceTest {
         val pendingStreamerUsers = findStreamerService.findPendingStreamers()
 
         // then
-        Assertions.assertAll(
+        assertAll(
             { assertThat(pendingStreamerUsers).isNotEmpty },
             { assertThat(pendingStreamerUsers).allMatch { it.status == StreamerUserStatus.PENDING} }
         )

@@ -4,7 +4,7 @@ import com.example.user.application.port.out.SearchUserQuery
 import com.example.user.util.MockUserRepository
 import com.example.user.util.randomUser
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -32,7 +32,7 @@ class FindUserServiceTest {
         val selectUsers = findUserService.findUsers(SearchUserQuery(email = user.email))
 
         // then
-        Assertions.assertAll(
+        assertAll(
             { assertThat(selectUsers).isNotEmpty },
             { assertThat(selectUsers[0]).isEqualTo(user) }
         )
@@ -49,7 +49,7 @@ class FindUserServiceTest {
         val selectUsers = findUserService.findUsers(SearchUserQuery(nickname = user.nickname))
 
         // then
-        Assertions.assertAll(
+        assertAll(
             { assertThat(selectUsers).isNotEmpty },
             { assertThat(selectUsers[0]).isEqualTo(user) }
         )
@@ -66,7 +66,7 @@ class FindUserServiceTest {
         val selectUsers = findUserService.findUsers(SearchUserQuery(status = user.status))
 
         // then
-        Assertions.assertAll(
+        assertAll(
             { assertThat(selectUsers).isNotEmpty },
             { assertThat(selectUsers[0]).isEqualTo(user) }
         )
@@ -84,7 +84,7 @@ class FindUserServiceTest {
             SearchUserQuery(email = user.email, nickname = user.nickname, status = user.status))
 
         // then
-        Assertions.assertAll(
+        assertAll(
             { assertThat(selectUsers).isNotEmpty },
             { assertThat(selectUsers[0]).isEqualTo(user) },
         )

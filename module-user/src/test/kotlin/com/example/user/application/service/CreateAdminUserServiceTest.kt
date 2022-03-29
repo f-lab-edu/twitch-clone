@@ -5,8 +5,8 @@ import com.example.exception.ErrorCode
 import com.example.user.util.MockAdminUserRepository
 import com.example.user.util.randomUser
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertAll
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -47,7 +47,7 @@ internal class CreateAdminUserServiceTest {
 
         // when
         val exception =
-            Assertions.assertThrows(CustomException::class.java) {
+            assertThrows(CustomException::class.java) {
                 createAdminUserService.createAdminUser(user, "admin")
             }
 

@@ -5,7 +5,7 @@ import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.domain.model.User
 import com.example.user.util.MockStreamerUserRepository
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -35,7 +35,7 @@ class UpdateStreamerUserServiceTest {
         // then
         val approvedUuid = mockStreamerUserRepository.findById(pendingStreamers[0].id)
 
-        Assertions.assertAll(
+        assertAll(
             { assertThat(approvedUuid).isNotNull },
             { assertThat(approvedUuid.status).isEqualTo(StreamerUserStatus.REGISTERED) }
         )
@@ -54,7 +54,7 @@ class UpdateStreamerUserServiceTest {
         // then
         val approvedUuid = mockStreamerUserRepository.findById(pendingStreamers[0].id)
 
-        Assertions.assertAll(
+        assertAll(
             { assertThat(approvedUuid).isNotNull },
             { assertThat(approvedUuid.status).isEqualTo(StreamerUserStatus.REJECTED) }
         )
@@ -74,7 +74,7 @@ class UpdateStreamerUserServiceTest {
         // then
         val findUser = mockStreamerUserRepository.findById(id)
 
-        Assertions.assertAll(
+        assertAll(
             { assertThat(findUser).isNotNull },
             { assertThat(findUser.status).isEqualTo(StreamerUserStatus.SUSPENSE) },
         )
