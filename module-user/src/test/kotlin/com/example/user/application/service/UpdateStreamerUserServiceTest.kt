@@ -33,7 +33,7 @@ class UpdateStreamerUserServiceTest {
         updateStreamerService.approveStreamerUser(pendingStreamers)
 
         // then
-        val approvedUuid = mockStreamerUserRepository.findById(pendingStreamers[0].id())
+        val approvedUuid = mockStreamerUserRepository.findById(pendingStreamers[0].id)
 
         Assertions.assertAll(
             { assertThat(approvedUuid).isNotNull },
@@ -52,7 +52,7 @@ class UpdateStreamerUserServiceTest {
         updateStreamerService.rejectStreamerUser(pendingStreamers)
 
         // then
-        val approvedUuid = mockStreamerUserRepository.findById(pendingStreamers[0].id())
+        val approvedUuid = mockStreamerUserRepository.findById(pendingStreamers[0].id)
 
         Assertions.assertAll(
             { assertThat(approvedUuid).isNotNull },
@@ -67,8 +67,7 @@ class UpdateStreamerUserServiceTest {
         createPendingStreamer()
         val streamerUsers = selectPendingStreamer()
         updateStreamerService.approveStreamerUser(streamerUsers)
-        val id = streamerUsers[0].id()
-
+        val id = streamerUsers[0].id
         // when
         updateStreamerService.suspendStreamer(id)
 

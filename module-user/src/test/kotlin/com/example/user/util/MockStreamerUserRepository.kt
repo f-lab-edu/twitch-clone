@@ -21,12 +21,12 @@ class MockStreamerUserRepository : StreamerUserRepository {
 
     override fun saveAll(streamerUsers: List<StreamerUser>) {
         for (streamerUser in streamerUsers) {
-            this.streamerUsers[streamerUser.id()] = streamerUser
+            this.streamerUsers[streamerUser.id] = streamerUser
         }
     }
 
     override fun save(streamerUser: StreamerUser) {
-        mockCreateStreamer(streamerUser.id(), streamerUser)
+        mockCreateStreamer(streamerUser.id, streamerUser)
     }
 
     override fun findById(id: UUID): StreamerUser {

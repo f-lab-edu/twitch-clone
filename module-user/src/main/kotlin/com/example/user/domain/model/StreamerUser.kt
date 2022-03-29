@@ -10,7 +10,8 @@ class StreamerUser(
     val streamerNickname: String,
     val status: StreamerUserStatus = StreamerUserStatus.PENDING
 ) {
-    internal fun id() : UUID {
-        return user.id
-    }
+    internal val id : UUID
+        get() {
+            return user.id
+        }
 }
