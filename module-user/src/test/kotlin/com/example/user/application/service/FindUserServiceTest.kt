@@ -10,15 +10,15 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 @DisplayName("[유저] 조회")
-class SelectUserServiceTest {
+class FindUserServiceTest {
 
-    private lateinit var selectUserService: SelectUserService
+    private lateinit var findUserService: FindUserService
     private lateinit var mockUserRepository: MockUserRepository
 
     @BeforeEach
     fun beforeEach() {
         mockUserRepository = MockUserRepository()
-        selectUserService = SelectUserService(mockUserRepository)
+        findUserService = FindUserService(mockUserRepository)
     }
 
     @Test
@@ -29,7 +29,7 @@ class SelectUserServiceTest {
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = selectUserService.selectUsers(SearchUserQuery(email = user.email))
+        val selectUsers = findUserService.findUsers(SearchUserQuery(email = user.email))
 
         // then
         Assertions.assertAll(
@@ -46,7 +46,7 @@ class SelectUserServiceTest {
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = selectUserService.selectUsers(SearchUserQuery(nickname = user.nickname))
+        val selectUsers = findUserService.findUsers(SearchUserQuery(nickname = user.nickname))
 
         // then
         Assertions.assertAll(
@@ -63,7 +63,7 @@ class SelectUserServiceTest {
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = selectUserService.selectUsers(SearchUserQuery(status = user.status))
+        val selectUsers = findUserService.findUsers(SearchUserQuery(status = user.status))
 
         // then
         Assertions.assertAll(
@@ -80,7 +80,7 @@ class SelectUserServiceTest {
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = selectUserService.selectUsers(
+        val selectUsers = findUserService.findUsers(
             SearchUserQuery(email = user.email, nickname = user.nickname, status = user.status))
 
         // then
