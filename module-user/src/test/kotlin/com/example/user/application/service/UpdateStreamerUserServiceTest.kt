@@ -2,8 +2,8 @@ package com.example.user.application.service
 
 import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
-import com.example.user.domain.model.User
 import com.example.user.util.MockStreamerUserRepository
+import com.example.user.util.createStreamUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach
@@ -26,7 +26,7 @@ class UpdateStreamerUserServiceTest {
     @DisplayName("스트리머 요청 리스트가 존재할 경우 스트리머 요청을 승인한다.")
     fun `pending streamer user register`() {
         // given
-        createPendingStreamer()
+        saveStreamer()
         val pendingStreamers = selectPendingStreamer()
 
         // when
@@ -45,7 +45,7 @@ class UpdateStreamerUserServiceTest {
     @DisplayName("스트리머 요청 리스트가 존재하지만 결격 사유 존재 시 스트리머 요청을 거절한다.")
     fun `pending streamer user rejected`() {
         // given
-        createPendingStreamer()
+        saveStreamer()
         val pendingStreamers = selectPendingStreamer()
 
         // when
@@ -64,7 +64,7 @@ class UpdateStreamerUserServiceTest {
     @DisplayName("스트리머의 상태를 정지 상태로 변경한다.")
     fun `update streamer status suspense`() {
         // given
-        createPendingStreamer()
+        saveStreamer()
         val streamerUsers = selectPendingStreamer()
         updateStreamerService.approveStreamerUser(streamerUsers)
         val id = streamerUsers[0].id
@@ -80,13 +80,8 @@ class UpdateStreamerUserServiceTest {
         )
     }
 
-    private fun createUser() = User(email = "test@Test.com", nickname = "test", password = "password01")
-
-    private fun createStreamerUser(user: User) = StreamerUser(user = user, streamerNickname = "streamer")
-
-    private fun createPendingStreamer() {
-        val user = createUser()
-        mockStreamerUserRepository.save(createStreamerUser(user))
+    private fun saveStreamer() {
+        mockStreamerUserRepository.save(createStreamUser())
     }
 
     private fun selectPendingStreamer() : List<StreamerUser>{
