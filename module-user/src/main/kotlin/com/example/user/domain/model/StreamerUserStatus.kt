@@ -7,5 +7,6 @@ package com.example.user.domain.model
 enum class StreamerUserStatus(val description: String) {
     PENDING("등록대기"),
     REGISTERED("등록"),
-    SUSPENSE("정지")
+    REJECTED("거절"),
+    SUSPENDED("정지")
 }

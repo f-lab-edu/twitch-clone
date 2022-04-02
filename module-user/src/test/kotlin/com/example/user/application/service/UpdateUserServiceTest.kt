@@ -3,6 +3,7 @@ package com.example.user.application.service
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
 import com.example.user.application.port.`in`.UpdateUserCommand
+import com.example.user.domain.model.UserStatus
 import com.example.user.util.MockUserRepository
 import com.example.user.util.randomUser
 import org.assertj.core.api.Assertions.assertThat
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.util.*
@@ -66,5 +68,24 @@ internal class UpdateUserServiceTest {
 
         // then
         assertThat(exception.errorCode).isEqualTo(ErrorCode.ENTITY_NOT_FOUND)
+    }
+
+    @Test
+    @DisplayName("회원의 상태를 정지 상태로 변경한다.")
+    fun `update user status suspense`() {
+        // given
+        val user = randomUser()
+        mockUserRepository.save(user)
+
+        // when
+        updateUserService.suspendUser(user.id)
+
+        // then
+        val findUser = mockUserRepository.findById(user.id)
+
+        assertAll(
+            { assertThat(findUser).isNotNull },
+            { assertThat(findUser.status).isEqualTo(UserStatus.SUSPENDED) },
+        )
     }
 }
