@@ -11,4 +11,5 @@ interface UpdateStreamerUserUseCase {
 
     fun suspendStreamer(id: UUID)
 
+    fun updateStreamerNickname(id: UUID, updateNickname: String)
 }
