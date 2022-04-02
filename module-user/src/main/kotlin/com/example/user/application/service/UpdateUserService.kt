@@ -30,7 +30,7 @@ internal class UpdateUserService(private val userRepository: UserRepository) : U
         val (id, email, password, nickname) = userRepository.findById(userId)
         userRepository.save(User(
             id = id, email = email, password = password,
-            nickname = nickname, status = UserStatus.SUSPENSE
+            nickname = nickname, status = UserStatus.SUSPENDED
         ))
     }
 }

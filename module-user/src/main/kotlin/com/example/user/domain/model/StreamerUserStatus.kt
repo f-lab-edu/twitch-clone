@@ -8,5 +8,5 @@ enum class StreamerUserStatus(val description: String) {
     PENDING("등록대기"),
     REGISTERED("등록"),
     REJECTED("거절"),
-    SUSPENSE("정지")
+    SUSPENDED("정지")
 }

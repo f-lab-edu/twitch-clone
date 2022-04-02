@@ -85,7 +85,7 @@ internal class UpdateUserServiceTest {
 
         assertAll(
             { assertThat(findUser).isNotNull },
-            { assertThat(findUser.status).isEqualTo(UserStatus.SUSPENSE) },
+            { assertThat(findUser.status).isEqualTo(UserStatus.SUSPENDED) },
         )
     }
 }

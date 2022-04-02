@@ -35,7 +35,7 @@ class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepo
         streamerRepository.save(StreamerUser(
             user = streamerUser.user,
             streamerNickname = streamerUser.streamerNickname,
-            status = StreamerUserStatus.SUSPENSE
+            status = StreamerUserStatus.SUSPENDED
         ))
     }
 

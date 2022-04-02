@@ -76,7 +76,7 @@ class UpdateStreamerUserServiceTest {
 
         assertAll(
             { assertThat(findUser).isNotNull },
-            { assertThat(findUser.status).isEqualTo(StreamerUserStatus.SUSPENSE) },
+            { assertThat(findUser.status).isEqualTo(StreamerUserStatus.SUSPENDED) },
         )
     }
 
