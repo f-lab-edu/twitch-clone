@@ -16,5 +16,9 @@ interface StreamerUserRepository {
 
     fun saveAll(streamerUsers: List<StreamerUser>)
 
+    fun findStreamers(searchStreamerQuery: SearchStreamerQuery): List<StreamerUser>
+
 }
+class SearchStreamerQuery(val streamerNickname: String? = null,
+                          val streamerUserStatus: StreamerUserStatus? = StreamerUserStatus.REGISTERED)
 
