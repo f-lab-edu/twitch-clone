@@ -19,6 +19,7 @@ interface StreamerUserRepository {
     fun findStreamers(searchStreamerQuery: SearchStreamerQuery): List<StreamerUser>
 
 }
+
 class SearchStreamerQuery(val streamerNickname: String? = null,
                           val streamerUserStatus: StreamerUserStatus? = StreamerUserStatus.REGISTERED)
 

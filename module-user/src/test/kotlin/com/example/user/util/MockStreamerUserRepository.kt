@@ -54,7 +54,6 @@ class MockStreamerUserRepository : StreamerUserRepository {
     }
 
     private fun statusFilter(searchStreamerUsers: List<StreamerUser>, status: StreamerUserStatus?): List<StreamerUser> {
-        return if (status == null) searchStreamerUsers
-        else searchStreamerUsers.filter { it.status == status }
+        return status?.let { searchStreamerUsers.filter { it.status == status } } ?: searchStreamerUsers
     }
 }
