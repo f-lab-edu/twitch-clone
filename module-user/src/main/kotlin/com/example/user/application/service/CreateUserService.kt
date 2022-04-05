@@ -6,15 +6,15 @@ import com.example.user.application.port.`in`.CreateUserCommand
 import com.example.user.application.port.`in`.CreateUserUseCase
 import com.example.user.application.port.out.SearchUserQuery
 import com.example.user.application.port.out.UserRepository
-import com.example.user.domain.model.User
+import com.example.user.domain.model.NormalUser
 
 internal class CreateUserService(private val userRepository: UserRepository) : CreateUserUseCase {
 
-    override fun createUser(createUserCommand: CreateUserCommand): User {
+    override fun createUser(createUserCommand: CreateUserCommand): NormalUser {
         with(createUserCommand) {
             if (userRepository.search(SearchUserQuery(email)).isEmpty()) {
                 return userRepository.save(
-                    User(email = email, password = password, nickname = nickname)
+                    NormalUser(email = email, password = password, nickname = nickname)
                 )
             }
 

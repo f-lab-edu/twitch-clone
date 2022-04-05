@@ -5,7 +5,7 @@ import com.example.exception.ErrorCode
 import com.example.user.application.port.`in`.CreateUserCommand
 import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
-import com.example.user.domain.model.User
+import com.example.user.domain.model.NormalUser
 import com.example.user.domain.model.UserStatus
 import com.example.user.util.MockUserRepository
 import org.assertj.core.api.Assertions.assertThat
@@ -19,7 +19,7 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
 @DisplayName("[회원] 생성")
-internal class CreateUserServiceTest {
+internal class CreateNormalUserServiceTest {
 
     private lateinit var mockUserRepository: MockUserRepository
     private lateinit var createUserService: CreateUserService
@@ -65,7 +65,7 @@ internal class CreateUserServiceTest {
     @DisplayName("user, streamerNickname으로 스트리머회원을 생성 합니다")
     @ParameterizedTest
     @MethodSource
-    fun `create streamerUser by userAndStreamerNickname`(user: User, streamerNickname: String) {
+    fun `create streamerUser by userAndStreamerNickname`(user: NormalUser, streamerNickname: String) {
         // when
         val streamer = StreamerUser(user, streamerNickname)
 
@@ -87,7 +87,7 @@ internal class CreateUserServiceTest {
         @JvmStatic
         fun `create streamerUser by userAndStreamerNickname`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(User(email = "test@gmail.com", password = "password01", nickname = "mario"), "koopa")
+                Arguments.of(NormalUser(email = "test@gmail.com", password = "password01", nickname = "mario"), "koopa")
             )
         }
     }

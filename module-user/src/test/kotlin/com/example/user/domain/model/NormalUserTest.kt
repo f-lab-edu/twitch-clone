@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
 @DisplayName("[회원] 일반")
-internal class UserTest {
+internal class NormalUserTest {
 
     @DisplayName("email, password, nickname로 일반회원을 생성합니다")
     @ParameterizedTest
@@ -16,7 +16,7 @@ internal class UserTest {
     )
     fun `create user by emailAndNicknameAndPassword`(email: String, password: String, nickname: String) {
         // when
-        val user = User(email = email, nickname = nickname, password = password)
+        val user = NormalUser(email = email, nickname = nickname, password = password)
 
         // then
         assertAll(

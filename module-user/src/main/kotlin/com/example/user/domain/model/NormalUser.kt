@@ -5,7 +5,7 @@ import java.util.*
 /**
  * 회원
  */
-data class User(
+data class NormalUser(
     val id: UUID = UUID.randomUUID(),
     val email: String,
     val password: String,
@@ -14,7 +14,7 @@ data class User(
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is User) return false
+        if (other !is NormalUser) return false
 
         if (id != other.id) return false
         if (email != other.email) return false

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 @DisplayName("[유저] 조회")
-class FindUserServiceTest {
+class FindNormalUserServiceTest {
 
     private lateinit var findUserService: FindUserService
     private lateinit var mockUserRepository: MockUserRepository
