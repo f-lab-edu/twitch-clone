@@ -6,13 +6,20 @@ import java.util.*
 
 interface StreamerUserRepository {
 
+    fun existsById(id: UUID): Boolean
+
     fun findById(id: UUID): StreamerUser
 
     fun findAllByStatus(streamerUserStatus: StreamerUserStatus): List<StreamerUser>
 
-    fun save(streamerUser: StreamerUser)
+    fun save(streamerUser: StreamerUser) : StreamerUser
 
     fun saveAll(streamerUsers: List<StreamerUser>)
 
+    fun findStreamers(searchStreamerQuery: SearchStreamerQuery): List<StreamerUser>
+
 }
+
+class SearchStreamerQuery(val streamerNickname: String? = null,
+                          val streamerUserStatus: StreamerUserStatus? = StreamerUserStatus.REGISTERED)
 

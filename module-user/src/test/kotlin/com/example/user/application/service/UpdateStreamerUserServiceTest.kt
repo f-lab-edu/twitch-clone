@@ -80,8 +80,28 @@ class UpdateStreamerUserServiceTest {
         )
     }
 
-    private fun saveStreamer() {
-        mockStreamerUserRepository.save(createStreamUser())
+    @Test
+    @DisplayName("스트리머의 닉네임을 변경한다.")
+    fun `update streamer nickname`() {
+        // given
+        val streamer = saveStreamer()
+        val id = streamer.id
+        val changeNickname = "change nickname"
+
+        // when
+        updateStreamerService.updateStreamerNickname(id, changeNickname)
+
+        // then
+        val findUser = mockStreamerUserRepository.findById(id)
+
+        assertAll(
+            { assertThat(findUser).isNotNull },
+            { assertThat(findUser.streamerNickname).isEqualTo(changeNickname) },
+        )
+    }
+
+    private fun saveStreamer() : StreamerUser{
+        return mockStreamerUserRepository.save(createStreamUser())
     }
 
     private fun selectPendingStreamer() : List<StreamerUser>{
