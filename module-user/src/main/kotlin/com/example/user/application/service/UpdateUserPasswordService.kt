@@ -14,25 +14,15 @@ internal class UpdateUserPasswordService(private val userRepository: UserReposit
     override fun updateUserPassword(updateUserPasswordCommand: UpdateUserPasswordCommand): NormalUser {
         return with(updateUserPasswordCommand) {
             userRepository.findById(id).let {
-                userRepository.save(
-                    NormalUser(
-                        id = it.id, email = it.email,
-                        password = password,
-                        nickname = it.nickname
-                    )
-                )
+                it.updatePassword(password)
+                userRepository.save(it)
             }
         }
     }
 
     override fun initUserPassword(id: UUID) {
         val user = userRepository.findById(id)
-        userRepository.save(
-            NormalUser(
-                id = user.id, email = user.email,
-                password = initPassword,
-                nickname = user.nickname
-            )
-        )
+        user.updatePassword(initPassword)
+        userRepository.save(user)
     }
 }

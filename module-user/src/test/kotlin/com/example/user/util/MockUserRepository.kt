@@ -13,11 +13,9 @@ class MockUserRepository : UserRepository {
 
     private val users = ConcurrentHashMap<UUID, NormalUser>()
 
-    override fun save(user: NormalUser): NormalUser {
-        val savedUser = NormalUser(user.id, user.email, user.password, user.nickname, user.status)
-        users[user.id] = savedUser
-
-        return savedUser
+    override fun save(normalUser: NormalUser): NormalUser {
+        users[normalUser.id] = normalUser
+        return normalUser
     }
 
     override fun findById(id: UUID): NormalUser {

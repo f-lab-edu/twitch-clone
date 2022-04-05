@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.CsvSource
 import java.util.*
 
 @DisplayName("[회원] 정보 수정")
-internal class UpdateUserServiceTest {
+internal class UpdateNormalUserServiceTest {
 
     private lateinit var mockUserRepository: MockUserRepository
     private lateinit var updateUserService: UpdateUserService

@@ -51,9 +51,9 @@ internal class CreateNormalUserServiceTest {
     @DisplayName("이미 존재하는 email의 일반회원을 생성하려고 하면 CustomException이 발생합니다")
     @ParameterizedTest
     @MethodSource("create user by createUserCommand")
-    fun `create user by exsitsNickname cuased customException`(createUserCommand: CreateUserCommand) {
+    fun `create user by existsNickname caused customException`(createUserCommand: CreateUserCommand) {
         // given
-        val user = createUserService.createUser(createUserCommand)
+        createUserService.createUser(createUserCommand)
 
         // when
         val exception = assertThrows(CustomException::class.java) { createUserService.createUser(createUserCommand) }
@@ -62,32 +62,11 @@ internal class CreateNormalUserServiceTest {
         assertThat(exception.errorCode).isEqualTo(ErrorCode.EXISTS_ENTITY)
     }
 
-    @DisplayName("user, streamerNickname으로 스트리머회원을 생성 합니다")
-    @ParameterizedTest
-    @MethodSource
-    fun `create streamerUser by userAndStreamerNickname`(user: NormalUser, streamerNickname: String) {
-        // when
-        val streamer = StreamerUser(user, streamerNickname)
-
-        // then
-        assertAll(
-            { assertThat(streamer.user.status).isEqualTo(UserStatus.REGISTERED) },
-            { assertThat(streamer.status).isEqualTo(StreamerUserStatus.PENDING) }
-        )
-    }
-
     companion object {
         @JvmStatic
         fun `create user by createUserCommand`(): Stream<Arguments> {
             return Stream.of(
                 Arguments.of(CreateUserCommand(email = "test@gmail.com", password = "password01", nickname = "mario"))
-            )
-        }
-
-        @JvmStatic
-        fun `create streamerUser by userAndStreamerNickname`(): Stream<Arguments> {
-            return Stream.of(
-                Arguments.of(NormalUser(email = "test@gmail.com", password = "password01", nickname = "mario"), "koopa")
             )
         }
     }

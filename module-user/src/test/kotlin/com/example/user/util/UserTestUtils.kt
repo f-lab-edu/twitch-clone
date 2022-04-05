@@ -10,13 +10,11 @@ fun randomUser(
     email: String? = null,
     password: String? = null,
     nickname: String? = null,
-    status: UserStatus? = null
 ): NormalUser = with(Faker()) {
     NormalUser(
         id = id ?: UUID.randomUUID(),
         email = email ?: internet().emailAddress(),
         password = password ?: lorem().characters(10),
         nickname = nickname ?: name().name(),
-        status = status ?: UserStatus.REGISTERED
     )
 }

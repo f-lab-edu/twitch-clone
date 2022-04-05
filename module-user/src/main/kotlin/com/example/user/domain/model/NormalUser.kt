@@ -5,13 +5,22 @@ import java.util.*
 /**
  * 회원
  */
-data class NormalUser(
-    val id: UUID = UUID.randomUUID(),
-    val email: String,
-    val password: String,
-    val nickname: String,
-    val status: UserStatus = UserStatus.REGISTERED
-) {
+class NormalUser(
+    override val id: UUID = UUID.randomUUID(),
+    override val email: String,
+    password: String,
+    nickname: String
+) : User.Editor {
+
+    override var password: String = ""
+    override var nickname: String = ""
+    override var status: UserStatus = UserStatus.REGISTERED
+
+    init {
+        this.password = password
+        this.nickname = nickname
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is NormalUser) return false
