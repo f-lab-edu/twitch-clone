@@ -1,11 +1,15 @@
 package com.example.user.application.service
 
+import com.example.user.application.port.`in`.ApproveStreamerUserUseCase
+import com.example.user.application.port.`in`.RejectStreamerUserUseCase
+import com.example.user.application.port.`in`.SuspendStreamerUserUseCase
 import com.example.user.application.port.`in`.UpdateStreamerUserUseCase
 import com.example.user.application.port.out.StreamerUserRepository
 import com.example.user.domain.model.StreamerUser
 import java.util.*
 
-class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepository) : UpdateStreamerUserUseCase {
+class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepository)
+    : ApproveStreamerUserUseCase, RejectStreamerUserUseCase, SuspendStreamerUserUseCase, UpdateStreamerUserUseCase {
 
     override fun approveStreamerUser(streamerUsers: List<StreamerUser>) {
         streamerUsers.map {
