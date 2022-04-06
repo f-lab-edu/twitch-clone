@@ -7,8 +7,8 @@ import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.User
 import java.util.*
 
-internal class UpdateUserService(private val normalUserRepository: NormalUserRepository)
-    : UpdateUserUseCase, SuspendUserUseCase {
+internal class UpdateUserService(private val normalUserRepository: NormalUserRepository) : UpdateUserUseCase,
+    SuspendUserUseCase {
 
     /**
      * - 현재 변경 가능한 필드는 nickname만 입니다.
@@ -16,10 +16,9 @@ internal class UpdateUserService(private val normalUserRepository: NormalUserRep
      */
     override fun updateUser(updateUserCommand: UpdateUserCommand): User {
         return with(updateUserCommand) {
-            normalUserRepository.findById(id).let {
-                it.edit().nickname = updateUserCommand.nickname ?: it.nickname
-                normalUserRepository.save(it)
-            }
+            val normalUser = normalUserRepository.findById(id)
+            normalUser.edit().nickname = updateUserCommand.nickname ?: normalUser.nickname
+            normalUserRepository.save(normalUser)
         }
     }
 

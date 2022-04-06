@@ -16,7 +16,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.util.*
 
-@DisplayName("[회원] 정보 수정")
+@DisplayName("[일반 유저] 정보 수정")
 internal class UpdateNormalUserServiceTest {
 
     private lateinit var mockUserRepository: MockNormalUserRepository
@@ -28,7 +28,7 @@ internal class UpdateNormalUserServiceTest {
         updateUserService = UpdateUserService(mockUserRepository)
     }
 
-    @DisplayName("회원의 nickname을 luigi로 변경합니다")
+    @DisplayName("유저의 nickname을 luigi로 변경합니다")
     @ParameterizedTest
     @CsvSource(
         value = ["luigi"]
@@ -54,7 +54,7 @@ internal class UpdateNormalUserServiceTest {
         )
     }
 
-    @DisplayName("존재하지 않는 회원을 수정하려고 하면 CustomException이 발생합니다")
+    @DisplayName("존재하지 않는 유저를 수정하려고 하면 CustomException이 발생합니다")
     @ParameterizedTest
     @CsvSource(
         value = ["luigi"]
@@ -71,7 +71,7 @@ internal class UpdateNormalUserServiceTest {
     }
 
     @Test
-    @DisplayName("회원의 상태를 정지 상태로 변경한다.")
+    @DisplayName("유저의 상태를 정지 상태로 변경한다.")
     fun `update user status suspense`() {
         // given
         val user = randomUser()

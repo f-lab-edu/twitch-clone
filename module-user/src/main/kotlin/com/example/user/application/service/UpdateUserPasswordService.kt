@@ -15,10 +15,9 @@ internal class UpdateUserPasswordService(private val normalUserRepository: Norma
 
     override fun updateUserPassword(updateUserPasswordCommand: UpdateUserPasswordCommand): NormalUser {
         return with(updateUserPasswordCommand) {
-            normalUserRepository.findById(id).let {
-                it.updatePassword(password)
-                normalUserRepository.save(it)
-            }
+            val normalUser = normalUserRepository.findById(id)
+            normalUser.updatePassword(password)
+            normalUserRepository.save(normalUser)
         }
     }
 

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-@DisplayName("[유저] 조회")
+@DisplayName("[일반 유저] 조회")
 class FindNormalUserServiceTest {
 
     private lateinit var findUserService: FindUserService

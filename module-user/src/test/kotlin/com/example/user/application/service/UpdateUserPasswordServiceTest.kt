@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-@DisplayName("[회원] 비밀번호 수정")
+@DisplayName("[일반 유저] 비밀번호 수정")
 internal class UpdateUserPasswordServiceTest {
 
     private lateinit var mockUserRepository: MockNormalUserRepository
@@ -23,7 +23,7 @@ internal class UpdateUserPasswordServiceTest {
         updateUserPasswordService = UpdateUserPasswordService(mockUserRepository)
     }
 
-    @DisplayName("회원의 password를 변경합니다")
+    @DisplayName("유저의 password를 변경합니다")
     @ParameterizedTest
     @CsvSource(
         value = ["password50"]
@@ -50,7 +50,7 @@ internal class UpdateUserPasswordServiceTest {
     }
 
     @Test
-    @DisplayName("회원의 password를 초기화 합니다")
+    @DisplayName("유저의 password를 초기화 합니다")
     fun `user password init`() {
         // given
         val user = randomUser()

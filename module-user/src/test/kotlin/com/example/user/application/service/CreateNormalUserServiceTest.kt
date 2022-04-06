@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
-@DisplayName("[회원] 생성")
+@DisplayName("[일반 유저] 생성")
 internal class CreateNormalUserServiceTest {
 
     private lateinit var mockUserRepository: MockNormalUserRepository
@@ -27,7 +27,7 @@ internal class CreateNormalUserServiceTest {
         createUserService = CreateUserService(mockUserRepository)
     }
 
-    @DisplayName("CreateUserCommand로 일반회원을 생성 합니다")
+    @DisplayName("CreateUserCommand로 일반유저를 생성 합니다")
     @ParameterizedTest
     @MethodSource
     fun `create user by createUserCommand`(createUserCommand: CreateUserCommand) {
@@ -45,7 +45,7 @@ internal class CreateNormalUserServiceTest {
         )
     }
 
-    @DisplayName("이미 존재하는 email의 일반회원을 생성하려고 하면 CustomException이 발생합니다")
+    @DisplayName("이미 존재하는 email의 일반유저를 생성하려고 하면 CustomException이 발생합니다")
     @ParameterizedTest
     @MethodSource("create user by createUserCommand")
     fun `create user by existsNickname caused customException`(createUserCommand: CreateUserCommand) {

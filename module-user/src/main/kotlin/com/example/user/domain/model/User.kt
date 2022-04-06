@@ -5,13 +5,9 @@ import java.util.*
 
 interface User : Editable<User> {
     val id: UUID
-
     val email: String
-
     val password: String
-
     val nickname: String
-
     val status: UserStatus
 
     override fun edit(): Editor
