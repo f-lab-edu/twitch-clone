@@ -3,11 +3,8 @@ package com.example.user.application.service
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
 import com.example.user.application.port.`in`.CreateUserCommand
-import com.example.user.domain.model.StreamerUser
-import com.example.user.domain.model.StreamerUserStatus
-import com.example.user.domain.model.NormalUser
 import com.example.user.domain.model.UserStatus
-import com.example.user.util.MockUserRepository
+import com.example.user.util.MockNormalUserRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertThrows
@@ -21,12 +18,12 @@ import java.util.stream.Stream
 @DisplayName("[회원] 생성")
 internal class CreateNormalUserServiceTest {
 
-    private lateinit var mockUserRepository: MockUserRepository
+    private lateinit var mockUserRepository: MockNormalUserRepository
     private lateinit var createUserService: CreateUserService
 
     @BeforeEach
     fun beforeEach() {
-        mockUserRepository = MockUserRepository()
+        mockUserRepository = MockNormalUserRepository()
         createUserService = CreateUserService(mockUserRepository)
     }
 

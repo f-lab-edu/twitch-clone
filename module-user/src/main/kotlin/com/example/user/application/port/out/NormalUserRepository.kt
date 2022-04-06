@@ -4,7 +4,7 @@ import com.example.user.domain.model.NormalUser
 import com.example.user.domain.model.UserStatus
 import java.util.*
 
-interface UserRepository {
+interface NormalUserRepository {
 
     fun save(normalUser: NormalUser): NormalUser
 

@@ -1,7 +1,7 @@
 package com.example.user.application.service
 
 import com.example.user.application.port.`in`.UpdateUserPasswordCommand
-import com.example.user.util.MockUserRepository
+import com.example.user.util.MockNormalUserRepository
 import com.example.user.util.randomUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
@@ -14,12 +14,12 @@ import org.junit.jupiter.params.provider.CsvSource
 @DisplayName("[회원] 비밀번호 수정")
 internal class UpdateUserPasswordServiceTest {
 
-    private lateinit var mockUserRepository: MockUserRepository
+    private lateinit var mockUserRepository: MockNormalUserRepository
     private lateinit var updateUserPasswordService: UpdateUserPasswordService
 
     @BeforeEach
     fun beforeEach() {
-        mockUserRepository = MockUserRepository()
+        mockUserRepository = MockNormalUserRepository()
         updateUserPasswordService = UpdateUserPasswordService(mockUserRepository)
     }
 

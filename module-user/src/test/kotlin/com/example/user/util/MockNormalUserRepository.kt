@@ -3,13 +3,13 @@ package com.example.user.util
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
 import com.example.user.application.port.out.SearchUserQuery
-import com.example.user.application.port.out.UserRepository
+import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.NormalUser
 import com.example.user.domain.model.UserStatus
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-class MockUserRepository : UserRepository {
+class MockNormalUserRepository : NormalUserRepository {
 
     private val users = ConcurrentHashMap<UUID, NormalUser>()
 

@@ -1,7 +1,7 @@
 package com.example.user.application.service
 
 import com.example.user.application.port.out.SearchUserQuery
-import com.example.user.util.MockUserRepository
+import com.example.user.util.MockNormalUserRepository
 import com.example.user.util.randomUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
@@ -13,11 +13,11 @@ import org.junit.jupiter.api.Test
 class FindNormalUserServiceTest {
 
     private lateinit var findUserService: FindUserService
-    private lateinit var mockUserRepository: MockUserRepository
+    private lateinit var mockUserRepository: MockNormalUserRepository
 
     @BeforeEach
     fun beforeEach() {
-        mockUserRepository = MockUserRepository()
+        mockUserRepository = MockNormalUserRepository()
         findUserService = FindUserService(mockUserRepository)
     }
 
