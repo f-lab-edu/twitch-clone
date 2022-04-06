@@ -48,7 +48,7 @@ internal class CreateStreamerUserServiceTest {
         // given
         createStreamerUserService.createStreamerUser(createStreamerCommand)
         val existsStreamerCommand =
-            randomCreateStreamerUserCommand(user = createStreamerCommand.user, streamerNickname = "존재하는 스트리머")
+            randomCreateStreamerUserCommand(id = createStreamerCommand.id, email = "존재하는 스트리머")
 
         // when
         val exception = assertThrows<CustomException> {
@@ -67,6 +67,6 @@ internal class CreateStreamerUserServiceTest {
 
         // then
         val findStreamer = mockStreamerUserRepository.findById(createStreamer.id)
-        assertThat(findStreamer.status).isEqualTo(StreamerUserStatus.PENDING)
+        assertThat(findStreamer.streamerStatus).isEqualTo(StreamerUserStatus.PENDING)
     }
 }

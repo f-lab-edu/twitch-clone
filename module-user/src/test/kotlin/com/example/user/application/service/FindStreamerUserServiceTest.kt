@@ -1,11 +1,9 @@
 package com.example.user.application.service
 
 import com.example.user.application.port.out.SearchStreamerQuery
-import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.util.MockStreamerUserRepository
-import com.example.user.util.createStreamUser
-import com.example.user.util.randomUser
+import com.example.user.util.randomStreamUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach
@@ -36,7 +34,7 @@ class FindStreamerUserServiceTest {
         // then
         assertAll(
             { assertThat(pendingStreamerUsers).isNotEmpty },
-            { assertThat(pendingStreamerUsers).allMatch { it.status == StreamerUserStatus.PENDING} }
+            { assertThat(pendingStreamerUsers).allMatch { it.streamerStatus == StreamerUserStatus.PENDING} }
         )
     }
 
@@ -63,18 +61,17 @@ class FindStreamerUserServiceTest {
         // then
         assertAll(
             { assertThat(pendingStreamerUsers).isNotEmpty },
-            { assertThat(pendingStreamerUsers).allMatch { it.status == StreamerUserStatus.REGISTERED} }
+            { assertThat(pendingStreamerUsers).allMatch { it.streamerStatus == StreamerUserStatus.REGISTERED} }
         )
     }
 
     private fun saveStreamer() {
-        mockStreamerUserRepository.save(createStreamUser())
+        mockStreamerUserRepository.save(randomStreamUser())
     }
 
-    private fun saveRegisteredStreamer(nickname : String = "streamer") {
-        val streamerUser = StreamerUser(
-            user = randomUser(), streamerNickname = nickname, StreamerUserStatus.REGISTERED
-        )
+    private fun saveRegisteredStreamer(streamerNickname : String = "streamer") {
+        val streamerUser = randomStreamUser(streamerNickname = streamerNickname)
+        streamerUser.registeredStreamer()
         mockStreamerUserRepository.save(streamerUser)
     }
 }

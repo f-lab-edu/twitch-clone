@@ -3,7 +3,7 @@ package com.example.user.application.service
 import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.util.MockStreamerUserRepository
-import com.example.user.util.createStreamUser
+import com.example.user.util.randomStreamUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach
@@ -37,7 +37,7 @@ class UpdateStreamerUserServiceTest {
 
         assertAll(
             { assertThat(approvedUuid).isNotNull },
-            { assertThat(approvedUuid.status).isEqualTo(StreamerUserStatus.REGISTERED) }
+            { assertThat(approvedUuid.streamerStatus).isEqualTo(StreamerUserStatus.REGISTERED) }
         )
     }
 
@@ -56,7 +56,7 @@ class UpdateStreamerUserServiceTest {
 
         assertAll(
             { assertThat(approvedUuid).isNotNull },
-            { assertThat(approvedUuid.status).isEqualTo(StreamerUserStatus.REJECTED) }
+            { assertThat(approvedUuid.streamerStatus).isEqualTo(StreamerUserStatus.REJECTED) }
         )
     }
 
@@ -76,7 +76,7 @@ class UpdateStreamerUserServiceTest {
 
         assertAll(
             { assertThat(findUser).isNotNull },
-            { assertThat(findUser.status).isEqualTo(StreamerUserStatus.SUSPENDED) },
+            { assertThat(findUser.streamerStatus).isEqualTo(StreamerUserStatus.SUSPENDED) },
         )
     }
 
@@ -101,7 +101,7 @@ class UpdateStreamerUserServiceTest {
     }
 
     private fun saveStreamer() : StreamerUser{
-        return mockStreamerUserRepository.save(createStreamUser())
+        return mockStreamerUserRepository.save(randomStreamUser())
     }
 
     private fun selectPendingStreamer() : List<StreamerUser>{

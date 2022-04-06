@@ -23,12 +23,12 @@ class MockStreamerUserRepository : StreamerUserRepository {
 
     override fun findAllByStatus(streamerUserStatus: StreamerUserStatus): List<StreamerUser> {
         val streamerUserMap = this.streamerUsers.filterValues {
-            it.status == StreamerUserStatus.PENDING
+            it.streamerStatus == StreamerUserStatus.PENDING
         }
         return ArrayList(streamerUserMap.values)
     }
 
-    override fun save(streamerUser: StreamerUser) : StreamerUser {
+    override fun save(streamerUser: StreamerUser): StreamerUser {
         this.streamerUsers[streamerUser.id] = streamerUser
         return streamerUser
     }
@@ -52,7 +52,12 @@ class MockStreamerUserRepository : StreamerUserRepository {
         else values.filter { it.streamerNickname == nickname }
     }
 
-    private fun statusFilter(searchStreamerUsers: List<StreamerUser>, status: StreamerUserStatus?): List<StreamerUser> {
-        return status?.let { searchStreamerUsers.filter { it.status == status } } ?: searchStreamerUsers
+    private fun statusFilter(
+        searchStreamerUsers: List<StreamerUser>,
+        streamerStatus: StreamerUserStatus?
+    ): List<StreamerUser> {
+        return streamerStatus?.let {
+            searchStreamerUsers.filter { it.streamerStatus == streamerStatus }
+        } ?: searchStreamerUsers
     }
 }
