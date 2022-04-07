@@ -17,14 +17,14 @@ internal class UpdateUserService(private val normalUserRepository: NormalUserRep
     override fun updateUser(updateUserCommand: UpdateUserCommand): User {
         return with(updateUserCommand) {
             val normalUser = normalUserRepository.findById(id)
-            normalUser.edit().nickname = updateUserCommand.nickname ?: normalUser.nickname
+            normalUser.nickname = updateUserCommand.nickname ?: normalUser.nickname
             normalUserRepository.save(normalUser)
         }
     }
 
     override fun suspendUser(userId: UUID) {
         val user = normalUserRepository.findById(userId)
-        user.edit().suspendedUser()
+        user.suspendedUser()
         normalUserRepository.save(user)
     }
 }
