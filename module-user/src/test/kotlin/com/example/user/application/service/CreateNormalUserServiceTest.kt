@@ -19,12 +19,12 @@ import java.util.stream.Stream
 internal class CreateNormalUserServiceTest {
 
     private lateinit var mockUserRepository: MockNormalUserRepository
-    private lateinit var createNormalUserService: CreateNormalNormalUserService
+    private lateinit var createNormalUserService: CreateNormalUserService
 
     @BeforeEach
     fun beforeEach() {
         mockUserRepository = MockNormalUserRepository()
-        createNormalUserService = CreateNormalNormalUserService(mockUserRepository)
+        createNormalUserService = CreateNormalUserService(mockUserRepository)
     }
 
     @DisplayName("CreateUserCommand로 일반유저를 생성 합니다")

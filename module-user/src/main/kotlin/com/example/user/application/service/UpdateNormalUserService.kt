@@ -7,7 +7,7 @@ import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.User
 import java.util.*
 
-internal class UpdateNormalNormalUserService(private val normalUserRepository: NormalUserRepository)
+internal class UpdateNormalUserService(private val normalUserRepository: NormalUserRepository)
     : UpdateNormalUserUseCase, SuspendNormalUserUseCase {
 
     /**

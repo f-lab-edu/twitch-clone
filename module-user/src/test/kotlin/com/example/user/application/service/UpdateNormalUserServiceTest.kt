@@ -20,12 +20,12 @@ import java.util.*
 internal class UpdateNormalUserServiceTest {
 
     private lateinit var mockUserRepository: MockNormalUserRepository
-    private lateinit var updateUserService: UpdateNormalNormalUserService
+    private lateinit var updateUserService: UpdateNormalUserService
 
     @BeforeEach
     fun beforeEach() {
         mockUserRepository = MockNormalUserRepository()
-        updateUserService = UpdateNormalNormalUserService(mockUserRepository)
+        updateUserService = UpdateNormalUserService(mockUserRepository)
     }
 
     @DisplayName("일반 유저의 nickname을 luigi로 변경합니다")

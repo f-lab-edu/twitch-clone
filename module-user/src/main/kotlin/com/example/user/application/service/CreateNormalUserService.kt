@@ -8,7 +8,7 @@ import com.example.user.application.port.out.SearchUserQuery
 import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.NormalUser
 
-internal class CreateNormalNormalUserService(private val normalUserRepository: NormalUserRepository)
+internal class CreateNormalUserService(private val normalUserRepository: NormalUserRepository)
     : CreateNormalUserUseCase {
 
     override fun createNormalUser(createUserCommand: CreateUserCommand): NormalUser {

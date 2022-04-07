@@ -7,7 +7,7 @@ import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.NormalUser
 import java.util.*
 
-internal class UpdateNormalNormalUserPasswordService(private val normalUserRepository: NormalUserRepository)
+internal class UpdateNormalUserPasswordService(private val normalUserRepository: NormalUserRepository)
     : UpdateNormalUserPasswordUseCase, InitNormalUserPasswordUseCase {
 
     // 추후 설정 파일이나 외부 주입으로 변경

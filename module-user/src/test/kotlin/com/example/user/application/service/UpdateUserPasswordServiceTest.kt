@@ -15,12 +15,12 @@ import org.junit.jupiter.params.provider.CsvSource
 internal class UpdateUserPasswordServiceTest {
 
     private lateinit var mockUserRepository: MockNormalUserRepository
-    private lateinit var updateUserPasswordService: UpdateNormalNormalUserPasswordService
+    private lateinit var updateUserPasswordService: UpdateNormalUserPasswordService
 
     @BeforeEach
     fun beforeEach() {
         mockUserRepository = MockNormalUserRepository()
-        updateUserPasswordService = UpdateNormalNormalUserPasswordService(mockUserRepository)
+        updateUserPasswordService = UpdateNormalUserPasswordService(mockUserRepository)
     }
 
     @DisplayName("일반 유저의 password를 변경합니다")
