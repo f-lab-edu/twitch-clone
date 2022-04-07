@@ -15,11 +15,12 @@ internal class CreateStreamerUserService(private val streamerRepository: Streame
             throw CustomException(ErrorCode.EXISTS_ENTITY)
         }
 
+        val normalUser = createStreamerUserCommand.normalUser
         val streamerUser = StreamerUser(
-            id = createStreamerUserCommand.id,
-            email = createStreamerUserCommand.email,
-            password = createStreamerUserCommand.password,
-            nickname = createStreamerUserCommand.nickname,
+            id = normalUser.id,
+            email = normalUser.email,
+            password = normalUser.password,
+            nickname = normalUser.nickname,
             createStreamerUserCommand.streamerUserNickname
         )
         return streamerRepository.save(streamerUser)

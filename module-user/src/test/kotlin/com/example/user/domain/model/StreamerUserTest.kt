@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.util.*
 import java.util.stream.Stream
 
-@DisplayName("[회원] 스트리머 회원")
+@DisplayName("[스트리머 유저]")
 internal class StreamerUserTest {
 
     companion object {
@@ -21,7 +21,7 @@ internal class StreamerUserTest {
         }
     }
 
-    @DisplayName("id, email, password, nickname, streamerNickname으로 스트리머 회원을 생성합니다")
+    @DisplayName("id, email, password, nickname, streamerNickname으로 스트리머 유저를 생성합니다")
     @ParameterizedTest
     @MethodSource
     fun `create streamerUser by userAndStreamerNickname`(

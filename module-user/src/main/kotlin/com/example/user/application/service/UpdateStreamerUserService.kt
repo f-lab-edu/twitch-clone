@@ -13,21 +13,21 @@ class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepo
 
     override fun approveStreamerUser(streamerUsers: List<StreamerUser>) {
         streamerUsers.map {
-            it.registeredStreamer()
+            it.register()
         }
         streamerRepository.saveAll(streamerUsers)
     }
 
     override fun rejectStreamerUser(streamerUsers: List<StreamerUser>) {
         streamerUsers.map {
-            it.rejectStreamerUser()
+            it.reject()
         }
         streamerRepository.saveAll(streamerUsers)
     }
 
     override fun suspendStreamer(id: UUID) {
         val streamerUser = streamerRepository.findById(id)
-        streamerUser.suspendStreamer()
+        streamerUser.suspend()
         streamerRepository.save(streamerUser)
     }
 

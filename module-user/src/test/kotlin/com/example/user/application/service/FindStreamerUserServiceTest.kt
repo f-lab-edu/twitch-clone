@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-@DisplayName("[스트리머] 조회")
+@DisplayName("[스트리머 유저] 조회")
 class FindStreamerUserServiceTest {
 
     private lateinit var findStreamerService: FindStreamerUserService
@@ -23,7 +23,7 @@ class FindStreamerUserServiceTest {
     }
 
     @Test
-    @DisplayName("스트리머 요청 승인을 위하여 스트리머 신청한 리스트를 가져온다.")
+    @DisplayName("스트리머 유저 요청 승인을 위하여 스트리머 유저 등록을 신청한 리스트를 가져온다.")
     fun `find pending streamer user list`() {
         // given
         saveStreamer()
@@ -39,7 +39,7 @@ class FindStreamerUserServiceTest {
     }
 
     @Test
-    @DisplayName("스트리머 요청이 존재하지 않을 경우 빈 리스트를 반환한다.")
+    @DisplayName("스트리머 유저 요청이 존재하지 않을 경우 빈 리스트를 반환한다.")
     fun `find pending streamer user list if not exists return empty list`() {
         // when
         val pendingStreamerUsers = findStreamerService.findPendingStreamers()
@@ -49,7 +49,7 @@ class FindStreamerUserServiceTest {
     }
 
     @Test
-    @DisplayName("스트리머 닉네임을 통하여 해당 스트리머 리스트를 가져온다.")
+    @DisplayName("스트리머 유저 닉네임을 통하여 해당 스트리머 유저 리스트를 가져온다.")
     fun `find streamer user by streamer nick name`() {
         // given
         saveRegisteredStreamer()
@@ -71,7 +71,7 @@ class FindStreamerUserServiceTest {
 
     private fun saveRegisteredStreamer(streamerNickname : String = "streamer") {
         val streamerUser = randomStreamUser(streamerNickname = streamerNickname)
-        streamerUser.registeredStreamer()
+        streamerUser.register()
         mockStreamerUserRepository.save(streamerUser)
     }
 }

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-@DisplayName("[스트리머] 수정")
+@DisplayName("[스트리머 유저] 수정")
 class UpdateStreamerUserServiceTest {
 
     private lateinit var updateStreamerService: UpdateStreamerUserService
@@ -23,11 +23,11 @@ class UpdateStreamerUserServiceTest {
     }
 
     @Test
-    @DisplayName("스트리머 요청 리스트가 존재할 경우 스트리머 요청을 승인한다.")
+    @DisplayName("스트리머 유저 요청 리스트가 존재할 경우 스트리머 유저 등록 요청을 승인한다.")
     fun `pending streamer user register`() {
         // given
-        saveStreamer()
-        val pendingStreamers = selectPendingStreamer()
+        saveStreamerUser()
+        val pendingStreamers = selectPendingStreamerUser()
 
         // when
         updateStreamerService.approveStreamerUser(pendingStreamers)
@@ -42,11 +42,11 @@ class UpdateStreamerUserServiceTest {
     }
 
     @Test
-    @DisplayName("스트리머 요청 리스트가 존재하지만 결격 사유 존재 시 스트리머 요청을 거절한다.")
+    @DisplayName("스트리머 유저 요청 리스트가 존재하지만 결격 사유 존재 시 스트리머 유저 등록 요청을 거절한다.")
     fun `pending streamer user rejected`() {
         // given
-        saveStreamer()
-        val pendingStreamers = selectPendingStreamer()
+        saveStreamerUser()
+        val pendingStreamers = selectPendingStreamerUser()
 
         // when
         updateStreamerService.rejectStreamerUser(pendingStreamers)
@@ -61,11 +61,11 @@ class UpdateStreamerUserServiceTest {
     }
 
     @Test
-    @DisplayName("스트리머의 상태를 정지 상태로 변경한다.")
-    fun `update streamer status suspense`() {
+    @DisplayName("스트리머 유저의 상태를 정지 상태로 변경한다.")
+    fun `update streamer user status suspense`() {
         // given
-        saveStreamer()
-        val streamerUsers = selectPendingStreamer()
+        saveStreamerUser()
+        val streamerUsers = selectPendingStreamerUser()
         updateStreamerService.approveStreamerUser(streamerUsers)
         val id = streamerUsers[0].id
         // when
@@ -81,11 +81,11 @@ class UpdateStreamerUserServiceTest {
     }
 
     @Test
-    @DisplayName("스트리머의 닉네임을 변경한다.")
-    fun `update streamer nickname`() {
+    @DisplayName("스트리머 유저의 닉네임을 변경한다.")
+    fun `update streamer user nickname`() {
         // given
-        val streamer = saveStreamer()
-        val id = streamer.id
+        val streamerUser = saveStreamerUser()
+        val id = streamerUser.id
         val changeNickname = "change nickname"
 
         // when
@@ -100,11 +100,11 @@ class UpdateStreamerUserServiceTest {
         )
     }
 
-    private fun saveStreamer() : StreamerUser{
+    private fun saveStreamerUser() : StreamerUser{
         return mockStreamerUserRepository.save(randomStreamUser())
     }
 
-    private fun selectPendingStreamer() : List<StreamerUser>{
+    private fun selectPendingStreamerUser() : List<StreamerUser>{
         return mockStreamerUserRepository.findAllByStatus(StreamerUserStatus.PENDING)
     }
 }

@@ -3,7 +3,7 @@ package com.example.user.domain.model
 import java.util.*
 
 /**
- * 스트리머 회원
+ * 스트리머 유저
  */
 class StreamerUser(
     override val id: UUID,
@@ -26,17 +26,17 @@ class StreamerUser(
         this.nickname = nickname
     }
 
-    var streamerStatusVar: StreamerUserStatus = StreamerUserStatus.PENDING
+    private var streamerStatusVar: StreamerUserStatus = StreamerUserStatus.PENDING
 
-    fun registeredStreamer() {
+    fun register() {
         this.streamerStatusVar = StreamerUserStatus.REGISTERED
     }
 
-    fun rejectStreamerUser() {
+    fun reject() {
         this.streamerStatusVar = StreamerUserStatus.REJECTED
     }
 
-    fun suspendStreamer() {
+    fun suspend() {
         this.streamerStatusVar = StreamerUserStatus.SUSPENDED
     }
 
