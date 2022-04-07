@@ -1,20 +1,19 @@
 package com.example.user.application.service
 
-import com.example.user.application.port.`in`.SuspendUserUseCase
+import com.example.user.application.port.`in`.SuspendNormalUserUseCase
 import com.example.user.application.port.`in`.UpdateUserCommand
-import com.example.user.application.port.`in`.UpdateUserUseCase
+import com.example.user.application.port.`in`.UpdateNormalUserUseCase
 import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.User
 import java.util.*
 
-internal class UpdateUserService(private val normalUserRepository: NormalUserRepository) : UpdateUserUseCase,
-    SuspendUserUseCase {
+internal class UpdateNormalNormalUserService(private val normalUserRepository: NormalUserRepository)
+    : UpdateNormalUserUseCase, SuspendNormalUserUseCase {
 
     /**
-     * - 현재 변경 가능한 필드는 nickname만 입니다.
-     * - 항상 새로운 객체를 만듭니다.
+     * - 현재는 nickname만 변경 합니다.
      */
-    override fun updateUser(updateUserCommand: UpdateUserCommand): User {
+    override fun updateNormalUser(updateUserCommand: UpdateUserCommand): User {
         return with(updateUserCommand) {
             val normalUser = normalUserRepository.findById(id)
             normalUser.nickname = updateUserCommand.nickname ?: normalUser.nickname
@@ -22,7 +21,7 @@ internal class UpdateUserService(private val normalUserRepository: NormalUserRep
         }
     }
 
-    override fun suspendUser(userId: UUID) {
+    override fun suspendNormalUser(userId: UUID) {
         val user = normalUserRepository.findById(userId)
         user.suspendedUser()
         normalUserRepository.save(user)

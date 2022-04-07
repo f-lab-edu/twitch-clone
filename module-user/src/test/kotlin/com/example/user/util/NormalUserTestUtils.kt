@@ -1,7 +1,6 @@
 package com.example.user.util
 
 import com.example.user.domain.model.NormalUser
-import com.example.user.domain.model.UserStatus
 import com.github.javafaker.Faker
 import java.util.*
 

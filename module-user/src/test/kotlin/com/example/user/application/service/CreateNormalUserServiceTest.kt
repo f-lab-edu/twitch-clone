@@ -19,20 +19,20 @@ import java.util.stream.Stream
 internal class CreateNormalUserServiceTest {
 
     private lateinit var mockUserRepository: MockNormalUserRepository
-    private lateinit var createUserService: CreateUserService
+    private lateinit var createNormalUserService: CreateNormalNormalUserService
 
     @BeforeEach
     fun beforeEach() {
         mockUserRepository = MockNormalUserRepository()
-        createUserService = CreateUserService(mockUserRepository)
+        createNormalUserService = CreateNormalNormalUserService(mockUserRepository)
     }
 
     @DisplayName("CreateUserCommand로 일반유저를 생성 합니다")
     @ParameterizedTest
     @MethodSource
-    fun `create user by createUserCommand`(createUserCommand: CreateUserCommand) {
+    fun `create normal user by createUserCommand`(createUserCommand: CreateUserCommand) {
         // when
-        val user = createUserService.createUser(createUserCommand)
+        val user = createNormalUserService.createNormalUser(createUserCommand)
 
         // then
         val findUser = mockUserRepository.findById(user.id)
@@ -47,13 +47,15 @@ internal class CreateNormalUserServiceTest {
 
     @DisplayName("이미 존재하는 email의 일반유저를 생성하려고 하면 CustomException이 발생합니다")
     @ParameterizedTest
-    @MethodSource("create user by createUserCommand")
+    @MethodSource("create normal user by createUserCommand")
     fun `create user by existsNickname caused customException`(createUserCommand: CreateUserCommand) {
         // given
-        createUserService.createUser(createUserCommand)
+        createNormalUserService.createNormalUser(createUserCommand)
 
         // when
-        val exception = assertThrows(CustomException::class.java) { createUserService.createUser(createUserCommand) }
+        val exception = assertThrows(CustomException::class.java) {
+            createNormalUserService.createNormalUser(createUserCommand)
+        }
 
         // then
         assertThat(exception.errorCode).isEqualTo(ErrorCode.EXISTS_ENTITY)
@@ -61,7 +63,7 @@ internal class CreateNormalUserServiceTest {
 
     companion object {
         @JvmStatic
-        fun `create user by createUserCommand`(): Stream<Arguments> {
+        fun `create normal user by createUserCommand`(): Stream<Arguments> {
             return Stream.of(
                 Arguments.of(CreateUserCommand(email = "test@gmail.com", password = "password01", nickname = "mario"))
             )

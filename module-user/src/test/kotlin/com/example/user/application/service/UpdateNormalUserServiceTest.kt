@@ -20,15 +20,15 @@ import java.util.*
 internal class UpdateNormalUserServiceTest {
 
     private lateinit var mockUserRepository: MockNormalUserRepository
-    private lateinit var updateUserService: UpdateUserService
+    private lateinit var updateUserService: UpdateNormalNormalUserService
 
     @BeforeEach
     fun beforeEach() {
         mockUserRepository = MockNormalUserRepository()
-        updateUserService = UpdateUserService(mockUserRepository)
+        updateUserService = UpdateNormalNormalUserService(mockUserRepository)
     }
 
-    @DisplayName("유저의 nickname을 luigi로 변경합니다")
+    @DisplayName("일반 유저의 nickname을 luigi로 변경합니다")
     @ParameterizedTest
     @CsvSource(
         value = ["luigi"]
@@ -41,7 +41,7 @@ internal class UpdateNormalUserServiceTest {
         val updateUserCommand = UpdateUserCommand(user.id, newNickname)
 
         // when
-        updateUserService.updateUser(updateUserCommand)
+        updateUserService.updateNormalUser(updateUserCommand)
 
         // then
         val findUser = mockUserRepository.findById(updateUserCommand.id)
@@ -54,7 +54,7 @@ internal class UpdateNormalUserServiceTest {
         )
     }
 
-    @DisplayName("존재하지 않는 유저를 수정하려고 하면 CustomException이 발생합니다")
+    @DisplayName("존재하지 않는 일반 유저를 수정하려고 하면 CustomException이 발생합니다")
     @ParameterizedTest
     @CsvSource(
         value = ["luigi"]
@@ -64,21 +64,23 @@ internal class UpdateNormalUserServiceTest {
         val updateUserCommand = UpdateUserCommand(UUID.randomUUID(), newNickname)
 
         // when
-        val exception = assertThrows(CustomException::class.java) { updateUserService.updateUser(updateUserCommand) }
+        val exception = assertThrows(CustomException::class.java) {
+            updateUserService.updateNormalUser(updateUserCommand)
+        }
 
         // then
         assertThat(exception.errorCode).isEqualTo(ErrorCode.ENTITY_NOT_FOUND)
     }
 
     @Test
-    @DisplayName("유저의 상태를 정지 상태로 변경한다.")
+    @DisplayName("일반 유저의 상태를 정지 상태로 변경한다.")
     fun `update user status suspense`() {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
 
         // when
-        updateUserService.suspendUser(user.id)
+        updateUserService.suspendNormalUser(user.id)
 
         // then
         val findUser = mockUserRepository.findById(user.id)

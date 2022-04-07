@@ -3,9 +3,9 @@ package com.example.user.application.port.`in`
 import com.example.user.domain.model.NormalUser
 import java.util.*
 
-interface UpdateUserPasswordUseCase {
+interface UpdateNormalUserPasswordUseCase {
 
-    fun updateUserPassword(updateUserPasswordCommand: UpdateUserPasswordCommand): NormalUser
+    fun updateNormalUserPassword(updateUserPasswordCommand: UpdateUserPasswordCommand): NormalUser
 
 }
 

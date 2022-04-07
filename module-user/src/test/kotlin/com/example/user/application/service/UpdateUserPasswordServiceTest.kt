@@ -15,20 +15,20 @@ import org.junit.jupiter.params.provider.CsvSource
 internal class UpdateUserPasswordServiceTest {
 
     private lateinit var mockUserRepository: MockNormalUserRepository
-    private lateinit var updateUserPasswordService: UpdateUserPasswordService
+    private lateinit var updateUserPasswordService: UpdateNormalNormalUserPasswordService
 
     @BeforeEach
     fun beforeEach() {
         mockUserRepository = MockNormalUserRepository()
-        updateUserPasswordService = UpdateUserPasswordService(mockUserRepository)
+        updateUserPasswordService = UpdateNormalNormalUserPasswordService(mockUserRepository)
     }
 
-    @DisplayName("유저의 password를 변경합니다")
+    @DisplayName("일반 유저의 password를 변경합니다")
     @ParameterizedTest
     @CsvSource(
         value = ["password50"]
     )
-    fun `update user by password`(newPassword: String) {
+    fun `update normal user by password`(newPassword: String) {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
@@ -36,7 +36,7 @@ internal class UpdateUserPasswordServiceTest {
         val updateUserPasswordCommand = UpdateUserPasswordCommand(user.id, newPassword)
 
         // when
-        updateUserPasswordService.updateUserPassword(updateUserPasswordCommand)
+        updateUserPasswordService.updateNormalUserPassword(updateUserPasswordCommand)
 
         // then
         val findUser = mockUserRepository.findById(updateUserPasswordCommand.id)
@@ -50,15 +50,15 @@ internal class UpdateUserPasswordServiceTest {
     }
 
     @Test
-    @DisplayName("유저의 password를 초기화 합니다")
-    fun `user password init`() {
+    @DisplayName("일반 유저의 password를 초기화 합니다")
+    fun `user normal password init`() {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
         val userId = user.id
 
         // when
-        updateUserPasswordService.initUserPassword(userId)
+        updateUserPasswordService.initNormalUserPassword(userId)
 
         // then
         val findUser = mockUserRepository.findById(userId)

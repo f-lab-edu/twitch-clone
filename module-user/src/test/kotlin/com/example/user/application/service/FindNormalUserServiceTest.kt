@@ -12,24 +12,24 @@ import org.junit.jupiter.api.Test
 @DisplayName("[일반 유저] 조회")
 class FindNormalUserServiceTest {
 
-    private lateinit var findUserService: FindUserService
+    private lateinit var findUserService: FindNormalUserService
     private lateinit var mockUserRepository: MockNormalUserRepository
 
     @BeforeEach
     fun beforeEach() {
         mockUserRepository = MockNormalUserRepository()
-        findUserService = FindUserService(mockUserRepository)
+        findUserService = FindNormalUserService(mockUserRepository)
     }
 
     @Test
-    @DisplayName("유저 리스트를 email 검색을 통하여 가져온다.")
-    fun `select user list by email`() {
+    @DisplayName("일반 유저 리스트를 email 검색을 통하여 가져온다.")
+    fun `select normal user list by email`() {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = findUserService.findUsers(SearchUserQuery(email = user.email))
+        val selectUsers = findUserService.findNormalUsers(SearchUserQuery(email = user.email))
 
         // then
         assertAll(
@@ -39,14 +39,14 @@ class FindNormalUserServiceTest {
     }
 
     @Test
-    @DisplayName("유저 리스트를 nickname 검색을 통하여 가져온다.")
-    fun `select user list by nickname`() {
+    @DisplayName("일반 유저 리스트를 nickname 검색을 통하여 가져온다.")
+    fun `select normal user list by nickname`() {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = findUserService.findUsers(SearchUserQuery(nickname = user.nickname))
+        val selectUsers = findUserService.findNormalUsers(SearchUserQuery(nickname = user.nickname))
 
         // then
         assertAll(
@@ -56,14 +56,14 @@ class FindNormalUserServiceTest {
     }
 
     @Test
-    @DisplayName("유저 리스트를 유저 상태 검색을 통하여 가져온다.")
-    fun `select user list by status`() {
+    @DisplayName("일반 유저 리스트를 유저 상태 검색을 통하여 가져온다.")
+    fun `select normal user list by status`() {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = findUserService.findUsers(SearchUserQuery(status = user.status))
+        val selectUsers = findUserService.findNormalUsers(SearchUserQuery(status = user.status))
 
         // then
         assertAll(
@@ -73,14 +73,14 @@ class FindNormalUserServiceTest {
     }
 
     @Test
-    @DisplayName("유저 리스트를 유저 이메일, 닉네임, 상태 검색을 통하여 가져온다.")
-    fun `select user list by email and nickname and status`() {
+    @DisplayName("일반 유저 리스트를 유저 이메일, 닉네임, 상태 검색을 통하여 가져온다.")
+    fun `select normal user list by email and nickname and status`() {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = findUserService.findUsers(
+        val selectUsers = findUserService.findNormalUsers(
             SearchUserQuery(email = user.email, nickname = user.nickname, status = user.status))
 
         // then
