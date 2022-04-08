@@ -11,11 +11,11 @@ interface CreateStreamerUserUseCase {
 
 data class CreateStreamerUserCommand(
     val normalUser: NormalUser,
-    val streamerUserNickname: String
-
+    val streamerUserNickname: String,
+    val subscriptionCost: Long
 ) {
     val id: UUID
-    get() {
-        return normalUser.id
-    }
+        get() {
+            return normalUser.id
+        }
 }

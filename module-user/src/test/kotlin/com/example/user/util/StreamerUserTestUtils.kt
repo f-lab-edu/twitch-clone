@@ -12,22 +12,26 @@ fun randomStreamUser(
     password: String? = null,
     nickname: String? = null,
     streamerNickname: String? = null,
+    subscriptionCost: Long? = null
 ): StreamerUser = with(Faker()) {
     StreamerUser(
         id = id ?: UUID.randomUUID(),
         email = email ?: internet().emailAddress(),
         password = password ?: lorem().characters(10),
         nickname = nickname ?: name().name(),
-        streamerNickname = streamerNickname ?: name().name()
+        streamerNickname = streamerNickname ?: name().name(),
+        subscriptionCost = subscriptionCost ?: number().numberBetween(5000L, 10000L),
     )
 }
 
 fun randomCreateStreamerUserCommand(
     normalUser: NormalUser? = null,
     streamerNickname: String? = null,
+    subscriptionCost: Long? = null
 ): CreateStreamerUserCommand = with(Faker()) {
     CreateStreamerUserCommand(
-        normalUser = normalUser?: randomUser(),
-        streamerUserNickname = streamerNickname ?: name().name()
+        normalUser = normalUser ?: randomUser(),
+        streamerUserNickname = streamerNickname ?: name().name(),
+        subscriptionCost = subscriptionCost ?: number().numberBetween(5000L, 10000L),
     )
 }
