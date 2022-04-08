@@ -13,7 +13,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-@DisplayName("[스트리머] 생성")
+@DisplayName("[스트리머 유저] 생성")
 internal class CreateStreamerUserServiceTest {
 
     private lateinit var mockStreamerUserRepository: MockStreamerUserRepository
@@ -28,7 +28,7 @@ internal class CreateStreamerUserServiceTest {
     }
 
     @Test
-    @DisplayName("유저 정보와 스트리머 닉네임으로 스트리머 회원을 생성 합니다")
+    @DisplayName("유저 정보와 스트리머 닉네임으로 스트리머 유저를 생성 합니다")
     fun `create streamer user by user info and streamer nick name`() {
         // when
         val createStreamer = createStreamerUserService.createStreamerUser(createStreamerCommand)
@@ -43,12 +43,12 @@ internal class CreateStreamerUserServiceTest {
     }
 
     @Test
-    @DisplayName("이미 존재하는 스트리머 생성 시 CustomException이 발생합니다")
+    @DisplayName("이미 존재하는 스트리머 유저 생성 시 CustomException이 발생합니다")
     fun `create streamer user by exists streamer info`() {
         // given
         createStreamerUserService.createStreamerUser(createStreamerCommand)
         val existsStreamerCommand =
-            randomCreateStreamerUserCommand(user = createStreamerCommand.user, streamerNickname = "존재하는 스트리머")
+            randomCreateStreamerUserCommand(normalUser = createStreamerCommand.normalUser)
 
         // when
         val exception = assertThrows<CustomException> {
@@ -60,13 +60,13 @@ internal class CreateStreamerUserServiceTest {
     }
 
     @Test
-    @DisplayName("생성 된 스트리머의 상태는 PENDING 이다.")
+    @DisplayName("생성 된 스트리머 유저의 상태는 PENDING 이다.")
     fun `create streamer user status is pending`() {
         // when
         val createStreamer = createStreamerUserService.createStreamerUser(createStreamerCommand)
 
         // then
         val findStreamer = mockStreamerUserRepository.findById(createStreamer.id)
-        assertThat(findStreamer.status).isEqualTo(StreamerUserStatus.PENDING)
+        assertThat(findStreamer.streamerStatus).isEqualTo(StreamerUserStatus.PENDING)
     }
 }

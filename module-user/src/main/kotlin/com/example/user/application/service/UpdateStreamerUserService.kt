@@ -1,51 +1,40 @@
 package com.example.user.application.service
 
+import com.example.user.application.port.`in`.ApproveStreamerUserUseCase
+import com.example.user.application.port.`in`.RejectStreamerUserUseCase
+import com.example.user.application.port.`in`.SuspendStreamerUserUseCase
 import com.example.user.application.port.`in`.UpdateStreamerUserUseCase
 import com.example.user.application.port.out.StreamerUserRepository
 import com.example.user.domain.model.StreamerUser
-import com.example.user.domain.model.StreamerUserStatus
 import java.util.*
 
-class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepository) : UpdateStreamerUserUseCase {
+class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepository)
+    : ApproveStreamerUserUseCase, RejectStreamerUserUseCase, SuspendStreamerUserUseCase, UpdateStreamerUserUseCase {
 
     override fun approveStreamerUser(streamerUsers: List<StreamerUser>) {
-        val updateStreamerUsers = streamerUsers.map {
-            StreamerUser(
-                user = it.user,
-                streamerNickname = it.streamerNickname,
-                status = StreamerUserStatus.REGISTERED
-            )
+        streamerUsers.map {
+            it.register()
         }
-        streamerRepository.saveAll(updateStreamerUsers)
+        streamerRepository.saveAll(streamerUsers)
     }
 
     override fun rejectStreamerUser(streamerUsers: List<StreamerUser>) {
-        val updateStreamerUsers = streamerUsers.map {
-            StreamerUser(
-                user = it.user,
-                streamerNickname = it.streamerNickname,
-                status = StreamerUserStatus.REJECTED
-            )
+        streamerUsers.map {
+            it.reject()
         }
-        streamerRepository.saveAll(updateStreamerUsers)
+        streamerRepository.saveAll(streamerUsers)
     }
 
     override fun suspendStreamer(id: UUID) {
         val streamerUser = streamerRepository.findById(id)
-        streamerRepository.save(StreamerUser(
-            user = streamerUser.user,
-            streamerNickname = streamerUser.streamerNickname,
-            status = StreamerUserStatus.SUSPENDED
-        ))
+        streamerUser.suspend()
+        streamerRepository.save(streamerUser)
     }
 
     override fun updateStreamerNickname(id: UUID, updateNickname: String) {
         val streamerUser = streamerRepository.findById(id)
-        streamerRepository.save(StreamerUser(
-            user = streamerUser.user,
-            streamerNickname = updateNickname,
-            status = streamerUser.status
-        ))
+        streamerUser.streamerNickname = updateNickname
+        streamerRepository.save(streamerUser)
     }
 
 }

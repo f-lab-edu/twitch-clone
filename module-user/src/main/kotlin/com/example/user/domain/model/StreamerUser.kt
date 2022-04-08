@@ -3,15 +3,41 @@ package com.example.user.domain.model
 import java.util.*
 
 /**
- * 스트리머 회원
+ * 스트리머 유저
  */
-data class StreamerUser(
-    val user: NormalUser, // table 구조에서는 userId만 가지지만 객체 관계로 표현합니다.
-    val streamerNickname: String,
-    val status: StreamerUserStatus = StreamerUserStatus.PENDING
-) {
-    internal val id : UUID
+class StreamerUser(
+    override val id: UUID,
+    override val email: String,
+    password: String,
+    nickname: String,
+    var streamerNickname: String,
+) : User.Editor {
+    override var password: String = ""
+    override var status: UserStatus = UserStatus.REGISTERED
+    override var nickname: String = ""
+
+    val streamerStatus: StreamerUserStatus
         get() {
-            return user.id
+            return streamerStatusVar
         }
+
+    init {
+        this.password = password
+        this.nickname = nickname
+    }
+
+    private var streamerStatusVar: StreamerUserStatus = StreamerUserStatus.PENDING
+
+    fun register() {
+        this.streamerStatusVar = StreamerUserStatus.REGISTERED
+    }
+
+    fun reject() {
+        this.streamerStatusVar = StreamerUserStatus.REJECTED
+    }
+
+    fun suspend() {
+        this.streamerStatusVar = StreamerUserStatus.SUSPENDED
+    }
+
 }

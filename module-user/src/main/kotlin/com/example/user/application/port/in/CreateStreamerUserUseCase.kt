@@ -1,7 +1,7 @@
 package com.example.user.application.port.`in`
 
-import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.NormalUser
+import com.example.user.domain.model.StreamerUser
 import java.util.*
 
 interface CreateStreamerUserUseCase {
@@ -9,9 +9,13 @@ interface CreateStreamerUserUseCase {
     fun createStreamerUser(createStreamerUserCommand: CreateStreamerUserCommand): StreamerUser
 }
 
-data class CreateStreamerUserCommand(val user: NormalUser, val streamerUserNickname: String) {
-    internal val id : UUID
-        get() {
-            return user.id
-        }
+data class CreateStreamerUserCommand(
+    val normalUser: NormalUser,
+    val streamerUserNickname: String
+
+) {
+    val id: UUID
+    get() {
+        return normalUser.id
+    }
 }
