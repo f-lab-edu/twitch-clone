@@ -14,7 +14,7 @@ class MockAdminUserRepository : AdminUserRepository {
     }
 
     override fun save(adminUser: AdminUser): AdminUser {
-        this.adminUsers[adminUser.id()] = adminUser
+        this.adminUsers[adminUser.id] = adminUser
         return adminUser
     }
 }

@@ -3,7 +3,7 @@ package com.example.user.domain.model
 import java.util.*
 
 /**
- * 회원
+ * 일반 유저
  */
 class NormalUser(
     override val id: UUID = UUID.randomUUID(),
