@@ -3,13 +3,14 @@ package com.example.user.application.service
 import com.example.user.application.port.`in`.ApproveStreamerUserUseCase
 import com.example.user.application.port.`in`.RejectStreamerUserUseCase
 import com.example.user.application.port.`in`.SuspendStreamerUserUseCase
+import com.example.user.application.port.`in`.UpdateStreamerUserSubscriptionCostUseCase
 import com.example.user.application.port.`in`.UpdateStreamerUserUseCase
 import com.example.user.application.port.out.StreamerUserRepository
 import com.example.user.domain.model.StreamerUser
 import java.util.*
 
-class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepository)
-    : ApproveStreamerUserUseCase, RejectStreamerUserUseCase, SuspendStreamerUserUseCase, UpdateStreamerUserUseCase {
+class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepository) : ApproveStreamerUserUseCase, RejectStreamerUserUseCase,
+    SuspendStreamerUserUseCase, UpdateStreamerUserUseCase, UpdateStreamerUserSubscriptionCostUseCase {
 
     override fun approveStreamerUser(streamerUsers: List<StreamerUser>) {
         streamerUsers.map {
@@ -37,4 +38,9 @@ class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepo
         streamerRepository.save(streamerUser)
     }
 
+    override fun updateSubscriptionCost(id: UUID, updateSubscriptionCost: Long) {
+        val streamerUser = streamerRepository.findById(id)
+        streamerUser.subscriptionCost = updateSubscriptionCost
+        streamerRepository.save(streamerUser)
+    }
 }

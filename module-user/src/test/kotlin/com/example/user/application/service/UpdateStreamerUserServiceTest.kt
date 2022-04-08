@@ -35,10 +35,7 @@ class UpdateStreamerUserServiceTest {
         // then
         val approvedUuid = mockStreamerUserRepository.findById(pendingStreamers[0].id)
 
-        assertAll(
-            { assertThat(approvedUuid).isNotNull },
-            { assertThat(approvedUuid.streamerStatus).isEqualTo(StreamerUserStatus.REGISTERED) }
-        )
+        assertAll({ assertThat(approvedUuid).isNotNull }, { assertThat(approvedUuid.streamerStatus).isEqualTo(StreamerUserStatus.REGISTERED) })
     }
 
     @Test
@@ -54,10 +51,7 @@ class UpdateStreamerUserServiceTest {
         // then
         val approvedUuid = mockStreamerUserRepository.findById(pendingStreamers[0].id)
 
-        assertAll(
-            { assertThat(approvedUuid).isNotNull },
-            { assertThat(approvedUuid.streamerStatus).isEqualTo(StreamerUserStatus.REJECTED) }
-        )
+        assertAll({ assertThat(approvedUuid).isNotNull }, { assertThat(approvedUuid.streamerStatus).isEqualTo(StreamerUserStatus.REJECTED) })
     }
 
     @Test
@@ -100,11 +94,31 @@ class UpdateStreamerUserServiceTest {
         )
     }
 
-    private fun saveStreamerUser() : StreamerUser{
+    @Test
+    @DisplayName("스트리머 유저의 구독 비용을 변경한다.")
+    fun `update streamer user subscriptionCost`() {
+        // given
+        val streamerUser = saveStreamerUser()
+        val id = streamerUser.id
+        val updateSubscriptionCost = streamerUser.subscriptionCost + 100L
+
+        // when
+        updateStreamerService.updateSubscriptionCost(id, updateSubscriptionCost)
+
+        // then
+        val findUser = mockStreamerUserRepository.findById(id)
+
+        assertAll(
+            { assertThat(findUser).isNotNull },
+            { assertThat(findUser.subscriptionCost).isEqualTo(updateSubscriptionCost) },
+        )
+    }
+
+    private fun saveStreamerUser(): StreamerUser {
         return mockStreamerUserRepository.save(randomStreamUser())
     }
 
-    private fun selectPendingStreamerUser() : List<StreamerUser>{
+    private fun selectPendingStreamerUser(): List<StreamerUser> {
         return mockStreamerUserRepository.findAllByStatus(StreamerUserStatus.PENDING)
     }
 }
