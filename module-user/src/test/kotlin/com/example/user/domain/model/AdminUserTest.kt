@@ -13,7 +13,7 @@ internal class AdminUserTest {
     @DisplayName("user, admin nickname으로 어드민 회원을 생성합니다")
     @ParameterizedTest
     @MethodSource
-    fun `create adminUser by user and admin nickname`(user: User, adminNickname: String) {
+    fun `create adminUser by user and admin nickname`(user: NormalUser, adminNickname: String) {
         // when
         val admin = AdminUser(user, adminNickname)
 
@@ -25,7 +25,7 @@ internal class AdminUserTest {
         @JvmStatic
         fun `create adminUser by user and admin nickname`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(User(email = "test@gmail.com", password = "passsword01", nickname = "user"), "admin")
+                Arguments.of(NormalUser(email = "test@gmail.com", password = "passsword01", nickname = "user"), "admin")
             )
         }
     }

@@ -1,7 +1,7 @@
 package com.example.user.application.service
 
 import com.example.user.application.port.`in`.UpdateUserPasswordCommand
-import com.example.user.util.MockUserRepository
+import com.example.user.util.MockNormalUserRepository
 import com.example.user.util.randomUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
@@ -11,24 +11,24 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-@DisplayName("[회원] 비밀번호 수정")
+@DisplayName("[일반 유저] 비밀번호 수정")
 internal class UpdateUserPasswordServiceTest {
 
-    private lateinit var mockUserRepository: MockUserRepository
-    private lateinit var updateUserPasswordService: UpdateUserPasswordService
+    private lateinit var mockUserRepository: MockNormalUserRepository
+    private lateinit var updateUserPasswordService: UpdateNormalUserPasswordService
 
     @BeforeEach
     fun beforeEach() {
-        mockUserRepository = MockUserRepository()
-        updateUserPasswordService = UpdateUserPasswordService(mockUserRepository)
+        mockUserRepository = MockNormalUserRepository()
+        updateUserPasswordService = UpdateNormalUserPasswordService(mockUserRepository)
     }
 
-    @DisplayName("회원의 password를 변경합니다")
+    @DisplayName("일반 유저의 password를 변경합니다")
     @ParameterizedTest
     @CsvSource(
         value = ["password50"]
     )
-    fun `update user by password`(newPassword: String) {
+    fun `update normal user by password`(newPassword: String) {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
@@ -36,7 +36,7 @@ internal class UpdateUserPasswordServiceTest {
         val updateUserPasswordCommand = UpdateUserPasswordCommand(user.id, newPassword)
 
         // when
-        updateUserPasswordService.updateUserPassword(updateUserPasswordCommand)
+        updateUserPasswordService.updateNormalUserPassword(updateUserPasswordCommand)
 
         // then
         val findUser = mockUserRepository.findById(updateUserPasswordCommand.id)
@@ -50,15 +50,15 @@ internal class UpdateUserPasswordServiceTest {
     }
 
     @Test
-    @DisplayName("회원의 password를 초기화 합니다")
-    fun `user password init`() {
+    @DisplayName("일반 유저의 password를 초기화 합니다")
+    fun `user normal password init`() {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
         val userId = user.id
 
         // when
-        updateUserPasswordService.initUserPassword(userId)
+        updateUserPasswordService.initNormalUserPassword(userId)
 
         // then
         val findUser = mockUserRepository.findById(userId)

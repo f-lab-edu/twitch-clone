@@ -4,7 +4,7 @@ import com.example.exception.CustomException
 import com.example.exception.ErrorCode
 import com.example.user.application.port.`in`.UpdateUserCommand
 import com.example.user.domain.model.UserStatus
-import com.example.user.util.MockUserRepository
+import com.example.user.util.MockNormalUserRepository
 import com.example.user.util.randomUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
@@ -16,19 +16,19 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.util.*
 
-@DisplayName("[회원] 정보 수정")
-internal class UpdateUserServiceTest {
+@DisplayName("[일반 유저] 정보 수정")
+internal class UpdateNormalUserServiceTest {
 
-    private lateinit var mockUserRepository: MockUserRepository
-    private lateinit var updateUserService: UpdateUserService
+    private lateinit var mockUserRepository: MockNormalUserRepository
+    private lateinit var updateUserService: UpdateNormalUserService
 
     @BeforeEach
     fun beforeEach() {
-        mockUserRepository = MockUserRepository()
-        updateUserService = UpdateUserService(mockUserRepository)
+        mockUserRepository = MockNormalUserRepository()
+        updateUserService = UpdateNormalUserService(mockUserRepository)
     }
 
-    @DisplayName("회원의 nickname을 luigi로 변경합니다")
+    @DisplayName("일반 유저의 nickname을 luigi로 변경합니다")
     @ParameterizedTest
     @CsvSource(
         value = ["luigi"]
@@ -41,7 +41,7 @@ internal class UpdateUserServiceTest {
         val updateUserCommand = UpdateUserCommand(user.id, newNickname)
 
         // when
-        updateUserService.updateUser(updateUserCommand)
+        updateUserService.updateNormalUser(updateUserCommand)
 
         // then
         val findUser = mockUserRepository.findById(updateUserCommand.id)
@@ -54,7 +54,7 @@ internal class UpdateUserServiceTest {
         )
     }
 
-    @DisplayName("존재하지 않는 회원을 수정하려고 하면 CustomException이 발생합니다")
+    @DisplayName("존재하지 않는 일반 유저를 수정하려고 하면 CustomException이 발생합니다")
     @ParameterizedTest
     @CsvSource(
         value = ["luigi"]
@@ -64,21 +64,23 @@ internal class UpdateUserServiceTest {
         val updateUserCommand = UpdateUserCommand(UUID.randomUUID(), newNickname)
 
         // when
-        val exception = assertThrows(CustomException::class.java) { updateUserService.updateUser(updateUserCommand) }
+        val exception = assertThrows(CustomException::class.java) {
+            updateUserService.updateNormalUser(updateUserCommand)
+        }
 
         // then
         assertThat(exception.errorCode).isEqualTo(ErrorCode.ENTITY_NOT_FOUND)
     }
 
     @Test
-    @DisplayName("회원의 상태를 정지 상태로 변경한다.")
+    @DisplayName("일반 유저의 상태를 정지 상태로 변경한다.")
     fun `update user status suspense`() {
         // given
         val user = randomUser()
         mockUserRepository.save(user)
 
         // when
-        updateUserService.suspendUser(user.id)
+        updateUserService.suspendNormalUser(user.id)
 
         // then
         val findUser = mockUserRepository.findById(user.id)

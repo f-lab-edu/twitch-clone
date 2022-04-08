@@ -6,7 +6,6 @@ import com.example.user.application.port.out.SearchStreamerQuery
 import com.example.user.application.port.out.StreamerUserRepository
 import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
-import com.example.user.domain.model.User
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 

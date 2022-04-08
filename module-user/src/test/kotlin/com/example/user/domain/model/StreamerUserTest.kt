@@ -15,7 +15,10 @@ internal class StreamerUserTest {
         @JvmStatic
         fun `create streamerUser by userAndStreamerNickname`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(User(email = "test@gmail.com", password = "passsword01", nickname = "mario"), "koopa")
+                Arguments.of(
+                    NormalUser(email = "test@gmail.com", password = "passsword01", nickname = "mario")
+                    , "koopa"
+                )
             )
         }
     }
@@ -23,7 +26,7 @@ internal class StreamerUserTest {
     @DisplayName("user, streamerNickname으로 스트리머회원을 생성합니다")
     @ParameterizedTest
     @MethodSource
-    fun `create streamerUser by userAndStreamerNickname`(user: User, streamerNickname: String) {
+    fun `create streamerUser by userAndStreamerNickname`(user: NormalUser, streamerNickname: String) {
         // when
         val streamer = StreamerUser(user, streamerNickname)
 

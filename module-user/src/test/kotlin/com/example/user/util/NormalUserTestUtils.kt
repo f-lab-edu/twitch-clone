@@ -1,7 +1,6 @@
 package com.example.user.util
 
-import com.example.user.domain.model.User
-import com.example.user.domain.model.UserStatus
+import com.example.user.domain.model.NormalUser
 import com.github.javafaker.Faker
 import java.util.*
 
@@ -10,13 +9,11 @@ fun randomUser(
     email: String? = null,
     password: String? = null,
     nickname: String? = null,
-    status: UserStatus? = null
-): User = with(Faker()) {
-    User(
+): NormalUser = with(Faker()) {
+    NormalUser(
         id = id ?: UUID.randomUUID(),
         email = email ?: internet().emailAddress(),
         password = password ?: lorem().characters(10),
         nickname = nickname ?: name().name(),
-        status = status ?: UserStatus.REGISTERED
     )
 }

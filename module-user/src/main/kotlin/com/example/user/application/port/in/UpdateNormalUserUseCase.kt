@@ -3,11 +3,9 @@ package com.example.user.application.port.`in`
 import com.example.user.domain.model.User
 import java.util.*
 
-interface UpdateUserUseCase {
+interface UpdateNormalUserUseCase {
 
-    fun updateUser(updateUserCommand: UpdateUserCommand): User
-
-    fun suspendUser(userId: UUID)
+    fun updateNormalUser(updateUserCommand: UpdateUserCommand): User
 
 }
 
