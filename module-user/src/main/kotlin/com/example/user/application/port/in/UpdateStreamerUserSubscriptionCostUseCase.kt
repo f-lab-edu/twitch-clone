@@ -4,5 +4,5 @@ import java.util.*
 
 interface UpdateStreamerUserSubscriptionCostUseCase {
 
-    fun updateSubscriptionCost(id: UUID, updateSubscriptionCost: Long)
+    fun updateSubscriptionCost(id: UUID, updateSubscriptionCost: Int)
 }

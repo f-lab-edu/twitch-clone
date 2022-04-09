@@ -16,7 +16,7 @@ internal class StreamerUserTest {
         @JvmStatic
         fun `create streamerUser by userAndStreamerNickname`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(UUID.randomUUID(), "test@gmail.com", "passsword01", "mario", "koopa", 5000L)
+                Arguments.of(UUID.randomUUID(), "test@gmail.com", "passsword01", "mario", "koopa", 5000)
             )
         }
     }
@@ -27,7 +27,7 @@ internal class StreamerUserTest {
     fun `create streamerUser by userAndStreamerNickname`(
         id: UUID, email: String, password: String,
         nickname: String, streamerNickname: String,
-        subscriptionCost: Long
+        subscriptionCost: Int
     ) {
         // when
         val streamer = StreamerUser(id, email, password, nickname, streamerNickname, subscriptionCost)

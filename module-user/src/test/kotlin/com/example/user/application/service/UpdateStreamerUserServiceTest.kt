@@ -100,7 +100,7 @@ class UpdateStreamerUserServiceTest {
         // given
         val streamerUser = saveStreamerUser()
         val id = streamerUser.id
-        val updateSubscriptionCost = streamerUser.subscriptionCost + 100L
+        val updateSubscriptionCost = streamerUser.subscriptionCost + 100
 
         // when
         updateStreamerService.updateSubscriptionCost(id, updateSubscriptionCost)
