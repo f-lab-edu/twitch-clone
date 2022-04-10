@@ -2,30 +2,40 @@ package com.example.user.domain.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
+import java.util.*
 import java.util.stream.Stream
 
-@DisplayName("[회원] 어드민 회원")
+@DisplayName("[어드민 유저]")
 internal class AdminUserTest {
 
-    @DisplayName("user, admin nickname으로 어드민 회원을 생성합니다")
+    @DisplayName("일반 유저 정보(id, email, password, nickname)와 admin nickname으로 어드민 유저를 생성합니다")
     @ParameterizedTest
     @MethodSource
-    fun `create adminUser by user and admin nickname`(user: NormalUser, adminNickname: String) {
+    fun `create adminUser by user info and admin nickname`(
+        id: UUID, email: String, password: String,
+        nickname: String, adminNickname: String
+    ) {
         // when
-        val admin = AdminUser(user, adminNickname)
+        val admin = AdminUser(id, email, password, nickname, adminNickname)
 
         // then
-        assertThat(admin).isEqualTo(AdminUser(user, adminNickname))
+        assertAll (
+            { assertThat(admin.id).isEqualTo(id) },
+            { assertThat(admin.email).isEqualTo(email) },
+            { assertThat(admin.nickname).isEqualTo(nickname) },
+            { assertThat(admin.adminNickname).isEqualTo(adminNickname) },
+        )
     }
 
     companion object {
         @JvmStatic
-        fun `create adminUser by user and admin nickname`(): Stream<Arguments> {
+        fun `create adminUser by user info and admin nickname`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(NormalUser(email = "test@gmail.com", password = "passsword01", nickname = "user"), "admin")
+                Arguments.of(UUID.randomUUID(), "test@gmail.com", "passsword01", "user", "admin")
             )
         }
     }
