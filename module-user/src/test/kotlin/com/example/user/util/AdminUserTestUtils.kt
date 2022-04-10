@@ -1,6 +1,6 @@
 package com.example.user.util
 
-import com.example.user.application.port.`in`.CreateAdminUserCommand
+import com.example.user.application.port.`in`.user.admin.CreateAdminUserCommand
 import com.example.user.domain.model.AdminUser
 import com.example.user.domain.model.NormalUser
 import com.github.javafaker.Faker

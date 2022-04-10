@@ -2,7 +2,7 @@ package com.example.user.application.service
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.`in`.UpdateUserCommand
+import com.example.user.application.port.`in`.user.normal.UpdateUserCommand
 import com.example.user.domain.model.UserStatus
 import com.example.user.util.MockNormalUserRepository
 import com.example.user.util.randomUser

@@ -2,7 +2,7 @@ package com.example.user.application.service
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.`in`.CreateAdminUserCommand
+import com.example.user.application.port.`in`.user.admin.CreateAdminUserCommand
 import com.example.user.util.MockAdminUserRepository
 import com.example.user.util.randomCreateAdminUserCommand
 import org.assertj.core.api.Assertions.assertThat

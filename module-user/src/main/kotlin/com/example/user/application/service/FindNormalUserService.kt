@@ -1,6 +1,6 @@
 package com.example.user.application.service
 
-import com.example.user.application.port.`in`.FindNormalUserUseCase
+import com.example.user.application.port.`in`.user.normal.FindNormalUserUseCase
 import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.application.port.out.SearchNormalUserQuery
 import com.example.user.domain.model.NormalUser

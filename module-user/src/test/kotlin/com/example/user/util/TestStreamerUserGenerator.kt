@@ -1,6 +1,6 @@
 package com.example.user.util
 
-import com.example.user.application.port.`in`.CreateStreamerUserCommand
+import com.example.user.application.port.`in`.user.streamer.CreateStreamerUserCommand
 import com.example.user.domain.model.NormalUser
 import com.example.user.domain.model.StreamerUser
 import com.github.javafaker.Faker

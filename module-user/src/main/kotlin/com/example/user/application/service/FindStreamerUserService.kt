@@ -1,7 +1,7 @@
 package com.example.user.application.service
 
-import com.example.user.application.port.`in`.FindPendingStreamerUserUseCase
-import com.example.user.application.port.`in`.FindStreamerUserUseCase
+import com.example.user.application.port.`in`.user.streamer.FindPendingStreamerUserUseCase
+import com.example.user.application.port.`in`.user.streamer.FindStreamerUserUseCase
 import com.example.user.application.port.out.SearchStreamerQuery
 import com.example.user.application.port.out.StreamerUserRepository
 import com.example.user.domain.model.StreamerUser

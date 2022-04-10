@@ -2,7 +2,7 @@ package com.example.user.application.service
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.`in`.CreateStreamerUserCommand
+import com.example.user.application.port.`in`.user.streamer.CreateStreamerUserCommand
 import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.util.MockStreamerUserRepository
 import com.example.user.util.randomCreateStreamerUserCommand

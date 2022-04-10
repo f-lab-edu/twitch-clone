@@ -2,8 +2,8 @@ package com.example.user.application.service
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.`in`.CreateAdminUserCommand
-import com.example.user.application.port.`in`.CreateAdminUserUseCase
+import com.example.user.application.port.`in`.user.admin.CreateAdminUserCommand
+import com.example.user.application.port.`in`.user.admin.CreateAdminUserUseCase
 import com.example.user.application.port.out.AdminUserRepository
 import com.example.user.domain.model.AdminUser
 

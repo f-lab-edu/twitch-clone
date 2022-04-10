@@ -2,7 +2,7 @@ package com.example.user.application.service
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.`in`.CreateNormalUserCommand
+import com.example.user.application.port.`in`.user.normal.CreateNormalUserCommand
 import com.example.user.domain.model.UserStatus
 import com.example.user.util.MockNormalUserRepository
 import org.assertj.core.api.Assertions.assertThat

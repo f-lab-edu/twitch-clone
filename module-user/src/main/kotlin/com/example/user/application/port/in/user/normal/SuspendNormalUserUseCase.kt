@@ -1,4 +1,4 @@
-package com.example.user.application.port.`in`
+package com.example.user.application.port.`in`.user.normal
 
 import java.util.*
 
