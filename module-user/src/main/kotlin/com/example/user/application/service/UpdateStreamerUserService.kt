@@ -33,14 +33,16 @@ class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepo
     }
 
     override fun updateStreamerNickname(id: UUID, updateNickname: String) {
-        val streamerUser = streamerRepository.findById(id)
-        streamerUser.streamerNickname = updateNickname
+        val streamerUser = streamerRepository.findById(id).apply {
+            streamerNickname = updateNickname
+        }
         streamerRepository.save(streamerUser)
     }
 
     override fun updateSubscriptionCost(id: UUID, updateSubscriptionCost: Int) {
-        val streamerUser = streamerRepository.findById(id)
-        streamerUser.subscriptionCost = updateSubscriptionCost
+        val streamerUser = streamerRepository.findById(id).apply {
+            subscriptionCost = updateSubscriptionCost
+        }
         streamerRepository.save(streamerUser)
     }
 }

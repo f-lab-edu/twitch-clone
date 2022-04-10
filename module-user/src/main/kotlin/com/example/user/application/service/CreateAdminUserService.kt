@@ -6,7 +6,6 @@ import com.example.user.application.port.`in`.CreateAdminUserCommand
 import com.example.user.application.port.`in`.CreateAdminUserUseCase
 import com.example.user.application.port.out.AdminUserRepository
 import com.example.user.domain.model.AdminUser
-import com.example.user.domain.model.NormalUser
 
 internal class CreateAdminUserService(private val adminUserRepository: AdminUserRepository) : CreateAdminUserUseCase {
 
