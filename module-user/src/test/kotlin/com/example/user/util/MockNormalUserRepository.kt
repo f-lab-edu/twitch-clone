@@ -3,7 +3,6 @@ package com.example.user.util
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
 import com.example.user.application.port.out.NormalUserRepository
-import com.example.user.application.port.out.SearchNormalUserQuery
 import com.example.user.domain.model.NormalUser
 import com.example.user.domain.model.UserStatus
 import java.util.*
@@ -22,10 +21,10 @@ class MockNormalUserRepository : NormalUserRepository {
         return users[id] ?: throw CustomException(ErrorCode.ENTITY_NOT_FOUND)
     }
 
-    override fun search(searchNormalUserQuery: SearchNormalUserQuery): List<NormalUser> {
-        val searchNormalUsers: List<NormalUser> = emailFilter(searchNormalUserQuery.email).apply {
-            nicknameFilter(this, searchNormalUserQuery.nickname)
-            statusFilter(this, searchNormalUserQuery.status)
+    override fun search(email: String?, nickname: String?, status: UserStatus?): List<NormalUser> {
+        val searchNormalUsers: List<NormalUser> = emailFilter(email).apply {
+            nicknameFilter(this, nickname)
+            statusFilter(this, status)
         }
         return searchNormalUsers
     }

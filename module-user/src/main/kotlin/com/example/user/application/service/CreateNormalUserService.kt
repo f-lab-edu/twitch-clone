@@ -5,14 +5,13 @@ import com.example.exception.ErrorCode
 import com.example.user.application.port.`in`.user.normal.CreateNormalUserCommand
 import com.example.user.application.port.`in`.user.normal.CreateNormalUserUseCase
 import com.example.user.application.port.out.NormalUserRepository
-import com.example.user.application.port.out.SearchNormalUserQuery
 import com.example.user.domain.model.NormalUser
 
 internal class CreateNormalUserService(private val normalUserRepository: NormalUserRepository) : CreateNormalUserUseCase {
 
     override fun createNormalUser(createNormalUserCommand: CreateNormalUserCommand): NormalUser {
         with(createNormalUserCommand) {
-            if (normalUserRepository.search(SearchNormalUserQuery(email)).isEmpty()) {
+            if (normalUserRepository.search(email = email).isEmpty()) {
                 return normalUserRepository.save(
                     NormalUser(email = email, password = password, nickname = nickname)
                 )

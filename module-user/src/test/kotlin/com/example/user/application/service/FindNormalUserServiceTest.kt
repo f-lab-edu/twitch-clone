@@ -1,6 +1,6 @@
 package com.example.user.application.service
 
-import com.example.user.application.port.out.SearchNormalUserQuery
+import com.example.user.application.port.`in`.user.normal.SearchNormalUserQuery
 import com.example.user.util.MockNormalUserRepository
 import com.example.user.util.randomUser
 import org.assertj.core.api.Assertions.assertThat
@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test
 @DisplayName("[일반 유저] 조회")
 class FindNormalUserServiceTest {
 
-    private lateinit var findUserService: FindNormalUserService
+    private lateinit var findUserService: SearchNormalUserService
     private lateinit var mockUserRepository: MockNormalUserRepository
 
     @BeforeEach
     fun beforeEach() {
         mockUserRepository = MockNormalUserRepository()
-        findUserService = FindNormalUserService(mockUserRepository)
+        findUserService = SearchNormalUserService(mockUserRepository)
     }
 
     @Test
@@ -29,7 +29,7 @@ class FindNormalUserServiceTest {
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = findUserService.findNormalUsers(SearchNormalUserQuery(email = user.email))
+        val selectUsers = findUserService.searchNormalUsers(SearchNormalUserQuery(email = user.email))
 
         // then
         assertAll(
@@ -46,7 +46,7 @@ class FindNormalUserServiceTest {
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = findUserService.findNormalUsers(SearchNormalUserQuery(nickname = user.nickname))
+        val selectUsers = findUserService.searchNormalUsers(SearchNormalUserQuery(nickname = user.nickname))
 
         // then
         assertAll(
@@ -63,7 +63,7 @@ class FindNormalUserServiceTest {
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = findUserService.findNormalUsers(SearchNormalUserQuery(status = user.status))
+        val selectUsers = findUserService.searchNormalUsers(SearchNormalUserQuery(status = user.status))
 
         // then
         assertAll(
@@ -80,8 +80,9 @@ class FindNormalUserServiceTest {
         mockUserRepository.save(user)
 
         // when
-        val selectUsers = findUserService.findNormalUsers(
-            SearchNormalUserQuery(email = user.email, nickname = user.nickname, status = user.status))
+        val selectUsers = findUserService.searchNormalUsers(
+            SearchNormalUserQuery(email = user.email, nickname = user.nickname, status = user.status)
+        )
 
         // then
         assertAll(
