@@ -4,7 +4,7 @@ import com.example.exception.CustomException
 import com.example.exception.ErrorCode
 import com.example.user.application.port.`in`.user.admin.CreateAdminUserCommand
 import com.example.user.util.MockAdminUserRepository
-import com.example.user.util.randomCreateAdminUserCommand
+import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach
@@ -23,7 +23,7 @@ internal class CreateAdminUserServiceTest {
     fun beforeEach() {
         mockAdminUserRepository = MockAdminUserRepository()
         createAdminUserService = CreateAdminUserService(mockAdminUserRepository)
-        createAdminUserCommand = randomCreateAdminUserCommand()
+        createAdminUserCommand = TestUserGenerator.createAdminUserCommand()
     }
 
     @Test
@@ -49,7 +49,7 @@ internal class CreateAdminUserServiceTest {
 
         // when
         val exception = assertThrows<CustomException> {
-            val duplicateAdminUserCommand = randomCreateAdminUserCommand(normalUser = createAdminUserCommand.normalUser)
+            val duplicateAdminUserCommand = TestUserGenerator.createAdminUserCommand(normalUser = createAdminUserCommand.normalUser)
             createAdminUserService.createAdminUser(duplicateAdminUserCommand)
         }
 

@@ -2,7 +2,7 @@ package com.example.user.application.service
 
 import com.example.user.application.port.`in`.user.normal.UpdateUserPasswordCommand
 import com.example.user.util.MockNormalUserRepository
-import com.example.user.util.randomUser
+import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach
@@ -30,7 +30,7 @@ internal class UpdateUserPasswordServiceTest {
     )
     fun `update normal user by password`(newPassword: String) {
         // given
-        val user = randomUser()
+        val user = TestUserGenerator.normalUser()
         mockUserRepository.save(user)
 
         val updateUserPasswordCommand = UpdateUserPasswordCommand(user.id, newPassword)
@@ -53,7 +53,7 @@ internal class UpdateUserPasswordServiceTest {
     @DisplayName("일반 유저의 password를 초기화 합니다")
     fun `user normal password init`() {
         // given
-        val user = randomUser()
+        val user = TestUserGenerator.normalUser()
         mockUserRepository.save(user)
         val userId = user.id
 

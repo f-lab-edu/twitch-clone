@@ -5,6 +5,7 @@ import com.example.exception.ErrorCode
 import com.example.user.application.port.`in`.user.normal.CreateNormalUserCommand
 import com.example.user.domain.model.UserStatus
 import com.example.user.util.MockNormalUserRepository
+import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertThrows
@@ -65,7 +66,7 @@ internal class CreateNormalUserServiceTest {
         @JvmStatic
         fun `create normal user by createUserCommand`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(CreateNormalUserCommand(email = "test@gmail.com", password = "password01", nickname = "mario"))
+                Arguments.of(TestUserGenerator.createNormalUserCommand())
             )
         }
     }

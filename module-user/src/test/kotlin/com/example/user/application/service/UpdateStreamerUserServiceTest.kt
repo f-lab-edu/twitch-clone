@@ -3,7 +3,7 @@ package com.example.user.application.service
 import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.util.MockStreamerUserRepository
-import com.example.user.util.randomStreamUser
+import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach
@@ -115,7 +115,7 @@ class UpdateStreamerUserServiceTest {
     }
 
     private fun saveStreamerUser(): StreamerUser {
-        return mockStreamerUserRepository.save(randomStreamUser())
+        return mockStreamerUserRepository.save(TestUserGenerator.streamUser())
     }
 
     private fun selectPendingStreamerUser(): List<StreamerUser> {

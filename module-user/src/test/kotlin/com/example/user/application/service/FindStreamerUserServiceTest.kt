@@ -3,7 +3,7 @@ package com.example.user.application.service
 import com.example.user.application.port.`in`.user.streamer.SearchStreamerUserQuery
 import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.util.MockStreamerUserRepository
-import com.example.user.util.randomStreamUser
+import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach
@@ -66,11 +66,11 @@ class FindStreamerUserServiceTest {
     }
 
     private fun saveStreamer() {
-        mockStreamerUserRepository.save(randomStreamUser())
+        mockStreamerUserRepository.save(TestUserGenerator.streamUser())
     }
 
     private fun saveRegisteredStreamer(streamerNickname: String = "streamer") {
-        val streamerUser = randomStreamUser(streamerNickname = streamerNickname)
+        val streamerUser = TestUserGenerator.streamUser(streamerNickname = streamerNickname)
         streamerUser.register()
         mockStreamerUserRepository.save(streamerUser)
     }
