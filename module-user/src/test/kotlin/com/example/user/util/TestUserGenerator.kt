@@ -1,8 +1,8 @@
 package com.example.user.util
 
-import com.example.user.application.port.`in`.user.admin.CreateAdminUserCommand
-import com.example.user.application.port.`in`.user.normal.CreateNormalUserCommand
-import com.example.user.application.port.`in`.user.streamer.CreateStreamerUserCommand
+import com.example.user.application.port.`in`.admin.CreateAdminUserCommand
+import com.example.user.application.port.`in`.normal.CreateNormalUserCommand
+import com.example.user.application.port.`in`.streamer.CreateStreamerUserCommand
 import com.example.user.domain.model.AdminUser
 import com.example.user.domain.model.NormalUser
 import com.example.user.domain.model.StreamerUser

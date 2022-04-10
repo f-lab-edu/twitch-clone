@@ -1,10 +1,10 @@
-package com.example.user.application.service
+package com.example.user.application.service.streamer
 
-import com.example.user.application.port.`in`.user.streamer.ApproveStreamerUserUseCase
-import com.example.user.application.port.`in`.user.streamer.RejectStreamerUserUseCase
-import com.example.user.application.port.`in`.user.streamer.SuspendStreamerUserUseCase
-import com.example.user.application.port.`in`.user.streamer.UpdateStreamerUserSubscriptionCostUseCase
-import com.example.user.application.port.`in`.user.streamer.UpdateStreamerUserUseCase
+import com.example.user.application.port.`in`.streamer.ApproveStreamerUserUseCase
+import com.example.user.application.port.`in`.streamer.RejectStreamerUserUseCase
+import com.example.user.application.port.`in`.streamer.SuspendStreamerUserUseCase
+import com.example.user.application.port.`in`.streamer.UpdateStreamerUserSubscriptionCostUseCase
+import com.example.user.application.port.`in`.streamer.UpdateStreamerUserUseCase
 import com.example.user.application.port.out.StreamerUserRepository
 import com.example.user.domain.model.StreamerUser
 import java.util.*

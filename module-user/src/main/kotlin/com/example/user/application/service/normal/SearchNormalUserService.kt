@@ -1,7 +1,7 @@
-package com.example.user.application.service
+package com.example.user.application.service.normal
 
-import com.example.user.application.port.`in`.user.normal.SearchNormalUserQuery
-import com.example.user.application.port.`in`.user.normal.SearchNormalUserUseCase
+import com.example.user.application.port.`in`.normal.SearchNormalUserQuery
+import com.example.user.application.port.`in`.normal.SearchNormalUserUseCase
 import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.NormalUser
 

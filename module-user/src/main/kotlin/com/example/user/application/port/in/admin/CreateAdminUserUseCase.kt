@@ -1,4 +1,4 @@
-package com.example.user.application.port.`in`.user.admin
+package com.example.user.application.port.`in`.admin
 
 import com.example.user.domain.model.AdminUser
 import com.example.user.domain.model.NormalUser

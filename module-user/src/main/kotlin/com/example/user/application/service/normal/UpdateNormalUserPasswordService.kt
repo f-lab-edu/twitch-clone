@@ -1,8 +1,8 @@
-package com.example.user.application.service
+package com.example.user.application.service.normal
 
-import com.example.user.application.port.`in`.user.normal.InitNormalUserPasswordUseCase
-import com.example.user.application.port.`in`.user.normal.UpdateNormalUserPasswordUseCase
-import com.example.user.application.port.`in`.user.normal.UpdateUserPasswordCommand
+import com.example.user.application.port.`in`.normal.InitNormalUserPasswordUseCase
+import com.example.user.application.port.`in`.normal.UpdateNormalUserPasswordUseCase
+import com.example.user.application.port.`in`.normal.UpdateUserPasswordCommand
 import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.NormalUser
 import java.util.*

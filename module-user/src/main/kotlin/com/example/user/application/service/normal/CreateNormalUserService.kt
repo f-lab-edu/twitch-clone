@@ -1,9 +1,9 @@
-package com.example.user.application.service
+package com.example.user.application.service.normal
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.`in`.user.normal.CreateNormalUserCommand
-import com.example.user.application.port.`in`.user.normal.CreateNormalUserUseCase
+import com.example.user.application.port.`in`.normal.CreateNormalUserCommand
+import com.example.user.application.port.`in`.normal.CreateNormalUserUseCase
 import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.NormalUser
 

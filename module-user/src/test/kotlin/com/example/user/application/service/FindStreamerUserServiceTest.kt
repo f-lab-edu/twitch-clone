@@ -1,6 +1,7 @@
 package com.example.user.application.service
 
-import com.example.user.application.port.`in`.user.streamer.SearchStreamerUserQuery
+import com.example.user.application.port.`in`.streamer.SearchStreamerUserQuery
+import com.example.user.application.service.streamer.SearchStreamerUserService
 import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.util.MockStreamerUserRepository
 import com.example.user.util.TestUserGenerator

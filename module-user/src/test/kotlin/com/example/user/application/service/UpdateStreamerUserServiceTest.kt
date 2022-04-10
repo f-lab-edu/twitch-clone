@@ -1,5 +1,6 @@
 package com.example.user.application.service
 
+import com.example.user.application.service.streamer.UpdateStreamerUserService
 import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.util.MockStreamerUserRepository

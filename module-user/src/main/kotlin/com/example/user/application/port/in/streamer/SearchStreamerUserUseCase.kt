@@ -1,4 +1,4 @@
-package com.example.user.application.port.`in`.user.streamer
+package com.example.user.application.port.`in`.streamer
 
 import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus

@@ -1,8 +1,8 @@
-package com.example.user.application.service
+package com.example.user.application.service.normal
 
-import com.example.user.application.port.`in`.user.normal.SuspendNormalUserUseCase
-import com.example.user.application.port.`in`.user.normal.UpdateNormalUserUseCase
-import com.example.user.application.port.`in`.user.normal.UpdateUserCommand
+import com.example.user.application.port.`in`.normal.SuspendNormalUserUseCase
+import com.example.user.application.port.`in`.normal.UpdateNormalUserUseCase
+import com.example.user.application.port.`in`.normal.UpdateUserCommand
 import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.User
 import java.util.*

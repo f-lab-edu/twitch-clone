@@ -1,6 +1,7 @@
 package com.example.user.application.service
 
-import com.example.user.application.port.`in`.user.normal.UpdateUserPasswordCommand
+import com.example.user.application.port.`in`.normal.UpdateUserPasswordCommand
+import com.example.user.application.service.normal.UpdateNormalUserPasswordService
 import com.example.user.util.MockNormalUserRepository
 import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat
