@@ -7,23 +7,24 @@ import com.example.user.application.port.`in`.CreateStreamerUserUseCase
 import com.example.user.application.port.out.StreamerUserRepository
 import com.example.user.domain.model.StreamerUser
 
-internal class CreateStreamerUserService(private val streamerRepository: StreamerUserRepository)
-    : CreateStreamerUserUseCase {
+internal class CreateStreamerUserService(private val streamerRepository: StreamerUserRepository) : CreateStreamerUserUseCase {
 
     override fun createStreamerUser(createStreamerUserCommand: CreateStreamerUserCommand): StreamerUser {
         if (streamerRepository.existsById(createStreamerUserCommand.id)) {
             throw CustomException(ErrorCode.EXISTS_ENTITY)
         }
 
-        val normalUser = createStreamerUserCommand.normalUser
-        val streamerUser = StreamerUser(
-            id = normalUser.id,
-            email = normalUser.email,
-            password = normalUser.password,
-            nickname = normalUser.nickname,
-            createStreamerUserCommand.streamerUserNickname
-        )
-        return streamerRepository.save(streamerUser)
-
+        return with(createStreamerUserCommand) {
+            streamerRepository.save(
+                StreamerUser(
+                    id = normalUser.id,
+                    email = normalUser.email,
+                    password = normalUser.password,
+                    nickname = normalUser.nickname,
+                    streamerNickname = streamerUserNickname,
+                    subscriptionCost = subscriptionCost
+                )
+            )
+        }
     }
 }

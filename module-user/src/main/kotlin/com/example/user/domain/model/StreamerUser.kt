@@ -11,6 +11,7 @@ class StreamerUser(
     password: String,
     nickname: String,
     var streamerNickname: String,
+    var subscriptionCost: Int
 ) : User.Editor {
     override var password: String = ""
     override var status: UserStatus = UserStatus.REGISTERED
