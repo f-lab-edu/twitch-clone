@@ -1,6 +1,6 @@
 package com.example.user.application.service
 
-import com.example.user.application.port.out.SearchStreamerQuery
+import com.example.user.application.port.`in`.user.streamer.SearchStreamerUserQuery
 import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.util.MockStreamerUserRepository
 import com.example.user.util.randomStreamUser
@@ -13,13 +13,13 @@ import org.junit.jupiter.api.Test
 @DisplayName("[스트리머 유저] 조회")
 class FindStreamerUserServiceTest {
 
-    private lateinit var findStreamerService: FindStreamerUserService
+    private lateinit var findStreamerService: SearchStreamerUserService
     private lateinit var mockStreamerUserRepository: MockStreamerUserRepository
 
     @BeforeEach
     fun beforeEach() {
         mockStreamerUserRepository = MockStreamerUserRepository()
-        findStreamerService = FindStreamerUserService(mockStreamerUserRepository)
+        findStreamerService = SearchStreamerUserService(mockStreamerUserRepository)
     }
 
     @Test
@@ -34,7 +34,7 @@ class FindStreamerUserServiceTest {
         // then
         assertAll(
             { assertThat(pendingStreamerUsers).isNotEmpty },
-            { assertThat(pendingStreamerUsers).allMatch { it.streamerStatus == StreamerUserStatus.PENDING} }
+            { assertThat(pendingStreamerUsers).allMatch { it.streamerStatus == StreamerUserStatus.PENDING } }
         )
     }
 
@@ -53,15 +53,15 @@ class FindStreamerUserServiceTest {
     fun `find streamer user by streamer nick name`() {
         // given
         saveRegisteredStreamer()
-        val streamerQuery = SearchStreamerQuery("streamer")
+        val streamerQuery = SearchStreamerUserQuery("streamer")
 
         // when
-        val pendingStreamerUsers = findStreamerService.findStreamers(streamerQuery)
+        val pendingStreamerUsers = findStreamerService.searchStreamers(streamerQuery)
 
         // then
         assertAll(
             { assertThat(pendingStreamerUsers).isNotEmpty },
-            { assertThat(pendingStreamerUsers).allMatch { it.streamerStatus == StreamerUserStatus.REGISTERED} }
+            { assertThat(pendingStreamerUsers).allMatch { it.streamerStatus == StreamerUserStatus.REGISTERED } }
         )
     }
 
@@ -69,7 +69,7 @@ class FindStreamerUserServiceTest {
         mockStreamerUserRepository.save(randomStreamUser())
     }
 
-    private fun saveRegisteredStreamer(streamerNickname : String = "streamer") {
+    private fun saveRegisteredStreamer(streamerNickname: String = "streamer") {
         val streamerUser = randomStreamUser(streamerNickname = streamerNickname)
         streamerUser.register()
         mockStreamerUserRepository.save(streamerUser)

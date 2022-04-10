@@ -2,7 +2,6 @@ package com.example.user.util
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.out.SearchStreamerQuery
 import com.example.user.application.port.out.StreamerUserRepository
 import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
@@ -39,9 +38,12 @@ class MockStreamerUserRepository : StreamerUserRepository {
         }
     }
 
-    override fun findStreamers(searchStreamerQuery: SearchStreamerQuery): List<StreamerUser> {
-        val searchStreamers: List<StreamerUser> = nicknameFilter(searchStreamerQuery.streamerNickname).apply {
-            statusFilter(this, searchStreamerQuery.streamerUserStatus)
+    override fun findStreamers(
+        streamerNickname: String?,
+        streamerUserStatus: StreamerUserStatus?
+    ): List<StreamerUser> {
+        val searchStreamers: List<StreamerUser> = nicknameFilter(streamerNickname).apply {
+            statusFilter(this, streamerUserStatus)
         }
         return searchStreamers
     }
