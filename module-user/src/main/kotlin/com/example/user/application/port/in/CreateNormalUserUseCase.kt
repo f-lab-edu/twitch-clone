@@ -4,7 +4,7 @@ import com.example.user.domain.model.NormalUser
 
 interface CreateNormalUserUseCase {
 
-    fun createNormalUser(createUserCommand: CreateUserCommand): NormalUser
+    fun createNormalUser(createNormalUserCommand: CreateNormalUserCommand): NormalUser
 }
 
-data class CreateUserCommand(val email: String, val password: String, val nickname: String)
+data class CreateNormalUserCommand(val email: String, val password: String, val nickname: String)

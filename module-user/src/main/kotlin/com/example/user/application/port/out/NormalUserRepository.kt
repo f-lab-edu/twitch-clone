@@ -10,7 +10,7 @@ interface NormalUserRepository {
 
     fun findById(id: UUID): NormalUser
 
-    fun search(searchUserQuery: SearchUserQuery): List<NormalUser>
+    fun search(searchNormalUserQuery: SearchNormalUserQuery): List<NormalUser>
 }
 
-class SearchUserQuery(val email: String? = null, val nickname: String? = null, val status: UserStatus? = null)
+class SearchNormalUserQuery(val email: String? = null, val nickname: String? = null, val status: UserStatus? = null)
