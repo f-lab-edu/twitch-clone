@@ -27,8 +27,9 @@ class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepo
     }
 
     override fun suspendStreamer(id: UUID) {
-        val streamerUser = streamerRepository.findById(id)
-        streamerUser.suspend()
+        val streamerUser = streamerRepository.findById(id).apply {
+            suspend()
+        }
         streamerRepository.save(streamerUser)
     }
 

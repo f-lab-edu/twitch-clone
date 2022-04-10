@@ -22,8 +22,9 @@ internal class UpdateNormalUserService(private val normalUserRepository: NormalU
     }
 
     override fun suspendNormalUser(userId: UUID) {
-        val user = normalUserRepository.findById(userId)
-        user.suspendedUser()
+        val user = normalUserRepository.findById(userId).apply {
+            suspendedUser()
+        }
         normalUserRepository.save(user)
     }
 }
