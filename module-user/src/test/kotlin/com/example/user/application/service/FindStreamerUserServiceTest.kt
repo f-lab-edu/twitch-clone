@@ -1,7 +1,7 @@
 package com.example.user.application.service
 
-import com.example.user.application.port.`in`.streamer.SearchStreamerUserQuery
-import com.example.user.application.service.streamer.SearchStreamerUserService
+import com.example.user.application.port.`in`.streamer.FindStreamerUserQuery
+import com.example.user.application.service.streamer.FindStreamerUserService
 import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.util.MockStreamerUserRepository
 import com.example.user.util.TestUserGenerator
@@ -14,13 +14,13 @@ import org.junit.jupiter.api.Test
 @DisplayName("[스트리머 유저] 조회")
 class FindStreamerUserServiceTest {
 
-    private lateinit var findStreamerService: SearchStreamerUserService
+    private lateinit var findStreamerService: FindStreamerUserService
     private lateinit var mockStreamerUserRepository: MockStreamerUserRepository
 
     @BeforeEach
     fun beforeEach() {
         mockStreamerUserRepository = MockStreamerUserRepository()
-        findStreamerService = SearchStreamerUserService(mockStreamerUserRepository)
+        findStreamerService = FindStreamerUserService(mockStreamerUserRepository)
     }
 
     @Test
@@ -54,10 +54,10 @@ class FindStreamerUserServiceTest {
     fun `find streamer user by streamer nick name`() {
         // given
         saveRegisteredStreamer()
-        val streamerQuery = SearchStreamerUserQuery("streamer")
+        val streamerQuery = FindStreamerUserQuery("streamer")
 
         // when
-        val pendingStreamerUsers = findStreamerService.searchStreamers(streamerQuery)
+        val pendingStreamerUsers = findStreamerService.findStreamers(streamerQuery)
 
         // then
         assertAll(

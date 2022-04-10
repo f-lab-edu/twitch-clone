@@ -11,7 +11,7 @@ internal class CreateNormalUserService(private val normalUserRepository: NormalU
 
     override fun createNormalUser(createNormalUserCommand: CreateNormalUserCommand): NormalUser {
         with(createNormalUserCommand) {
-            if (normalUserRepository.search(email = email).isNotEmpty()) {
+            if (normalUserRepository.find(email = email).isNotEmpty()) {
                 throw CustomException(ErrorCode.EXISTS_ENTITY)
             }
 

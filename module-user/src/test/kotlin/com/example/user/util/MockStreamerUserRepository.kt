@@ -42,10 +42,10 @@ class MockStreamerUserRepository : StreamerUserRepository {
         streamerNickname: String?,
         streamerUserStatus: StreamerUserStatus?
     ): List<StreamerUser> {
-        val searchStreamers: List<StreamerUser> = nicknameFilter(streamerNickname).apply {
+        val findStreamers: List<StreamerUser> = nicknameFilter(streamerNickname).apply {
             statusFilter(this, streamerUserStatus)
         }
-        return searchStreamers
+        return findStreamers
     }
 
     private fun nicknameFilter(nickname: String?): List<StreamerUser> {
@@ -55,11 +55,11 @@ class MockStreamerUserRepository : StreamerUserRepository {
     }
 
     private fun statusFilter(
-        searchStreamerUsers: List<StreamerUser>,
+        findStreamerUsers: List<StreamerUser>,
         streamerStatus: StreamerUserStatus?
     ): List<StreamerUser> {
         return streamerStatus?.let {
-            searchStreamerUsers.filter { it.streamerStatus == streamerStatus }
-        } ?: searchStreamerUsers
+            findStreamerUsers.filter { it.streamerStatus == streamerStatus }
+        } ?: findStreamerUsers
     }
 }

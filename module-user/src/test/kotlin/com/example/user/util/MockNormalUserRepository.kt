@@ -21,12 +21,12 @@ class MockNormalUserRepository : NormalUserRepository {
         return users[id] ?: throw CustomException(ErrorCode.ENTITY_NOT_FOUND)
     }
 
-    override fun search(email: String?, nickname: String?, status: UserStatus?): List<NormalUser> {
-        val searchNormalUsers: List<NormalUser> = emailFilter(email).apply {
+    override fun find(email: String?, nickname: String?, status: UserStatus?): List<NormalUser> {
+        val findNormalUsers: List<NormalUser> = emailFilter(email).apply {
             nicknameFilter(this, nickname)
             statusFilter(this, status)
         }
-        return searchNormalUsers
+        return findNormalUsers
     }
 
     private fun emailFilter(email: String?): List<NormalUser> {
@@ -36,13 +36,13 @@ class MockNormalUserRepository : NormalUserRepository {
         else values.filter { it.email == email }
     }
 
-    private fun nicknameFilter(searchNormalUsers: List<NormalUser>, nickname: String?): List<NormalUser> {
-        return if (nickname == null) searchNormalUsers
-        else searchNormalUsers.filter { it.nickname == nickname }
+    private fun nicknameFilter(findNormalUsers: List<NormalUser>, nickname: String?): List<NormalUser> {
+        return if (nickname == null) findNormalUsers
+        else findNormalUsers.filter { it.nickname == nickname }
     }
 
-    private fun statusFilter(searchNormalUsers: List<NormalUser>, status: UserStatus?): List<NormalUser> {
-        return if (status == null) searchNormalUsers
-        else searchNormalUsers.filter { it.status == status }
+    private fun statusFilter(findNormalUsers: List<NormalUser>, status: UserStatus?): List<NormalUser> {
+        return if (status == null) findNormalUsers
+        else findNormalUsers.filter { it.status == status }
     }
 }

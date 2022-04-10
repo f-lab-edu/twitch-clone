@@ -10,5 +10,5 @@ interface NormalUserRepository {
 
     fun findById(id: UUID): NormalUser
 
-    fun search(email: String? = null, nickname: String? = null, status: UserStatus? = null): List<NormalUser>
+    fun find(email: String? = null, nickname: String? = null, status: UserStatus? = null): List<NormalUser>
 }

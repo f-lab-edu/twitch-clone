@@ -3,11 +3,11 @@ package com.example.user.application.port.`in`.streamer
 import com.example.user.domain.model.StreamerUser
 import com.example.user.domain.model.StreamerUserStatus
 
-interface SearchStreamerUserUseCase {
-    fun searchStreamers(searchStreamerUserQuery: SearchStreamerUserQuery): List<StreamerUser>
+interface FindStreamerUserUseCase {
+    fun findStreamers(findStreamerUserQuery: FindStreamerUserQuery): List<StreamerUser>
 }
 
-class SearchStreamerUserQuery(
+class FindStreamerUserQuery(
     val streamerNickname: String? = null,
     val streamerUserStatus: StreamerUserStatus? = StreamerUserStatus.REGISTERED
 )
