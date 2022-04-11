@@ -2,10 +2,11 @@ package com.example.user.application.service
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.`in`.UpdateUserCommand
+import com.example.user.application.port.`in`.normal.UpdateUserCommand
+import com.example.user.application.service.normal.UpdateNormalUserService
 import com.example.user.domain.model.UserStatus
 import com.example.user.util.MockNormalUserRepository
-import com.example.user.util.randomUser
+import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertThrows
@@ -35,7 +36,7 @@ internal class UpdateNormalUserServiceTest {
     )
     fun `update user by nickname`(newNickname: String) {
         // given
-        val user = randomUser()
+        val user = TestUserGenerator.normalUser()
         mockUserRepository.save(user)
 
         val updateUserCommand = UpdateUserCommand(user.id, newNickname)
@@ -76,7 +77,7 @@ internal class UpdateNormalUserServiceTest {
     @DisplayName("일반 유저의 상태를 정지 상태로 변경한다.")
     fun `update user status suspense`() {
         // given
-        val user = randomUser()
+        val user = TestUserGenerator.normalUser()
         mockUserRepository.save(user)
 
         // when

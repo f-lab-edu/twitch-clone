@@ -1,4 +1,4 @@
-package com.example.user.application.port.`in`
+package com.example.user.application.port.`in`.streamer
 
 import java.util.*
 

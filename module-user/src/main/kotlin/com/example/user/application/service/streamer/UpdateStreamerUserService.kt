@@ -1,10 +1,10 @@
-package com.example.user.application.service
+package com.example.user.application.service.streamer
 
-import com.example.user.application.port.`in`.ApproveStreamerUserUseCase
-import com.example.user.application.port.`in`.RejectStreamerUserUseCase
-import com.example.user.application.port.`in`.SuspendStreamerUserUseCase
-import com.example.user.application.port.`in`.UpdateStreamerUserSubscriptionCostUseCase
-import com.example.user.application.port.`in`.UpdateStreamerUserUseCase
+import com.example.user.application.port.`in`.streamer.ApproveStreamerUserUseCase
+import com.example.user.application.port.`in`.streamer.RejectStreamerUserUseCase
+import com.example.user.application.port.`in`.streamer.SuspendStreamerUserUseCase
+import com.example.user.application.port.`in`.streamer.UpdateStreamerUserSubscriptionCostUseCase
+import com.example.user.application.port.`in`.streamer.UpdateStreamerUserUseCase
 import com.example.user.application.port.out.StreamerUserRepository
 import com.example.user.domain.model.StreamerUser
 import java.util.*
@@ -27,20 +27,23 @@ class UpdateStreamerUserService(private val streamerRepository: StreamerUserRepo
     }
 
     override fun suspendStreamer(id: UUID) {
-        val streamerUser = streamerRepository.findById(id)
-        streamerUser.suspend()
+        val streamerUser = streamerRepository.findById(id).apply {
+            suspend()
+        }
         streamerRepository.save(streamerUser)
     }
 
     override fun updateStreamerNickname(id: UUID, updateNickname: String) {
-        val streamerUser = streamerRepository.findById(id)
-        streamerUser.streamerNickname = updateNickname
+        val streamerUser = streamerRepository.findById(id).apply {
+            streamerNickname = updateNickname
+        }
         streamerRepository.save(streamerUser)
     }
 
     override fun updateSubscriptionCost(id: UUID, updateSubscriptionCost: Int) {
-        val streamerUser = streamerRepository.findById(id)
-        streamerUser.subscriptionCost = updateSubscriptionCost
+        val streamerUser = streamerRepository.findById(id).apply {
+            subscriptionCost = updateSubscriptionCost
+        }
         streamerRepository.save(streamerUser)
     }
 }

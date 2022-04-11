@@ -2,10 +2,11 @@ package com.example.user.application.service
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.`in`.CreateStreamerUserCommand
+import com.example.user.application.port.`in`.streamer.CreateStreamerUserCommand
+import com.example.user.application.service.streamer.CreateStreamerUserService
 import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.util.MockStreamerUserRepository
-import com.example.user.util.randomCreateStreamerUserCommand
+import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.BeforeEach
@@ -24,7 +25,7 @@ internal class CreateStreamerUserServiceTest {
     fun beforeEach() {
         mockStreamerUserRepository = MockStreamerUserRepository()
         createStreamerUserService = CreateStreamerUserService(mockStreamerUserRepository)
-        createStreamerCommand = randomCreateStreamerUserCommand()
+        createStreamerCommand = TestUserGenerator.createStreamerUserCommand()
     }
 
     @Test
@@ -48,7 +49,7 @@ internal class CreateStreamerUserServiceTest {
         // given
         createStreamerUserService.createStreamerUser(createStreamerCommand)
         val existsStreamerCommand =
-            randomCreateStreamerUserCommand(normalUser = createStreamerCommand.normalUser)
+            TestUserGenerator.createStreamerUserCommand(normalUser = createStreamerCommand.normalUser)
 
         // when
         val exception = assertThrows<CustomException> {

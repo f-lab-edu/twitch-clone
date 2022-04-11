@@ -2,9 +2,11 @@ package com.example.user.application.service
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.`in`.CreateUserCommand
+import com.example.user.application.port.`in`.normal.CreateNormalUserCommand
+import com.example.user.application.service.normal.CreateNormalUserService
 import com.example.user.domain.model.UserStatus
 import com.example.user.util.MockNormalUserRepository
+import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertThrows
@@ -30,9 +32,9 @@ internal class CreateNormalUserServiceTest {
     @DisplayName("CreateUserCommand로 일반유저를 생성 합니다")
     @ParameterizedTest
     @MethodSource
-    fun `create normal user by createUserCommand`(createUserCommand: CreateUserCommand) {
+    fun `create normal user by createUserCommand`(createNormalUserCommand: CreateNormalUserCommand) {
         // when
-        val user = createNormalUserService.createNormalUser(createUserCommand)
+        val user = createNormalUserService.createNormalUser(createNormalUserCommand)
 
         // then
         val findUser = mockUserRepository.findById(user.id)
@@ -48,13 +50,13 @@ internal class CreateNormalUserServiceTest {
     @DisplayName("이미 존재하는 email의 일반유저를 생성하려고 하면 CustomException이 발생합니다")
     @ParameterizedTest
     @MethodSource("create normal user by createUserCommand")
-    fun `create user by existsNickname caused customException`(createUserCommand: CreateUserCommand) {
+    fun `create user by existsNickname caused customException`(createNormalUserCommand: CreateNormalUserCommand) {
         // given
-        createNormalUserService.createNormalUser(createUserCommand)
+        createNormalUserService.createNormalUser(createNormalUserCommand)
 
         // when
         val exception = assertThrows(CustomException::class.java) {
-            createNormalUserService.createNormalUser(createUserCommand)
+            createNormalUserService.createNormalUser(createNormalUserCommand)
         }
 
         // then
@@ -65,7 +67,7 @@ internal class CreateNormalUserServiceTest {
         @JvmStatic
         fun `create normal user by createUserCommand`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(CreateUserCommand(email = "test@gmail.com", password = "password01", nickname = "mario"))
+                Arguments.of(TestUserGenerator.createNormalUserCommand())
             )
         }
     }

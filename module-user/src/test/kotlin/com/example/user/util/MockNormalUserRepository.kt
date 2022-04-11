@@ -2,7 +2,6 @@ package com.example.user.util
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.out.SearchUserQuery
 import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.NormalUser
 import com.example.user.domain.model.UserStatus
@@ -22,12 +21,12 @@ class MockNormalUserRepository : NormalUserRepository {
         return users[id] ?: throw CustomException(ErrorCode.ENTITY_NOT_FOUND)
     }
 
-    override fun search(searchUserQuery: SearchUserQuery): List<NormalUser> {
-        val searchUsers: List<NormalUser> = emailFilter(searchUserQuery.email).apply {
-            nicknameFilter(this, searchUserQuery.nickname)
-            statusFilter(this, searchUserQuery.status)
+    override fun find(email: String?, nickname: String?, status: UserStatus?): List<NormalUser> {
+        val findNormalUsers: List<NormalUser> = emailFilter(email).apply {
+            nicknameFilter(this, nickname)
+            statusFilter(this, status)
         }
-        return searchUsers
+        return findNormalUsers
     }
 
     private fun emailFilter(email: String?): List<NormalUser> {
@@ -37,13 +36,13 @@ class MockNormalUserRepository : NormalUserRepository {
         else values.filter { it.email == email }
     }
 
-    private fun nicknameFilter(searchUsers: List<NormalUser>, nickname: String?): List<NormalUser> {
-        return if (nickname == null) searchUsers
-        else searchUsers.filter { it.nickname == nickname }
+    private fun nicknameFilter(findNormalUsers: List<NormalUser>, nickname: String?): List<NormalUser> {
+        return if (nickname == null) findNormalUsers
+        else findNormalUsers.filter { it.nickname == nickname }
     }
 
-    private fun statusFilter(searchUsers: List<NormalUser>, status: UserStatus?): List<NormalUser> {
-        return if (status == null) searchUsers
-        else searchUsers.filter { it.status == status }
+    private fun statusFilter(findNormalUsers: List<NormalUser>, status: UserStatus?): List<NormalUser> {
+        return if (status == null) findNormalUsers
+        else findNormalUsers.filter { it.status == status }
     }
 }

@@ -1,9 +1,9 @@
-package com.example.user.application.service
+package com.example.user.application.service.streamer
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
-import com.example.user.application.port.`in`.CreateStreamerUserCommand
-import com.example.user.application.port.`in`.CreateStreamerUserUseCase
+import com.example.user.application.port.`in`.streamer.CreateStreamerUserCommand
+import com.example.user.application.port.`in`.streamer.CreateStreamerUserUseCase
 import com.example.user.application.port.out.StreamerUserRepository
 import com.example.user.domain.model.StreamerUser
 
