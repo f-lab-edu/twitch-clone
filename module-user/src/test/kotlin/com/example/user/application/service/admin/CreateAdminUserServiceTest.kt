@@ -1,9 +1,8 @@
-package com.example.user.application.service
+package com.example.user.application.service.admin
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
 import com.example.user.application.port.`in`.admin.CreateAdminUserCommand
-import com.example.user.application.service.admin.CreateAdminUserService
 import com.example.user.util.MockAdminUserRepository
 import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat

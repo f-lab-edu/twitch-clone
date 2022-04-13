@@ -1,9 +1,8 @@
-package com.example.user.application.service
+package com.example.user.application.service.normal
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
 import com.example.user.application.port.`in`.normal.UpdateUserCommand
-import com.example.user.application.service.normal.UpdateNormalUserService
 import com.example.user.domain.model.UserStatus
 import com.example.user.util.MockNormalUserRepository
 import com.example.user.util.TestUserGenerator
