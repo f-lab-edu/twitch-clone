@@ -1,9 +1,8 @@
-package com.example.user.application.service
+package com.example.user.application.service.streamer
 
 import com.example.exception.CustomException
 import com.example.exception.ErrorCode
 import com.example.user.application.port.`in`.streamer.CreateStreamerUserCommand
-import com.example.user.application.service.streamer.CreateStreamerUserService
 import com.example.user.domain.model.StreamerUserStatus
 import com.example.user.util.MockStreamerUserRepository
 import com.example.user.util.TestUserGenerator

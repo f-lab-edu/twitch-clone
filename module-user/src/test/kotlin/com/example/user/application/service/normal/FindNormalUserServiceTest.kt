@@ -1,7 +1,6 @@
-package com.example.user.application.service
+package com.example.user.application.service.normal
 
 import com.example.user.application.port.`in`.normal.FindNormalUserQuery
-import com.example.user.application.service.normal.FindNormalUserService
 import com.example.user.util.MockNormalUserRepository
 import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat

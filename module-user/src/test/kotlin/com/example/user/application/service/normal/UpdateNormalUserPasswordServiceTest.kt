@@ -1,7 +1,6 @@
-package com.example.user.application.service
+package com.example.user.application.service.normal
 
 import com.example.user.application.port.`in`.normal.UpdateUserPasswordCommand
-import com.example.user.application.service.normal.UpdateNormalUserPasswordService
 import com.example.user.util.MockNormalUserRepository
 import com.example.user.util.TestUserGenerator
 import org.assertj.core.api.Assertions.assertThat
@@ -13,15 +12,15 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
 @DisplayName("[일반 유저] 비밀번호 수정")
-internal class UpdateUserPasswordServiceTest {
+internal class UpdateNormalUserPasswordServiceTest {
 
     private lateinit var mockUserRepository: MockNormalUserRepository
-    private lateinit var updateUserPasswordService: UpdateNormalUserPasswordService
+    private lateinit var updateNormalUserPasswordService: UpdateNormalUserPasswordService
 
     @BeforeEach
     fun beforeEach() {
         mockUserRepository = MockNormalUserRepository()
-        updateUserPasswordService = UpdateNormalUserPasswordService(mockUserRepository)
+        updateNormalUserPasswordService = UpdateNormalUserPasswordService(mockUserRepository)
     }
 
     @DisplayName("일반 유저의 password를 변경합니다")
@@ -37,7 +36,7 @@ internal class UpdateUserPasswordServiceTest {
         val updateUserPasswordCommand = UpdateUserPasswordCommand(user.id, newPassword)
 
         // when
-        updateUserPasswordService.updateNormalUserPassword(updateUserPasswordCommand)
+        updateNormalUserPasswordService.updateNormalUserPassword(updateUserPasswordCommand)
 
         // then
         val findUser = mockUserRepository.findById(updateUserPasswordCommand.id)
@@ -59,7 +58,7 @@ internal class UpdateUserPasswordServiceTest {
         val userId = user.id
 
         // when
-        updateUserPasswordService.initNormalUserPassword(userId)
+        updateNormalUserPasswordService.initNormalUserPassword(userId)
 
         // then
         val findUser = mockUserRepository.findById(userId)
