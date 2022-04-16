@@ -12,7 +12,11 @@ import javax.validation.Valid
 class NormalUserUseCaseController(private val createNormalUserUseCase: CreateNormalUserUseCase) {
 
     @PostMapping(path = ["/user"])
-    fun create(@Valid @RequestBody req: CreateNormalUserCommand): UUID {
-        return createNormalUserUseCase.createNormalUser(req).id
+    fun create(@Valid @RequestBody req: CreateNormalUserCommand): CreateNormalUserResponse {
+        return with(createNormalUserUseCase.createNormalUser(req)) {
+            CreateNormalUserResponse(id)
+        }
     }
 }
+
+class CreateNormalUserResponse(val id: UUID)
