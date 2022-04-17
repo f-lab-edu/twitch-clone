@@ -1,5 +1,6 @@
 package com.example.config.exception
 
+import org.slf4j.Logger
 import org.springframework.http.HttpStatus
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.validation.BindException
@@ -14,7 +15,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import javax.validation.ConstraintViolationException
 
 @RestControllerAdvice
-class ControllerAdvice {
+class ControllerAdvice(private val log: Logger) {
 
     /**
      * 외부 통신 실패
@@ -112,8 +113,6 @@ class ControllerAdvice {
     }
 
     private fun preHandle(exception: Exception) {
-        // slf4j 적용 필요
-        // log.error("### message={}, cause={}", ex.message, ex.cause, ex)
-        println("### message=" + exception.message + ", cause=" + exception.cause)
+        log.error("### message={}, cause={}", exception.message, exception.cause, exception)
     }
 }
