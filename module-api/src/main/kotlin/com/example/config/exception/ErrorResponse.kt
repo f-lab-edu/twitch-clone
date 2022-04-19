@@ -13,7 +13,7 @@ data class ErrorResponse(
     val codeName: String = "",
     val message: String = "",
     val time: LocalDateTime = LocalDateTime.now(),
-    val errors: List<FieldError> = ArrayList()
+    val errors: List<FieldError> = emptyList()
 ) {
     companion object {
         private const val DEFAULT_MESSAGE = "기본 에러 메시지가 존재하지 않습니다."
@@ -40,35 +40,15 @@ data class ErrorResponse(
         }
 
         fun of(exception: MethodArgumentTypeMismatchException): ErrorResponse {
-            val fieldError = with(exception) {
-                FieldError.of(
-                    field = name,
-                    value = value?.toString() ?: "",
-                    reason = errorCode
-                )
-            }
-            return of(ErrorCode.BAD_REQUEST, listOf(fieldError))
+            return of(ErrorCode.BAD_REQUEST, listOf(FieldError.of(exception)))
         }
 
         fun of(exception: MissingServletRequestParameterException): ErrorResponse {
-            val fieldError = FieldError.of(
-                field = exception.parameterName,
-                value = "",
-                reason = "Not exist"
-            )
-            return of(ErrorCode.BAD_REQUEST, listOf(fieldError))
+            return of(ErrorCode.BAD_REQUEST, listOf(FieldError.of(exception)))
         }
 
         fun of(exception: ConstraintViolationException): ErrorResponse {
-            val fieldErrors = exception.constraintViolations.stream()
-                .map {
-                    FieldError.of(
-                        field = extractPropertyName(it.propertyPath),
-                        value = "",
-                        reason = it.message
-                    )
-                }.collect(Collectors.toList())
-            return of(ErrorCode.BAD_REQUEST, fieldErrors)
+            return of(ErrorCode.BAD_REQUEST, FieldError.of(exception))
         }
 
         private fun of(errorCode: ErrorCode, errors: List<FieldError>): ErrorResponse {
@@ -99,16 +79,41 @@ data class ErrorResponse(
     ) {
 
         companion object {
-            fun of(field: String, value: String, reason: String): FieldError {
-                return FieldError(field, value, reason)
-            }
-
             fun of(bindingResult: BindingResult): List<FieldError> {
                 return with(bindingResult) {
                     fieldErrors.stream()
                         .map { of(it) }
                         .collect(Collectors.toList())
                 }
+            }
+
+            fun of(exception: MethodArgumentTypeMismatchException): FieldError {
+                return of(
+                    field = exception.name,
+                    value = exception.value?.toString() ?: "",
+                    reason = exception.errorCode
+                )
+            }
+
+            fun of(exception: ConstraintViolationException): List<FieldError> {
+                return exception.constraintViolations.stream()
+                    .map {
+                        of(
+                            field = extractPropertyName(it.propertyPath),
+                            reason = it.message
+                        )
+                    }.collect(Collectors.toList()) ?: emptyList()
+            }
+
+            fun of(exception: MissingServletRequestParameterException): FieldError {
+                return of(
+                    field = exception.parameterName,
+                    reason = "Not exist"
+                )
+            }
+
+            private fun of(field: String = "", value: String = "", reason: String = ""): FieldError {
+                return FieldError(field, value, reason)
             }
 
             private fun of(fieldError: org.springframework.validation.FieldError): FieldError {

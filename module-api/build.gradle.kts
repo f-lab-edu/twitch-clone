@@ -3,6 +3,8 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.spring") version "1.6.10"
+
+    id("io.gitlab.arturbosch.detekt").version("1.19.0")
 }
 
 group = "com.example"
@@ -25,8 +27,17 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    runtimeOnly("io.gitlab.arturbosch.detekt:detekt-api:1.19.0")
 }
 
 tasks.register("prepareKotlinBuildScriptModel") {
 
+}
+
+afterEvaluate {
+    detekt {
+        buildUponDefaultConfig = true
+        config.setFrom(files("$rootDir/detekt-config.yml"))
+    }
 }

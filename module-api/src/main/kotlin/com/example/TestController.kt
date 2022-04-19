@@ -14,7 +14,7 @@ class TestController {
 
     @GetMapping(path = ["/test/error"])
     fun error(@RequestParam message: String): Boolean {
-        throw RuntimeException("error!!!")
+        throw IllegalAccessError("error!!! $message")
     }
 }
 

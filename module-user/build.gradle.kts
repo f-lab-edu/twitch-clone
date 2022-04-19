@@ -1,5 +1,7 @@
 plugins {
     kotlin("jvm") version "1.6.10"
+
+    id("io.gitlab.arturbosch.detekt").version("1.19.0")
 }
 
 group = "com.example"
@@ -23,4 +25,13 @@ dependencies {
 
     // kotlin-test-junit
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
+
+    runtimeOnly("io.gitlab.arturbosch.detekt:detekt-api:1.19.0")
+}
+
+afterEvaluate {
+    detekt {
+        buildUponDefaultConfig = true
+        config.setFrom(files("$rootDir/detekt-config.yml"))
+    }
 }
