@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://27.96.135.97:3306/twitch_clone?serverTimezone=Asia/Seoul
+    username: user
