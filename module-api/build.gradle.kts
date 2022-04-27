@@ -3,6 +3,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.spring") version "1.6.10"
+    kotlin("plugin.noarg") version "1.6.10"
 
     id("io.gitlab.arturbosch.detekt").version("1.19.0")
 }
@@ -15,17 +16,24 @@ repositories {
     mavenCentral()
 }
 
+noArg {
+    annotation("javax.persistence.Entity")
+}
+
+
 dependencies {
     // Project dependencies
     implementation(project(":module-user"))
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     implementation("mysql:mysql-connector-java:8.0.28")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-noarg")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
