@@ -2,18 +2,16 @@ package com.example.user.adpter.out
 
 import com.example.user.application.port.out.NormalUserRepository
 import com.example.user.domain.model.NormalUser
+import com.example.user.domain.model.NormalUserEntity
 import com.example.user.domain.model.UserStatus
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-/**
- * TODO mysql로 변경합니다.
- */
-class NormalUserRepositoryImpl : NormalUserRepository {
+class NormalUserRepositoryImpl(private val normalUserDao: NormalUserDao) : NormalUserRepository {
     private val users = ConcurrentHashMap<UUID, NormalUser>()
 
     override fun save(normalUser: NormalUser): NormalUser {
-        users[normalUser.id] = normalUser
+        normalUserDao.save(NormalUserEntity.from(normalUser))
         return normalUser
     }
 
