@@ -36,8 +36,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-noarg")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("com.github.javafaker:javafaker:1.0.2")
 
     runtimeOnly("io.gitlab.arturbosch.detekt:detekt-api:1.19.0")
+    runtimeOnly("com.h2database:h2")
 }
 
 tasks.register("prepareKotlinBuildScriptModel") {
