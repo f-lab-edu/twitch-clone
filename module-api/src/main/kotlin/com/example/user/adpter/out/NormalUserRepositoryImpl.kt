@@ -9,7 +9,7 @@ import com.example.user.domain.model.UserStatus
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-class NormalUserRepositoryImpl(private val normalUserDao: NormalUserDao) : NormalUserRepository {
+internal class NormalUserRepositoryImpl(private val normalUserDao: NormalUserDao) : NormalUserRepository {
 
     override fun save(normalUser: NormalUser): NormalUserEntity {
         return normalUserDao.save(NormalUserEntity.from(normalUser))

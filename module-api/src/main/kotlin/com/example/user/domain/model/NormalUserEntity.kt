@@ -11,7 +11,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "normal_user")
-class NormalUserEntity(
+internal class NormalUserEntity(
     @Id
     @Column(name = "id", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
     override val id: UUID = UUID.randomUUID(),

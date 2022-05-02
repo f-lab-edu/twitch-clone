@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Bean
 class TestBeanConfig {
 
     @Autowired
-    lateinit var normalUserDao : NormalUserDao
+    internal lateinit var normalUserDao : NormalUserDao
 
     @Bean
-    fun normalUserRepositoryImpl() : NormalUserRepositoryImpl {
+    internal fun normalUserRepositoryImpl() : NormalUserRepositoryImpl {
         return NormalUserRepositoryImpl(normalUserDao)
     }
 }

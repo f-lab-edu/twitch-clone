@@ -4,4 +4,4 @@ import com.example.user.domain.model.NormalUserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
-interface NormalUserDao : JpaRepository<NormalUserEntity, UUID>
+internal interface NormalUserDao : JpaRepository<NormalUserEntity, UUID>
