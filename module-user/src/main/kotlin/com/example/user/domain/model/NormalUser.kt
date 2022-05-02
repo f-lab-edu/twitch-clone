@@ -5,7 +5,7 @@ import java.util.*
 /**
  * 일반 유저
  */
-class NormalUser(
+open class NormalUser(
     override val id: UUID = UUID.randomUUID(),
     override val email: String,
     password: String,

@@ -13,19 +13,18 @@ import javax.persistence.Table
 @Table(name = "normal_user")
 class NormalUserEntity(
     @Id
-    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "CHAR(36)")
-    @Type(type = "uuid-char")
-    override val id: UUID,
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
+    override val id: UUID = UUID.randomUUID(),
     @Column
-    override val email: String,
+    override val email: String = "",
     @Column
-    override var password: String,
+    override var password: String = "",
     @Column
     @Enumerated(EnumType.STRING)
-    override var status: UserStatus,
+    override var status: UserStatus = UserStatus.SUSPENDED,
     @Column
-    override var nickname: String
-) : User.Editor by NormalUser(id, email, password, nickname) {
+    override var nickname: String = ""
+) : NormalUser(id, email, password, nickname){
 
     companion object {
         fun from(normalUser: NormalUser): NormalUserEntity = with(normalUser) {
