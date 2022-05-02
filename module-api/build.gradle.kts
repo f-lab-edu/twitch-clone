@@ -3,7 +3,6 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.spring") version "1.6.10"
-    kotlin("plugin.noarg") version "1.6.10"
 
     id("io.gitlab.arturbosch.detekt").version("1.19.0")
 }
@@ -15,11 +14,6 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 repositories {
     mavenCentral()
 }
-
-noArg {
-    annotation("javax.persistence.Entity")
-}
-
 
 dependencies {
     // Project dependencies
