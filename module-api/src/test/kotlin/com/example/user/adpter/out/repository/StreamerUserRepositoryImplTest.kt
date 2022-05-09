@@ -13,6 +13,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
@@ -24,11 +25,12 @@ import java.util.*
 @Import(value = [TestBeanConfig::class])
 class StreamerUserRepositoryImplTest {
 
-    private lateinit var normalUser : NormalUser
-    private lateinit var streamerUser : StreamerUser
+    private lateinit var normalUser: NormalUser
+    private lateinit var streamerUser: StreamerUser
 
     @Autowired
     private lateinit var normalUserRepositoryImpl: NormalUserRepositoryImpl
+
     @Autowired
     private lateinit var streamerUserRepositoryImpl: StreamerUserRepositoryImpl
 
@@ -111,6 +113,36 @@ class StreamerUserRepositoryImplTest {
 
         // then
         assertThat(streamerUsers.size).isEqualTo(2)
+    }
+
+    @DisplayName("스트리머 유저 리스트를 저장한다.")
+    @Test
+    fun `save streamer user list`() {
+        // given
+        val normalUser2 = TestUserGenerator.normalUser()
+        normalUserRepositoryImpl.save(normalUser2)
+        val streamerUsers = listOf(streamerUser, TestUserGenerator.streamUser(id = normalUser2.id))
+
+        // when
+        val streamerUserEntities = streamerUserRepositoryImpl.saveAll(streamerUsers)
+
+        // then
+        assertThat(streamerUserEntities.size).isEqualTo(2)
+    }
+
+    @DisplayName("스트리머 유저 리스트를 저장시 normal user id 가 존재하지 않으면 해당 데이터를 제외하고 저장한다.")
+    @Test
+    fun `save streamer user list if normal user id exists`() {
+        // given
+        val normalUser2 = TestUserGenerator.normalUser()
+        normalUserRepositoryImpl.save(normalUser2)
+        val streamerUsers = listOf(streamerUser, TestUserGenerator.streamUser(id = normalUser2.id), TestUserGenerator.streamUser())
+
+        // when
+        val streamerUserEntities = streamerUserRepositoryImpl.saveAll(streamerUsers)
+
+        // then
+        assertThat(streamerUserEntities.size).isEqualTo(2)
     }
 
     @DisplayName("등록되어 있는 스트리머 유저 리스트를 스트리머 닉네임과 스트리머 유저 상태값을 통하여 가져온다.")

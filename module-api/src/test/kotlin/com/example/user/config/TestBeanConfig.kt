@@ -24,6 +24,6 @@ class TestBeanConfig {
 
     @Bean
     internal fun streamerUserRepositoryImpl() : StreamerUserRepositoryImpl {
-        return StreamerUserRepositoryImpl(streamerUserDao, normalUserRepositoryImpl())
+        return StreamerUserRepositoryImpl(streamerUserDao, normalUserDao, normalUserRepositoryImpl())
     }
 }

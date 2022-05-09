@@ -28,7 +28,7 @@ internal class StreamerUserEntity(
     @Enumerated(EnumType.STRING)
     override val streamerStatus: StreamerUserStatus = StreamerUserStatus.PENDING,
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.MERGE, CascadeType.PERSIST])
     @MapsId("id")
     @JoinColumn(name = "id")
     val normalUserEntity: NormalUserEntity = NormalUserEntity(),
@@ -52,6 +52,16 @@ internal class StreamerUserEntity(
                 streamerStatus = streamerStatus,
                 normalUserEntity = normalUserEntity
             )
+        }
+
+        fun fromList(streamerUsers: List<StreamerUser>, normalUserEntityMap: Map<UUID, NormalUserEntity>) : List<StreamerUserEntity> {
+            val streamerUserEntities = mutableListOf<StreamerUserEntity>()
+            streamerUsers
+                .asSequence()
+                .map { streamerUser -> normalUserEntityMap[streamerUser.id]?.let { from(streamerUser, it) } }
+                .forEach { streamerUserEntity -> streamerUserEntity?.let { streamerUserEntities.add(it) } }
+
+            return streamerUserEntities.toList()
         }
     }
 }

@@ -32,10 +32,11 @@ class MockStreamerUserRepository : StreamerUserRepository {
         return streamerUser
     }
 
-    override fun saveAll(streamerUsers: List<StreamerUser>) {
+    override fun saveAll(streamerUsers: List<StreamerUser>): List<StreamerUser> {
         for (streamerUser in streamerUsers) {
             this.streamerUsers[streamerUser.id] = streamerUser
         }
+        return streamerUsers
     }
 
     override fun findStreamers(

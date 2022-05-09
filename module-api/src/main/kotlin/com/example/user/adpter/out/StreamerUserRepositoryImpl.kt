@@ -12,8 +12,9 @@ import java.util.*
 @Repository
 internal class StreamerUserRepositoryImpl(
     private val streamerUserDao: StreamerUserDao,
+    private val normalUserDao: NormalUserDao,
     private val normalUserRepositoryImpl: NormalUserRepositoryImpl,
-)  : StreamerUserRepository {
+) : StreamerUserRepository {
     override fun save(streamerUser: StreamerUser): StreamerUserEntity {
         val normalUserEntity = normalUserRepositoryImpl.findById(streamerUser.id)
         return streamerUserDao.save(StreamerUserEntity.from(streamerUser, normalUserEntity))
@@ -31,8 +32,10 @@ internal class StreamerUserRepositoryImpl(
         return streamerUserDao.findAllByStreamerStatus(streamerUserStatus)
     }
 
-    override fun saveAll(streamerUsers: List<StreamerUser>) {
-        TODO("Not yet implemented")
+    override fun saveAll(streamerUsers: List<StreamerUser>) : List<StreamerUserEntity> {
+        val streamerUserIds = streamerUsers.map { it.id }
+        val normalUserEntityMap = normalUserDao.findAllByIdIn(streamerUserIds).associateBy({ it.id }, { it })
+        return streamerUserDao.saveAll(StreamerUserEntity.fromList(streamerUsers, normalUserEntityMap))
     }
 
     override fun findStreamers(streamerNickname: String?, streamerUserStatus: StreamerUserStatus?): List<StreamerUser> {
@@ -42,12 +45,18 @@ internal class StreamerUserRepositoryImpl(
         return streamerUserEntities
     }
 
-    private fun nicknameFilter(streamerUserEntities: List<StreamerUserEntity>, streamerNickname: String?): List<StreamerUserEntity> {
+    private fun nicknameFilter(
+        streamerUserEntities: List<StreamerUserEntity>,
+        streamerNickname: String?
+    ): List<StreamerUserEntity> {
         return if (streamerNickname == null) streamerUserEntities
         else streamerUserEntities.filter { it.streamerNickname == streamerNickname }
     }
 
-    private fun streamerStatusFilter(streamerUserEntities: List<StreamerUserEntity>, streamerUserStatus: StreamerUserStatus?): List<StreamerUserEntity> {
+    private fun streamerStatusFilter(
+        streamerUserEntities: List<StreamerUserEntity>,
+        streamerUserStatus: StreamerUserStatus?
+    ): List<StreamerUserEntity> {
         return if (streamerUserStatus == null) streamerUserEntities
         else streamerUserEntities.filter { it.streamerStatus == streamerUserStatus }
     }
