@@ -3,6 +3,7 @@ package com.example.user.config
 import com.example.user.adpter.out.AdminUserDao
 import com.example.user.adpter.out.AdminUserRepositoryImpl
 import com.example.user.adpter.out.NormalUserDao
+import com.example.user.adpter.out.NormalUserDynamicDao
 import com.example.user.adpter.out.NormalUserRepositoryImpl
 import com.example.user.adpter.out.StreamerUserDao
 import com.example.user.adpter.out.StreamerUserDynamicDao
@@ -29,7 +30,7 @@ class TestBeanConfig {
 
     @Bean
     internal fun normalUserRepositoryImpl() : NormalUserRepositoryImpl {
-        return NormalUserRepositoryImpl(normalUserDao)
+        return NormalUserRepositoryImpl(normalUserDao, NormalUserDynamicDao(entityManager))
     }
 
     @Bean
