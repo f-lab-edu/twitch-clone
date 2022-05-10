@@ -12,6 +12,7 @@ import java.util.*
 @Repository
 internal class StreamerUserRepositoryImpl(
     private val streamerUserDao: StreamerUserDao,
+    private val streamerUserDynamicDao: StreamerUserDynamicDao,
     private val normalUserDao: NormalUserDao,
     private val normalUserRepositoryImpl: NormalUserRepositoryImpl,
 ) : StreamerUserRepository {
@@ -39,26 +40,6 @@ internal class StreamerUserRepositoryImpl(
     }
 
     override fun findStreamers(streamerNickname: String?, streamerUserStatus: StreamerUserStatus?): List<StreamerUser> {
-        var streamerUserEntities = streamerUserDao.findAll()
-        streamerUserEntities = nicknameFilter(streamerUserEntities, streamerNickname)
-        streamerUserEntities = streamerStatusFilter(streamerUserEntities, streamerUserStatus)
-        return streamerUserEntities
+        return streamerUserDynamicDao.findStreamers(streamerNickname, streamerUserStatus)
     }
-
-    private fun nicknameFilter(
-        streamerUserEntities: List<StreamerUserEntity>,
-        streamerNickname: String?
-    ): List<StreamerUserEntity> {
-        return if (streamerNickname == null) streamerUserEntities
-        else streamerUserEntities.filter { it.streamerNickname == streamerNickname }
-    }
-
-    private fun streamerStatusFilter(
-        streamerUserEntities: List<StreamerUserEntity>,
-        streamerUserStatus: StreamerUserStatus?
-    ): List<StreamerUserEntity> {
-        return if (streamerUserStatus == null) streamerUserEntities
-        else streamerUserEntities.filter { it.streamerStatus == streamerUserStatus }
-    }
-
 }
