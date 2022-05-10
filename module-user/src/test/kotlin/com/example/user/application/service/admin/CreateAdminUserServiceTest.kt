@@ -35,10 +35,7 @@ internal class CreateAdminUserServiceTest {
         // then
         val findAdmin = mockAdminUserRepository.findById(adminUser.id)
 
-        assertAll(
-            { assertThat(findAdmin).isNotNull() },
-            { assertThat(findAdmin).isEqualTo(adminUser) }
-        )
+        assertThat(findAdmin).isEqualTo(adminUser)
     }
 
     @Test
