@@ -1,5 +1,7 @@
 package com.example.user.config
 
+import com.example.user.adpter.out.AdminUserDao
+import com.example.user.adpter.out.AdminUserRepositoryImpl
 import com.example.user.adpter.out.NormalUserDao
 import com.example.user.adpter.out.NormalUserRepositoryImpl
 import com.example.user.adpter.out.StreamerUserDao
@@ -17,6 +19,9 @@ class TestBeanConfig {
     @Autowired
     internal lateinit var streamerUserDao: StreamerUserDao
 
+    @Autowired
+    internal lateinit var adminUserDao: AdminUserDao
+
     @Bean
     internal fun normalUserRepositoryImpl() : NormalUserRepositoryImpl {
         return NormalUserRepositoryImpl(normalUserDao)
@@ -25,5 +30,10 @@ class TestBeanConfig {
     @Bean
     internal fun streamerUserRepositoryImpl() : StreamerUserRepositoryImpl {
         return StreamerUserRepositoryImpl(streamerUserDao, normalUserDao, normalUserRepositoryImpl())
+    }
+
+    @Bean
+    internal fun adminUserRepositoryImpl() : AdminUserRepositoryImpl {
+        return AdminUserRepositoryImpl(adminUserDao, normalUserRepositoryImpl())
     }
 }

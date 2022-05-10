@@ -11,7 +11,7 @@ internal class CreateAdminUserService(private val adminUserRepository: AdminUser
 
     override fun createAdminUser(createAdminUserCommand: CreateAdminUserCommand): AdminUser {
         val normalUser = createAdminUserCommand.normalUser
-        if (adminUserRepository.findById(normalUser.id) != null) throw CustomException(ErrorCode.EXISTS_ENTITY)
+        if (adminUserRepository.existsById(normalUser.id)) throw CustomException(ErrorCode.EXISTS_ENTITY)
 
         return adminUserRepository.save(
             AdminUser(
