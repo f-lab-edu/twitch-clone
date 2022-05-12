@@ -67,7 +67,7 @@ class NormalUserRepositoryImplTest {
         assertThat(exception.errorCode).isEqualTo(ErrorCode.ENTITY_NOT_FOUND)
     }
 
-    @DisplayName("등록되어 있는 유저 리스트를 가져온다.")
+    @DisplayName("등록되어 있는 일반 유저 리스트를 가져온다.")
     @Test
     fun `select all normal user`() {
         // given
@@ -82,7 +82,7 @@ class NormalUserRepositoryImplTest {
         assertThat(normalUserEntities.size).isEqualTo(2)
     }
 
-    @DisplayName("등록되어 있는 유저 리스트를 email 검색을 통하여 가져온다.")
+    @DisplayName("등록되어 있는 일반 유저 리스트를 email 검색을 통하여 가져온다.")
     @Test
     fun `select all normal user by email`() {
         // given
@@ -98,7 +98,7 @@ class NormalUserRepositoryImplTest {
         assertThat(normalUserEntities.size).isEqualTo(1)
     }
 
-    @DisplayName("등록되어 있는 유저 리스트를 nickname 검색을 통하여 가져온다.")
+    @DisplayName("등록되어 있는 일반 유저 리스트를 nickname 검색을 통하여 가져온다.")
     @Test
     fun `select all normal user by nickname`() {
         // given
@@ -114,7 +114,7 @@ class NormalUserRepositoryImplTest {
         assertThat(normalUserEntities.size).isEqualTo(1)
     }
 
-    @DisplayName("등록되어 있는 유저 리스트를 UserStatus 검색을 통하여 가져온다.")
+    @DisplayName("등록되어 있는 일반 유저 리스트를 UserStatus 검색을 통하여 가져온다.")
     @Test
     fun `select all normal user by userStatus`() {
         // given

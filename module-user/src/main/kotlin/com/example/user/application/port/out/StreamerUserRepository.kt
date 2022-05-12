@@ -14,7 +14,7 @@ interface StreamerUserRepository {
 
     fun save(streamerUser: StreamerUser): StreamerUser
 
-    fun saveAll(streamerUsers: List<StreamerUser>)
+    fun saveAll(streamerUsers: List<StreamerUser>): List<StreamerUser>
 
     fun findStreamers(
         streamerNickname: String? = null,
