@@ -5,19 +5,19 @@ import java.util.*
 /**
  * 스트리머 유저
  */
-class StreamerUser(
+open class StreamerUser(
     override val id: UUID,
     override val email: String,
     password: String,
     nickname: String,
-    var streamerNickname: String,
-    var subscriptionCost: Int
+    open var streamerNickname: String,
+    open var subscriptionCost: Int
 ) : User.Editor {
     override var password: String = ""
     override var status: UserStatus = UserStatus.REGISTERED
     override var nickname: String = ""
 
-    val streamerStatus: StreamerUserStatus
+    open val streamerStatus: StreamerUserStatus
         get() {
             return streamerStatusVar
         }

@@ -2,12 +2,12 @@ package com.example.user.domain.model
 
 import java.util.*
 
-class AdminUser(
+open class AdminUser(
     override val id: UUID,
     override val email: String,
     password: String,
     nickname: String,
-    val adminNickname: String
+    open val adminNickname: String
 ) : User.Editor {
     override var status: UserStatus = UserStatus.REGISTERED
     override var nickname: String = ""

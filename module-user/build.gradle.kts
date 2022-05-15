@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm") version "1.6.10"
 
     id("io.gitlab.arturbosch.detekt").version("1.19.0")
+    id("java-test-fixtures")
 }
 
 group = "com.example"
@@ -21,7 +22,7 @@ dependencies {
     // TODO 추후 버전 및 공통 dependencies 분리
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("org.assertj:assertj-core:3.21.0")
-    testImplementation("com.github.javafaker:javafaker:1.0.2")
+    testFixturesImplementation("com.github.javafaker:javafaker:1.0.2")
 
     // kotlin-test-junit
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")

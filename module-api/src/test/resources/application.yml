@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=MySQL;IGNORECASE=TRUE;DB_CLOSE_ON_EXIT=FALSE;
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      database-platform: org.hibernate.dialect.H2Dialect
+      default_batch_fetch_size: 100
+      hibernate:
+        format_sql: true
+    generate-ddl: true
+    show-sql: true
+    open-in-view: false
