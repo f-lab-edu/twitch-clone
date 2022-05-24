@@ -6,6 +6,7 @@ import com.example.user.application.port.`in`.normal.UpdateNormalUserPasswordUse
 import com.example.user.application.port.`in`.normal.UpdateNormalUserUseCase
 import com.example.user.application.port.`in`.normal.UpdateUserCommand
 import com.example.user.application.port.`in`.normal.UpdateUserPasswordCommand
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.*
 import javax.validation.Valid
 
+@Transactional
 @RestController
 class UpdateNormalUserController(
     private val initNormalUserPasswordUseCase: InitNormalUserPasswordUseCase,
@@ -25,6 +27,7 @@ class UpdateNormalUserController(
     fun initPassword(@PathVariable id: UUID) {
         initNormalUserPasswordUseCase.initNormalUserPassword(id)
     }
+
 
     @PatchMapping(path = ["/user/{id}/suspend"])
     fun suspend(@PathVariable id: UUID) {
