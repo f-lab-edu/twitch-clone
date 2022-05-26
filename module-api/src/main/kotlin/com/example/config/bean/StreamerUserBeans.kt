@@ -20,36 +20,66 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-internal class StreamerUserBeans(
-    private val streamerUserDao: StreamerUserDao,
-    private val streamerUserDynamicDao: StreamerUserDynamicDao,
-    private val normalUserDao: NormalUserDao,
-    private val normalUserDynamicDao: NormalUserDynamicDao,
-    private val normalUserRepositoryImpl: NormalUserRepositoryImpl,
-) {
+internal class StreamerUserBeans {
 
     @Bean
-    fun approveStreamerUserUseCase(): ApproveStreamerUserUseCase =
+    fun approveStreamerUserUseCase(
+        streamerUserDao: StreamerUserDao,
+        streamerUserDynamicDao: StreamerUserDynamicDao,
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao,
+        normalUserRepositoryImpl: NormalUserRepositoryImpl
+    ): ApproveStreamerUserUseCase =
         ApproveStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
 
     @Bean
-    fun createStreamerUserUseCase(): CreateStreamerUserUseCase =
+    fun createStreamerUserUseCase(
+        streamerUserDao: StreamerUserDao,
+        streamerUserDynamicDao: StreamerUserDynamicDao,
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao,
+        normalUserRepositoryImpl: NormalUserRepositoryImpl
+    ): CreateStreamerUserUseCase =
         CreateStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
 
     @Bean
-    fun findPendingStreamerUserUseCase(): FindPendingStreamerUserUseCase =
+    fun findPendingStreamerUserUseCase(
+        streamerUserDao: StreamerUserDao,
+        streamerUserDynamicDao: StreamerUserDynamicDao,
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao,
+        normalUserRepositoryImpl: NormalUserRepositoryImpl
+    ): FindPendingStreamerUserUseCase =
         FindPendingStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
 
     @Bean
-    fun findStreamerUserUseCase(): FindStreamerUserUseCase =
+    fun findStreamerUserUseCase(
+        streamerUserDao: StreamerUserDao,
+        streamerUserDynamicDao: StreamerUserDynamicDao,
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao,
+        normalUserRepositoryImpl: NormalUserRepositoryImpl
+    ): FindStreamerUserUseCase =
         FindStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
 
     @Bean
-    fun rejectStreamerUserUseCase(): RejectStreamerUserUseCase =
+    fun rejectStreamerUserUseCase(
+        streamerUserDao: StreamerUserDao,
+        streamerUserDynamicDao: StreamerUserDynamicDao,
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao,
+        normalUserRepositoryImpl: NormalUserRepositoryImpl
+    ): RejectStreamerUserUseCase =
         RejectStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
 
     @Bean
-    fun subscribeStreamerUserUseCase(): SubscribeStreamerUserUseCase =
+    fun subscribeStreamerUserUseCase(
+        streamerUserDao: StreamerUserDao,
+        streamerUserDynamicDao: StreamerUserDynamicDao,
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao,
+        normalUserRepositoryImpl: NormalUserRepositoryImpl
+    ): SubscribeStreamerUserUseCase =
         SubscribeStreamerUserUseCase.create(
             NormalUserRepositoryImpl(normalUserDao, normalUserDynamicDao),
             StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl),
@@ -57,21 +87,36 @@ internal class StreamerUserBeans(
         )
 
     @Bean
-    fun suspendStreamerUserUseCase(): SuspendStreamerUserUseCase =
+    fun suspendStreamerUserUseCase(
+        streamerUserDao: StreamerUserDao,
+        streamerUserDynamicDao: StreamerUserDynamicDao,
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao,
+        normalUserRepositoryImpl: NormalUserRepositoryImpl
+    ): SuspendStreamerUserUseCase =
         SuspendStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
 
     @Bean
-    fun updateStreamerUserSubscriptionCostUseCase(): UpdateStreamerUserSubscriptionCostUseCase =
+    fun updateStreamerUserSubscriptionCostUseCase(
+        streamerUserDao: StreamerUserDao,
+        streamerUserDynamicDao: StreamerUserDynamicDao,
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao,
+        normalUserRepositoryImpl: NormalUserRepositoryImpl
+    ): UpdateStreamerUserSubscriptionCostUseCase =
         UpdateStreamerUserSubscriptionCostUseCase.create(
-            StreamerUserRepositoryImpl(
-                streamerUserDao,
-                streamerUserDynamicDao,
-                normalUserDao,
-                normalUserRepositoryImpl
-            )
+            StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl)
         )
 
     @Bean
-    fun updateStreamerUserUseCase(): UpdateStreamerUserUseCase =
-        UpdateStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
+    fun updateStreamerUserUseCase(
+        streamerUserDao: StreamerUserDao,
+        streamerUserDynamicDao: StreamerUserDynamicDao,
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao,
+        normalUserRepositoryImpl: NormalUserRepositoryImpl
+    ): UpdateStreamerUserUseCase =
+        UpdateStreamerUserUseCase.create(
+            StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl)
+        )
 }

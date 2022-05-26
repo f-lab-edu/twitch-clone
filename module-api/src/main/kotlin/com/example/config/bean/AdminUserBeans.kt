@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-internal class AdminUserBeans(
-    private val adminUserDao: AdminUserDao,
-    private val normalUserRepositoryImpl: NormalUserRepositoryImpl,
-) {
+internal class AdminUserBeans {
 
     @Bean
-    fun createAdminUserUseCase(): CreateAdminUserUseCase = CreateAdminUserUseCase.create(AdminUserRepositoryImpl(adminUserDao, normalUserRepositoryImpl))
+    fun createAdminUserUseCase(
+        adminUserDao: AdminUserDao,
+        normalUserRepositoryImpl: NormalUserRepositoryImpl
+    ): CreateAdminUserUseCase = CreateAdminUserUseCase.create(AdminUserRepositoryImpl(adminUserDao, normalUserRepositoryImpl))
 }
