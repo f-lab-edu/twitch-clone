@@ -13,32 +13,47 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-internal class NormalUserBeans(
-    private val normalUserDao: NormalUserDao,
-    private val normalUserDynamicDao: NormalUserDynamicDao,
-) {
+internal class NormalUserBeans {
 
     @Bean
-    fun createNormalUserUseCase(): CreateNormalUserUseCase =
+    fun createNormalUserUseCase(
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao
+    ): CreateNormalUserUseCase =
         CreateNormalUserUseCase.create(NormalUserRepositoryImpl(normalUserDao, normalUserDynamicDao))
 
     @Bean
-    fun findNormalUserUseCase(): FindNormalUserUseCase =
+    fun findNormalUserUseCase(
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao
+    ): FindNormalUserUseCase =
         FindNormalUserUseCase.create(NormalUserRepositoryImpl(normalUserDao, normalUserDynamicDao))
 
     @Bean
-    fun initNormalUserPasswordUseCase(): InitNormalUserPasswordUseCase =
+    fun initNormalUserPasswordUseCase(
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao
+    ): InitNormalUserPasswordUseCase =
         InitNormalUserPasswordUseCase.create(NormalUserRepositoryImpl(normalUserDao, normalUserDynamicDao))
 
     @Bean
-    fun suspendNormalUserUseCase(): SuspendNormalUserUseCase =
+    fun suspendNormalUserUseCase(
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao
+    ): SuspendNormalUserUseCase =
         SuspendNormalUserUseCase.create(NormalUserRepositoryImpl(normalUserDao, normalUserDynamicDao))
 
     @Bean
-    fun updateNormalUserPasswordUseCase(): UpdateNormalUserPasswordUseCase =
+    fun updateNormalUserPasswordUseCase(
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao
+    ): UpdateNormalUserPasswordUseCase =
         UpdateNormalUserPasswordUseCase.create(NormalUserRepositoryImpl(normalUserDao, normalUserDynamicDao))
 
     @Bean
-    fun updateNormalUserUseCase(): UpdateNormalUserUseCase =
+    fun updateNormalUserUseCase(
+        normalUserDao: NormalUserDao,
+        normalUserDynamicDao: NormalUserDynamicDao
+    ): UpdateNormalUserUseCase =
         UpdateNormalUserUseCase.create(NormalUserRepositoryImpl(normalUserDao, normalUserDynamicDao))
 }
