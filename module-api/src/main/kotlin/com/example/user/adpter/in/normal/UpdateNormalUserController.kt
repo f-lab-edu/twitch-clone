@@ -1,4 +1,4 @@
-package com.example.user.adpter.`in`
+package com.example.user.adpter.`in`.normal
 
 import com.example.user.application.port.`in`.normal.InitNormalUserPasswordUseCase
 import com.example.user.application.port.`in`.normal.SuspendNormalUserUseCase
@@ -23,18 +23,18 @@ class UpdateNormalUserController(
     private val updateNormalUserUseCase: UpdateNormalUserUseCase
 ) {
 
-    @PatchMapping(path = ["/user/{id}/paassword/init"])
+    @PatchMapping(path = ["/api/user/{id}/paassword/init"])
     fun initPassword(@PathVariable id: UUID) {
         initNormalUserPasswordUseCase.initNormalUserPassword(id)
     }
 
 
-    @PatchMapping(path = ["/user/{id}/suspend"])
+    @PatchMapping(path = ["/api/user/{id}/suspend"])
     fun suspend(@PathVariable id: UUID) {
         suspendNormalUserUseCase.suspendNormalUser(id)
     }
 
-    @PatchMapping(path = ["/user/{id}"])
+    @PatchMapping(path = ["/api/user/{id}"])
     fun create(@PathVariable id: UUID, @Valid @RequestBody req: UpdateCommand) {
         req.password?.let {
             val command = UpdateUserPasswordCommand(id, password = it)

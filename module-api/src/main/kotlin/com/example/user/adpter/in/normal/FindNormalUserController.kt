@@ -1,4 +1,4 @@
-package com.example.user.adpter.`in`
+package com.example.user.adpter.`in`.normal
 
 import com.example.user.application.port.`in`.normal.FindNormalUserQuery
 import com.example.user.application.port.`in`.normal.FindNormalUserUseCase
@@ -11,11 +11,11 @@ import javax.validation.Valid
 
 @Transactional(readOnly = true)
 @RestController
-class NormalUserController(
+class FindNormalUserController(
     private val findNormalUserUseCase: FindNormalUserUseCase
 ) {
 
-    @GetMapping(path = ["/user"])
+    @GetMapping(path = ["/api/user"])
     fun find(@Valid @RequestBody req: FindNormalUserQuery): FindNormalUserResponse {
         return FindNormalUserResponse(findNormalUserUseCase.findNormalUsers(req))
     }

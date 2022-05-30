@@ -1,4 +1,4 @@
-package com.example.user.adpter.`in`
+package com.example.user.adpter.`in`.normal
 
 import com.example.user.application.port.`in`.normal.CreateNormalUserCommand
 import com.example.user.application.port.`in`.normal.CreateNormalUserUseCase
@@ -15,7 +15,7 @@ class CreateNormalUserController(
     private val createNormalUserUseCase: CreateNormalUserUseCase,
 ) {
 
-    @PostMapping(path = ["/user"])
+    @PostMapping(path = ["/api/user"])
     fun create(@Valid @RequestBody req: CreateNormalUserCommand): CreateNormalUserResponse {
         return CreateNormalUserResponse(createNormalUserUseCase.createNormalUser(req).id)
     }
