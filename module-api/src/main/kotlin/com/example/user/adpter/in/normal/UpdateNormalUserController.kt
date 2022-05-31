@@ -48,4 +48,4 @@ class UpdateNormalUserController(
     }
 }
 
-data class UpdateCommand(val id: UUID, val password: String?, val nickname: String?)
+data class UpdateCommand(val password: String?, val nickname: String?)
