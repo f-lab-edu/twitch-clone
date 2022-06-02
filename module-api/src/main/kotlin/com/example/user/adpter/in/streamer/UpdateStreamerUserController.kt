@@ -1,5 +1,6 @@
 package com.example.user.adpter.`in`.streamer
 
+import com.example.user.adpter.`in`.streamer.request.UpdateStreamerUserRequest
 import com.example.user.application.port.`in`.streamer.UpdateStreamerUserSubscriptionCostUseCase
 import com.example.user.application.port.`in`.streamer.UpdateStreamerUserUseCase
 import org.springframework.transaction.annotation.Transactional
@@ -18,7 +19,7 @@ class UpdateStreamerUserController(
 ) {
 
     @PatchMapping(path = ["/api/streamer/{id}"])
-    fun update(@PathVariable id: UUID, @Valid @RequestBody req: UpdateCommand) {
+    fun update(@PathVariable id: UUID, @Valid @RequestBody req: UpdateStreamerUserRequest) {
         req.subscriptionCost?.let {
             updateStreamerUserSubscriptionCostUseCase.updateSubscriptionCost(id, it)
         }
@@ -28,5 +29,3 @@ class UpdateStreamerUserController(
         }
     }
 }
-
-data class UpdateCommand(val subscriptionCost: Int?, val nickname: String?)

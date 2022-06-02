@@ -1,8 +1,9 @@
 package com.example.user.adpter.`in`.streamer
 
+import com.example.user.adpter.`in`.streamer.request.FindStreamerUserRequest
+import com.example.user.adpter.`in`.streamer.response.FindStreamerUserResponse
 import com.example.user.application.port.`in`.streamer.FindPendingStreamerUserUseCase
 import com.example.user.application.port.`in`.streamer.FindStreamerUserUseCase
-import com.example.user.domain.model.StreamerUser
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -17,7 +18,7 @@ class FindStreamerUserController(
 ) {
 
     @GetMapping(path = ["/api/streamer"])
-    fun find(@Valid @RequestBody req: FindStreamerUserQuery): FindStreamerUserResponse {
+    fun find(@Valid @RequestBody req: FindStreamerUserRequest): FindStreamerUserResponse {
         // 스트리머 이름으로 조회
         req.streamerNickname?.let {
             val findStreamerUserQuery = com.example.user.application.port.`in`.streamer.FindStreamerUserQuery(req.streamerNickname)
@@ -28,7 +29,3 @@ class FindStreamerUserController(
         return FindStreamerUserResponse(findPendingStreamerUserUseCase.findPendingStreamers())
     }
 }
-
-data class FindStreamerUserQuery(val streamerNickname: String? = null)
-
-data class FindStreamerUserResponse(val streamerUsers: List<StreamerUser>)

@@ -8,7 +8,6 @@ import com.example.user.domain.model.NormalUserEntity
 import com.example.user.domain.model.UserStatus
 import org.springframework.stereotype.Repository
 import java.util.*
-import java.util.concurrent.ConcurrentHashMap
 
 @Repository
 internal class NormalUserRepositoryImpl(

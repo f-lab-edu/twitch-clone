@@ -1,5 +1,6 @@
 package com.example.user.adpter.`in`.normal
 
+import com.example.user.adpter.`in`.normal.request.UpdateRequest
 import com.example.user.application.port.`in`.normal.InitNormalUserPasswordUseCase
 import com.example.user.application.port.`in`.normal.SuspendNormalUserUseCase
 import com.example.user.application.port.`in`.normal.UpdateNormalUserPasswordUseCase
@@ -35,7 +36,7 @@ class UpdateNormalUserController(
     }
 
     @PatchMapping(path = ["/api/user/{id}"])
-    fun create(@PathVariable id: UUID, @Valid @RequestBody req: UpdateCommand) {
+    fun create(@PathVariable id: UUID, @Valid @RequestBody req: UpdateRequest) {
         req.password?.let {
             val command = UpdateUserPasswordCommand(id, password = it)
             updateNormalUserPasswordUseCase.updateNormalUserPassword(command)
@@ -47,5 +48,3 @@ class UpdateNormalUserController(
         }
     }
 }
-
-data class UpdateCommand(val password: String?, val nickname: String?)

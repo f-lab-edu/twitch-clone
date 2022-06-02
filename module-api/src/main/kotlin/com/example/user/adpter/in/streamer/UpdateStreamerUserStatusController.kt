@@ -1,5 +1,6 @@
 package com.example.user.adpter.`in`.streamer
 
+import com.example.user.adpter.`in`.streamer.request.UpdateStreamerUserStatusCommand
 import com.example.user.application.port.`in`.streamer.ApproveStreamerUserUseCase
 import com.example.user.application.port.`in`.streamer.RejectStreamerUserUseCase
 import com.example.user.application.port.`in`.streamer.SuspendStreamerUserUseCase
@@ -21,7 +22,7 @@ class UpdateStreamerUserStatusController(
 ) {
 
     @PatchMapping(path = ["/api/streamer/{id}/status"])
-    fun updateStatus(@PathVariable id: UUID, @Valid @RequestBody req: UpdateStatusCommand) {
+    fun updateStatus(@PathVariable id: UUID, @Valid @RequestBody req: UpdateStreamerUserStatusCommand) {
         when (req.status) {
 //            StreamerUserStatus.REGISTERED -> approveStreamerUserUseCase.approveStreamerUser()
 //            StreamerUserStatus.REJECTED -> rejectStreamerUserUseCase.rejectStreamerUser()
@@ -30,5 +31,3 @@ class UpdateStreamerUserStatusController(
         }
     }
 }
-
-data class UpdateStatusCommand(val status: StreamerUserStatus)

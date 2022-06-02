@@ -1,5 +1,6 @@
 package com.example.user.adpter.`in`.streamer
 
+import com.example.user.adpter.`in`.streamer.request.SubscribeRequest
 import com.example.user.application.port.`in`.streamer.SubscribeStreamerUserUseCase
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.PatchMapping
@@ -16,9 +17,7 @@ class SubscribeStreamerUserController(
 ) {
 
     @PatchMapping(path = ["/api/streamer/{id}"])
-    fun subscribe(@PathVariable id: UUID, @Valid @RequestBody req: SubscribeCommand) {
+    fun subscribe(@PathVariable id: UUID, @Valid @RequestBody req: SubscribeRequest) {
         subscribeStreamerUserUseCase.subscribe(req.normarUserId, id)
     }
 }
-
-data class SubscribeCommand(val normarUserId: UUID)
