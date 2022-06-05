@@ -33,7 +33,7 @@ internal class StreamerUserRepositoryImpl(
         return streamerUserDao.findAllByStreamerStatus(streamerUserStatus)
     }
 
-    override fun saveAll(streamerUsers: List<StreamerUser>) : List<StreamerUserEntity> {
+    override fun saveAll(streamerUsers: List<StreamerUser>): List<StreamerUserEntity> {
         val streamerUserIds = streamerUsers.map { it.id }
         val normalUserEntityMap = normalUserDao.findAllByIdIn(streamerUserIds).associateBy({ it.id }, { it })
         return streamerUserDao.saveAll(StreamerUserEntity.fromList(streamerUsers, normalUserEntityMap))
