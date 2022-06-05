@@ -4,13 +4,11 @@ import com.example.user.adpter.`in`.streamer.request.FindStreamerUserRequest
 import com.example.user.adpter.`in`.streamer.response.FindStreamerUserResponse
 import com.example.user.application.port.`in`.streamer.FindPendingStreamerUserUseCase
 import com.example.user.application.port.`in`.streamer.FindStreamerUserUseCase
-import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
-@Transactional(readOnly = true)
 @RestController
 class FindStreamerUserController(
     private val findStreamerUserUseCase: FindStreamerUserUseCase,
