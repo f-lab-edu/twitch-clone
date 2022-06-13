@@ -16,7 +16,7 @@ class SubscribeStreamerUserController(
     private val transactionTemplate: TransactionTemplate
 ) {
 
-    @PatchMapping(path = ["/api/streamer/{id}"])
+    @PatchMapping(path = ["/api/streamer/{id}/subscribe"])
     fun subscribe(@PathVariable id: UUID, @Valid @RequestBody req: SubscribeRequest) {
         transactionTemplate.execute {
             subscribeStreamerUserUseCase.subscribe(req.normarUserId, id)
