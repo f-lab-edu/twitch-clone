@@ -1,0 +1,19 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:mysql://localhost:4306/hyune?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8}
+    username: ${DATASOURCE_USERNAME:root}
+    password: ${DATASOURCE_PASSWORD:password1}
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    properties:
+      default_batch_fetch_size: 100
+      hibernate:
+        format_sql: true
