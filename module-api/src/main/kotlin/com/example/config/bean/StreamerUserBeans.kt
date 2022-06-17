@@ -27,7 +27,6 @@ internal class StreamerUserBeans {
         streamerUserDao: StreamerUserDao,
         streamerUserDynamicDao: StreamerUserDynamicDao,
         normalUserDao: NormalUserDao,
-        normalUserDynamicDao: NormalUserDynamicDao,
         normalUserRepositoryImpl: NormalUserRepositoryImpl
     ): ApproveStreamerUserUseCase =
         ApproveStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
@@ -37,7 +36,6 @@ internal class StreamerUserBeans {
         streamerUserDao: StreamerUserDao,
         streamerUserDynamicDao: StreamerUserDynamicDao,
         normalUserDao: NormalUserDao,
-        normalUserDynamicDao: NormalUserDynamicDao,
         normalUserRepositoryImpl: NormalUserRepositoryImpl
     ): CreateStreamerUserUseCase =
         CreateStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
@@ -47,7 +45,6 @@ internal class StreamerUserBeans {
         streamerUserDao: StreamerUserDao,
         streamerUserDynamicDao: StreamerUserDynamicDao,
         normalUserDao: NormalUserDao,
-        normalUserDynamicDao: NormalUserDynamicDao,
         normalUserRepositoryImpl: NormalUserRepositoryImpl
     ): FindPendingStreamerUserUseCase =
         FindPendingStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
@@ -57,7 +54,6 @@ internal class StreamerUserBeans {
         streamerUserDao: StreamerUserDao,
         streamerUserDynamicDao: StreamerUserDynamicDao,
         normalUserDao: NormalUserDao,
-        normalUserDynamicDao: NormalUserDynamicDao,
         normalUserRepositoryImpl: NormalUserRepositoryImpl
     ): FindStreamerUserUseCase =
         FindStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
@@ -67,7 +63,6 @@ internal class StreamerUserBeans {
         streamerUserDao: StreamerUserDao,
         streamerUserDynamicDao: StreamerUserDynamicDao,
         normalUserDao: NormalUserDao,
-        normalUserDynamicDao: NormalUserDynamicDao,
         normalUserRepositoryImpl: NormalUserRepositoryImpl
     ): RejectStreamerUserUseCase =
         RejectStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
@@ -91,7 +86,6 @@ internal class StreamerUserBeans {
         streamerUserDao: StreamerUserDao,
         streamerUserDynamicDao: StreamerUserDynamicDao,
         normalUserDao: NormalUserDao,
-        normalUserDynamicDao: NormalUserDynamicDao,
         normalUserRepositoryImpl: NormalUserRepositoryImpl
     ): SuspendStreamerUserUseCase =
         SuspendStreamerUserUseCase.create(StreamerUserRepositoryImpl(streamerUserDao, streamerUserDynamicDao, normalUserDao, normalUserRepositoryImpl))
@@ -101,7 +95,6 @@ internal class StreamerUserBeans {
         streamerUserDao: StreamerUserDao,
         streamerUserDynamicDao: StreamerUserDynamicDao,
         normalUserDao: NormalUserDao,
-        normalUserDynamicDao: NormalUserDynamicDao,
         normalUserRepositoryImpl: NormalUserRepositoryImpl
     ): UpdateStreamerUserSubscriptionCostUseCase =
         UpdateStreamerUserSubscriptionCostUseCase.create(
@@ -113,7 +106,6 @@ internal class StreamerUserBeans {
         streamerUserDao: StreamerUserDao,
         streamerUserDynamicDao: StreamerUserDynamicDao,
         normalUserDao: NormalUserDao,
-        normalUserDynamicDao: NormalUserDynamicDao,
         normalUserRepositoryImpl: NormalUserRepositoryImpl
     ): UpdateStreamerUserUseCase =
         UpdateStreamerUserUseCase.create(
