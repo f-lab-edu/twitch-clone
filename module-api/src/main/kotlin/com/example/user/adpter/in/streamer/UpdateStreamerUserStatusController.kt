@@ -1,8 +1,6 @@
 package com.example.user.adpter.`in`.streamer
 
 import com.example.user.adpter.`in`.streamer.request.UpdateStreamerUserStatusCommand
-import com.example.user.application.port.`in`.streamer.ApproveStreamerUserUseCase
-import com.example.user.application.port.`in`.streamer.RejectStreamerUserUseCase
 import com.example.user.application.port.`in`.streamer.SuspendStreamerUserUseCase
 import com.example.user.domain.model.StreamerUserStatus
 import org.springframework.transaction.support.TransactionTemplate
@@ -15,8 +13,8 @@ import javax.validation.Valid
 
 @RestController
 class UpdateStreamerUserStatusController(
-    private val approveStreamerUserUseCase: ApproveStreamerUserUseCase,
-    private val rejectStreamerUserUseCase: RejectStreamerUserUseCase,
+//    private val approveStreamerUserUseCase: ApproveStreamerUserUseCase,
+//    private val rejectStreamerUserUseCase: RejectStreamerUserUseCase,
     private val suspendStreamerUserUseCase: SuspendStreamerUserUseCase,
     private val transactionTemplate: TransactionTemplate
 ) {
